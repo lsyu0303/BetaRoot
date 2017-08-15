@@ -1,0 +1,98 @@
+<!-- 分离导航页面 -->
+<div class="user">
+	<div class="user-con">
+		<div class="user-img"><img src="__ADMIN__/image/a1.jpg"></div>
+		<div class="user-info">
+			<span>轻风之语</span>
+			<span>超级管理员</span>
+			<span><a href="#"><span>退出</span></a></span>
+		</div>
+	</div>
+</div>
+<ul class="Tab_nav">
+	<li id="menu1">
+		<dl><i class="icon ai-user"></i><span>个人中心</span></dl>
+		<dd class="no"><a class="Tab_Item" href="{:url('System/system')}">系统设置</a></dd>
+		<dd><a class="Tab_Item" href="{:url('System/index')}">配置管理</a></dd>
+		<dd><a class="Tab_Item" href="{:url('Tabs/index')}">标签管理</a></dd>
+		<dd><a class="Tab_Item" href="{:url('Category/index')}">模块管理</a></dd>
+		
+		<dl><i class="icon ai-i"></i><span>模板帮助</span></dl>
+		<dd><a class="Tab_Item" href="i/icon.html">图标</a></dd>
+		<dd><a class="Tab_Item" href="i/btn.html">按钮</a></dd>
+		<dd><a class="Tab_Item" href="i/form.html">表单</a></dd>
+		<dd><a class="Tab_Item" href="i/table.html">表格</a></dd>
+	</li>
+	<li id="menu2" style="display:none">
+		<dl><i class="icon ai-cart"></i><span>订单管理</span></dl>
+		<dd><a class="Tab_Item" href="shop/shop.html">订单列表</a></dd>
+		<dd><a class="Tab_Item" href="{U('tao/index')}">发货管理</a></dd>
+		<dd><a class="Tab_Item" href="homs2.html">退换管理</a></dd>
+		<dd><a class="Tab_Item" href="homs3.html">售后管理</a></dd>
+		<dd><a class="Tab_Item" href="homs4.html">评级管理</a></dd>
+		
+		<dl><i class="icon ai-item"></i><span>商品管理</span></dl>
+		<dd><a class="Tab_Item" href="shop/shop.html">商品列表</a></dd>
+		<dd><a class="Tab_Item" href="homs2.html">商品分类</a></dd>
+		<dd><a class="Tab_Item" href="homs3.html">品牌管理</a></dd>
+		<dd><a class="Tab_Item" href="homs4.html">规格属性</a></dd>
+		<dd><a class="Tab_Item" href="{U('tao/index')}">获取商品</a></dd>
+	</li>
+	<li id="menu3" style="display:none">
+		<dl><i class="icon ai-article"></i><span>文章管理</span></dl>
+		<dd><a class="Tab_Item" href="article.html">文章列表</a></dd>
+		<dd><a class="Tab_Item" href="{U('user/index')}">文章分类</a></dd>
+				
+		<dl><i class="icon ai-new"></i><span>广告管理</span></dl>
+		<dd><a class="Tab_Item" href="{U('user/index')}">首页焦点</a></dd>
+		<dd><a class="Tab_Item" href="{U('user/index')}">商品推荐</a></dd>
+		
+		<dl><i class="icon ai-link"></i><span>友情链接</span></dl>
+		<dd><a class="Tab_Item" href="liks.html">链接列表</a></dd>
+		<dd><a class="Tab_Item" href="{U('user/index')}">链接分类</a></dd>
+	</li>
+	<li id="menu4" style="display:none">
+		<dl><i class="icon ai-wallet"></i><span>账户管理</span></dl>
+		<dd><a class="Tab_Item" href="pay.html">账户列表</a></dd>
+		<dd><a class="Tab_Item" href="pay.html">交易记录</a></dd>
+		<dd><a class="Tab_Item" href="set.html">充值记录</a></dd>
+		<dd><a class="Tab_Item" href="set.html">实名认证</a></dd>
+		<dd><a class="Tab_Item" href="set.html">安全中心</a></dd>
+				
+		<dl><i class="icon ai-profit"></i><span>支付设置</span></dl>
+		<dd><a class="Tab_Item" href="pay.html">手续费</a></dd>
+		<dd><a class="Tab_Item" href="pay.html">支付插件</a></dd>
+		<dd><a class="Tab_Item" href="set.html">钱包设置</a></dd>
+	</li>
+	<li id="menu5" style="display:none">
+		<dl><i class="icon ai-users"></i><span>用户管理</span></dl>
+		<dd><a class="Tab_Item" href="user/user.html">会员列表</a></dd>
+		<dd><a class="Tab_Item" href="user/vip.html">VIP设置</a></dd>
+				
+		<dl><i class="icon ai-message"></i><span>消息管理</span></dl>
+		<dd><a class="Tab_Item" href="msg/log.html">发送记录</a></dd>
+		<dd><a class="Tab_Item" href="msg/msg.html">消息设置</a></dd>
+				
+		<dl><i class="icon ai-mail"></i><span>邮件管理</span></dl>
+		<dd><a class="Tab_Item" href="mail/log.html">发送记录</a></dd>
+		<dd><a class="Tab_Item" href="mail/activate.html">激活记录</a></dd>
+		<dd><a class="Tab_Item" href="mail/mail.html">邮件设置</a></dd>
+	</li>
+	<li id="menu6" style="display:none">
+		<dl><i class="icon ai-set"></i><span>系统管理</span></dl>
+		<dd><a class="Tab_Item" href="set/set.html">系统设置</a></dd>
+		<dd><a class="Tab_Item" href="{U('system/fu')}">附件设置</a></dd>
+		<dd><a class="Tab_Item" href="nav.html">水印设置</a></dd>
+		
+		<dl><i class="icon ai-password"></i><span>管理权限</span></dl>
+		<dd><a class="Tab_Item" href="admin.html">管理员</a></dd>
+		<dd><a class="Tab_Item" href="auth.html">用户组</a></dd>
+		<dd><a class="Tab_Item" href="auth_rule.html">权限管理</a></dd>
+		
+		<dl><i class="icon ai-kind"></i><span>导航菜单</span></dl>
+		<dd><a class="Tab_Item" href="nav/menu.html">后台菜单</a></dd>
+		<dd><a class="Tab_Item" href="nav/nav.html">前台导航</a></dd>
+		<dd><a class="Tab_Item" href="nav/nav_type.html">导航分类</a></dd>
+		
+	</li>
+</ul>

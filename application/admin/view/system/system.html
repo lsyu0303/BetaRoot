@@ -1,0 +1,105 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="Cache-Control" content="no-siteapp" />
+		<title>轻风之语〖开发中……〗</title>
+		<meta name="keywords" content="轻风之语〖开发中……〗"/>
+		<meta name="description" content="轻风之语〖开发中……〗"/>
+		<link rel="stylesheet" type="text/css" href="__ADMIN__/style/default.css">
+		<link rel="stylesheet" type="text/css" href="__ADMIN__/style/font.min.css">
+		<link rel="stylesheet" type="text/css" href="__ADMIN__/style/bootstrap.css">
+	</head>
+	<body>
+		<div class="i-con">
+			<div class="box i-row">
+				<div class="i-col-12">
+					<!-- 标签导航 -->
+					<ul class="nav nav-tabs" role="tablist">
+						{volist name='config_groups' id='config_group'}
+							<li {if condition="$config_group.value eq 1"} class="active" {/if}><a role="tab" data-toggle="tab" href="#{$config_group.value}">{$config_group.title}</a></li>
+						{/volist}
+						<li><a href="{:url('index')}">配置管理</a></li>
+					</ul>
+					<div class="box-con">
+						<form class="Tab_form" name="form" method="post" enctype="multipart/form-data" action="">
+							<div class="tab-content tabs">
+								<!-- 标签循环 -->
+								{volist name='config_groups' id='config_group'}
+									<div class="tab-pane fade {if condition="$config_group.value eq 1"} in active {/if}" id="{$config_group.value}">
+										{volist name='config_lists' id='config_list'}
+											{if condition="$config_list.groupid eq $config_group.value"}
+												<div class="form-node">
+													<div class="form-title">{$config_list.title}：</div>
+													<div class="form-con i-col-2">
+
+														<!-- 配置类型判断循环 -->
+														<!-- 字符值型 -->
+														{if $config_list.typeid==1}
+															<input class="input-title" type="text" name="{$config_list.name}" value="{$config_list.value}">
+
+														<!-- 文本域型 -->
+														{elseif $config_list.typeid==2}
+															<textarea class="input-title" rows="3" name="{$config_list.name}">{$config_list.value}</textarea>
+
+														<!-- 下拉列表 -->
+														{elseif $config_list.typeid==3}
+															<select style="width: 109%" name="{$config_list.name}">
+																<?php $optional_Array=explode('|',$config_list['optional']);foreach($optional_Array as $key=>$value):?>
+																	<option value="{$value}" {if condition="$value eq $config_list.value"} selected="selected"{/if}>{$value}</option>
+																<?php endforeach;?>
+															</select>
+
+														<!-- 单项选择 -->
+														{elseif $config_list.typeid==4}
+															<?php $optional_Array=explode('|',$config_list['optional']);foreach($optional_Array as $key=>$value):?>
+																<div class="Tab_radio">
+																	{if condition="$value eq $config_list.value"}
+																		<input type="radio" checked="checked" name="{$config_list.name}" value="{$value}"><dl class="on"><i class="icon ai-radio-on"></i><span>{$value}</span></dl>
+																	{else}
+																		<input type="radio" name="{$config_list.name}" value="{$value}"><dl><i class="icon ai-radio"></i><span>{$value}</span></dl>
+																	{/if}
+																</div>
+															<?php endforeach;?>
+
+														<!-- 多项选择 -->
+														{elseif $config_list.typeid==5}
+															<?php $optional_Array=explode('|',$config_list['optional']);$value_Array=explode('|',$config_list['value']);foreach($optional_Array as $key=>$value):?>
+																<div class="Tab_checkbox2"><input type="checkbox" name="{$config_list.name}[]" value="{$value}" {if(in_array($value,$value_Array))} checked="checked" {/if}><span>{$value}</span></div>
+															<?php endforeach;?>
+
+														<!-- 文件附件 -->
+														{elseif $config_list.typeid==6}
+															<input class="input-upload" type="file" name="{$config_list.name}" value="">
+														{/if}
+													</div>
+												</div>
+											{/if}
+										{/volist}
+									</div>
+								{/volist}
+								<!-- 标签结束 -->
+							</div>
+							<div class="form-node">
+								<div class="form-title">&nbsp;</div>
+								<div class="form-con">&nbsp;</div>
+							</div>
+							<div class="form-node">
+								<div class="form-title">&nbsp;</div>
+								<div class="form-con">
+									<button class="btn btn-submit blue" type="submit">提 交</button>
+									<button class="btn btn-back" type="submit" onclick="history.go(-1)">返 回</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript" src="__ADMIN__/style/jquery.min.js"></script>
+		<script type="text/javascript" src="__ADMIN__/style/major.js"></script>
+		<script type="text/javascript" src="__ADMIN__/style/bootstrap.js"></script>
+	</body>
+</html>

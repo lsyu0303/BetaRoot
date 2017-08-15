@@ -1,0 +1,109 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="Cache-Control" content="no-siteapp" />
+		<title>轻风之语〖开发中……〗</title>
+		<meta name="keywords" content="轻风之语〖开发中……〗"/>
+		<meta name="description" content="轻风之语〖开发中……〗"/>
+		<link rel="stylesheet" type="text/css" href="__ADMIN__/style/default.css">
+		<link rel="stylesheet" type="text/css" href="__ADMIN__/style/font.min.css">
+		<link rel="stylesheet" type="text/css" href="__ADMIN__/style/bootstrap.css">
+	</head>
+
+	<body>
+		<div class="i-con">
+			<div class="box i-row">
+				<div class="i-col-12">
+					<ul class="nav nav-tabs" role="tablist">
+						<li class="active"><a href="javascript:void(0);">添加配置</a></li>
+						<li><a href="{:url('index')}">配置管理</a></li>
+					</ul>
+					<div class="box-con">
+						<form class="Tab_form" name="form" method="post" action="">
+							<div class="form-node">
+								<div class="form-title">配置类型：</div>
+								<div class="form-con i-col-2">
+									<select name="typeid" style="width: 109%">
+										{volist name='config_types' id='config_type'}
+										<option value="{$config_type.value}">{$config_type.title}</option>
+										{/volist}
+									</select>
+								</div>
+							</div>
+							<div class="form-node">
+								<div class="form-title">英文标识：</div>
+								<div class="form-con i-col-2">
+									<input class="input-title" id="name" name="name" type="text" value="">
+								</div>
+							</div>
+							<div class="form-node">
+								<div class="form-title">配置名称：</div>
+								<div class="form-con i-col-2">
+									<input class="input-title" id="title" name="title" type="text" value="">
+								</div>
+							</div>
+							<div class="form-node">
+								<div class="form-title">配置分组：</div>
+								<div class="form-con i-col-2">
+									<input class="input-title" id="groupid" name="groupid" type="text" value="">
+								</div>
+							</div>
+							<div class="form-node">
+								<div class="form-title">配置排序：</div>
+								<div class="form-con i-col-2">
+									<input class="input-title" id="sort" name="sort" type="text" value="">
+								</div>
+							</div>
+							<div class="form-node">
+								<div class="form-title">默 认 值：</div>
+								<div class="form-con i-col-2">
+									<input class="input-title" id="value" name="value" type="text" value="">
+								</div>
+							</div>
+							<div class="form-node">
+								<div class="form-title">可 选 值：</div>
+								<div class="form-con i-col-2">
+									<textarea class="input-title" id="optional" name="optional" rows="3"></textarea>
+								</div>
+							</div>
+							<div class="form-node">
+								<div class="form-title">注释说明：</div>
+								<div class="form-con i-col-2">
+									<textarea class="input-title" id="description" name="description" rows="3"></textarea>
+								</div>
+							</div>
+							<div class="form-node">
+								<div class="form-title">配置状态：</div>
+								<div class="form-con i-col-2">
+									<div class="btn-on">
+										<label class="Tab_on btn on-on">开 启</label>
+										<input class="Tab_open" name="status" value="1" type="radio" checked>
+										<input class="Tab_shut" name="status" value="0" type="radio">
+										<label class="Tab_off btn off-off">关 闭</label>
+									</div>
+								</div>
+							</div>
+							<div class="form-node">
+								<div class="form-title">&nbsp;</div>
+								<div class="form-con">&nbsp;</div>
+							</div>
+							<div class="form-node">
+								<div class="form-title">&nbsp;</div>
+								<div class="form-con">
+									<button class="btn btn-submit blue" type="submit">提 交</button>
+									<button class="btn btn-back" type="submit" onclick="history.go(-1)">返 回</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript" src="__ADMIN__/style/jquery.min.js"></script>
+		<script type="text/javascript" src="__ADMIN__/style/major.js"></script>
+		<script type="text/javascript" src="__ADMIN__/style/bootstrap.js"></script>
+	</body>
+</html>
