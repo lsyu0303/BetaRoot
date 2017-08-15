@@ -16,6 +16,7 @@
 		<script type="text/javascript" src="__ADDONS__/ueditor/lang/zh-cn/zh-cn.js"></script>
 		<script type="text/javascript" src="__ADMIN__/style/jquery.min.js"></script>
 		<script type="text/javascript" src="__ADDONS__/uploadify/jquery.uploadifive.js"></script>
+		<script type="text/javascript" src="__ADDONS__/layer/layer.js"></script>
 		<script type="text/javascript">
 			$(function() {
 				$('#uploadify').uploadifive({
@@ -220,27 +221,27 @@
 			$("#cancel").click(function(){
 				var source=$("input[name='image']").val();
 				if(!source){
-					alert('请先上传文件！');
+					layer.msg('请先上传文件！', {icon: 7});
 					return false;
 				}
-				if(!confirm('确定删除文件吗？')){
-					return false;
-				}
-				$("#upload_show").hide();
-				$("input[name='image']").val('');
-				$.ajax({
-					type	: 'post',
-					dataType: 'json',
-					url		: '{:url('deletefile')}',
-					data	: {source:source},
-					success:function(data){
-						if(data==1){
-							alert('删除文件成功！');
+				layer.confirm('确定删除文件吗？', {icon: 3, title:'提示'}, function(index){
+					$("#upload_show").hide();
+					$("input[name='image']").val('');
+					$.ajax({
+						type	: 'post',
+						dataType: 'json',
+						url		: '{:url('deletefile')}',
+						data	: {source:source},
+						success:function(data){
+							if(data==1){
+								layer.msg('删除文件成功！', {icon: 1});
+							}
+							else{
+								layer.msg('删除文件失败！', {icon: 2});
+							}
 						}
-						else{
-							alert('删除文件失败！');
-						}
-					}
+					});
+					layer.close(index);
 				});
 			});
 		</script>
