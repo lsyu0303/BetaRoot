@@ -1,88 +1,39 @@
 <!DOCTYPE HTML>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<meta name="renderer" content="webkit">
-		<meta http-equiv="Cache-Control" content="no-siteapp" />
-		<title>轻风之语〖开发中……〗</title>
-		<meta name="keywords" content="轻风之语〖开发中……〗"/>
-		<meta name="description" content="轻风之语〖开发中……〗"/>
-		<link rel="stylesheet" type="text/css" href="__ADMIN__/style/default.css">
-		<link rel="stylesheet" type="text/css" href="__ADMIN__/style/font.min.css">
-		<link rel="stylesheet" type="text/css" href="__ADMIN__/style/bootstrap.css">
-	</head>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="Cache-Control" content="no-siteapp" />
+	<title>轻风之语〖开发中……〗</title>
+	<meta name="keywords" content="轻风之语〖开发中……〗"/>
+	<meta name="description" content="轻风之语〖开发中……〗"/>
+	<link rel="stylesheet" type="text/css" href="__ADMIN__/style/default.css">
+	<link rel="stylesheet" type="text/css" href="__ADMIN__/style/font.min.css">
+	<link rel="stylesheet" type="text/css" href="__ADMIN__/style/bootstrap.css">
+</head>
 
-	<body>
-		<div class="i-con">
-			<div class="box i-row">
-				<div class="i-col-12">
-					<ul class="nav nav-tabs" role="tablist">
-						<li class="active"><a role="tab" data-toggle="tab" href="#tabs">联动分组</a></li>
+<body>
+	<div class="i-con">
+		<div class="box i-row">
+			<div class="i-col-12">
+				<ul class="nav nav-tabs" role="tablist">
+					<li class="active"><a role="tab" data-toggle="tab" href="#tabs">联动分组</a></li>
+					{volist name='tabs_lists' id='tabs_list'}
+						<li><a role="tab" data-toggle="tab" href="#{$tabs_list.name}">{$tabs_list.title}</a></li>
+					{/volist}
+					<li><a role="tab" data-toggle="tab" href="#tab">标签管理</a></li>
+				</ul>
+				<div class="box-con">
+					<div class="tab-content tabs">
+						<!-- 联动分组 -->
+						<div class="tab-pane fade in active" id="tabs">
+							<h3>Section 1</h3>
+						</div>
+
+						<!-- 标签循环 -->
 						{volist name='tabs_lists' id='tabs_list'}
-							<li><a role="tab" data-toggle="tab" href="#{$tabs_list.name}">{$tabs_list.title}</a></li>
-						{/volist}
-						<li><a role="tab" data-toggle="tab" href="#tab">标签管理</a></li>
-					</ul>
-					<div class="box-con">
-						<div class="tab-content tabs">
-							<!-- 联动分组 -->
-							<div class="tab-pane fade in active" id="tabs">
-								<h3>Section 1</h3>
-							</div>
-
-							<!-- 标签循环 -->
-							{volist name='tabs_lists' id='tabs_list'}
-								<div role="tabpanel" class="tab-pane fade" id="{$tabs_list.name}">
-									<form class="Tab_form" name="form" method="post" action="">
-										<div class="box-btn">
-											<a class="btn btn-insert" href="{:url('insert')}"><i class="icon ai-edit"></i>添加标签</a>
-											<a class="btn btn-insert" href="{:url('insert')}"><i class="icon ai-edit"></i>更新排序</a>
-										</div>
-										<div class="table-con">
-											<table class="table">
-												<thead>
-													<tr>
-														<th class="check"><input type="checkbox" class="Tab_checkAll" id="idAll"></th>
-														<th class="text-ctr-05">序号</th>
-														<th class="text-ctr-05">排序</th>
-														<th class="text-ltr-20">标题</th>
-														<th class="text-ltr-20">分组</th>
-														<th class="text-ltr">枚举值</th>
-														<th class="text-ctr-08">状态</th>
-														<th class="text-ctr-15">操作</th>
-													</tr>
-												</thead>
-												<tbody id="id">
-													{volist name='tab_lists' id='tab_list'}
-														{if condition="$tab_list.group eq $tabs_list.name"}
-															<tr>
-																<td class="check"><input class="Tab_check" type="checkbox" name="id[]" value="{$tab_list.id}"></td>
-																<td class="text-ctr">{$tab_list.id}</td>
-																<td class="text-ctr-05"><input class="sort" type="text" name="sort" value="{$tab_list.sort}"></td>
-																<td class="text-ltr">{$tab_list.title}</td>
-																<td class="text-ltr">{$tab_list.group}</td>
-																<td class="text-ltr">{$tab_list.value}</td>
-																<td class="text-ctr">
-																	{if condition="$tab_list.status eq 0"}<span class="label red">禁用</span>
-																	{elseif condition="$tab_list.status eq 1"}<span class="label green">启用</span>
-																	{/if}
-																</td>
-																<td><a class="btn btn-redact" href='{:url('redact',array('id'=>$tab_list.id))}'><i class="icon ai-edit"></i>编辑</a>
-																	<a class="btn btn-delete" href='{:url('delete',array('id'=>$tab_list.id))}' onclick="javascript:return confirm('确定要删除吗？');"><i class="icon ai-delete"></i>删除</a>
-																</td>
-															</tr>
-														{/if}
-													{/volist}
-												</tbody>
-											</table>
-										</div>
-									</form>
-								</div>
-							{/volist}
-
-							<!-- 标签管理 -->
-							<div class="tab-pane fade" id="tab">
+							<div role="tabpanel" class="tab-pane fade" id="{$tabs_list.name}">
 								<form class="Tab_form" name="form" method="post" action="">
 									<div class="box-btn">
 										<a class="btn btn-insert" href="{:url('insert')}"><i class="icon ai-edit"></i>添加标签</a>
@@ -104,35 +55,84 @@
 											</thead>
 											<tbody id="id">
 												{volist name='tab_lists' id='tab_list'}
-													<tr>
-														<td class="check"><input class="Tab_check" type="checkbox" name="id[]" value="{$tab_list.id}"></td>
-														<td class="text-ctr">{$tab_list.id}</td>
-														<td class="text-ctr-05"><input class="sort" type="text" name="sort" value="{$tab_list.sort}"></td>
-														<td class="text-ltr">{$tab_list.title}</td>
-														<td class="text-ltr">{$tab_list.group}</td>
-														<td class="text-ltr">{$tab_list.value}</td>
-														<td class="text-ctr">
-															{if condition="$tab_list.status eq 0"}<span class="label red">禁用</span>
-															{elseif condition="$tab_list.status eq 1"}<span class="label green">启用</span>
-															{/if}
-														</td>
-														<td><a class="btn btn-redact" href='{:url('redact',array('id'=>$tab_list.id))}'><i class="icon ai-edit"></i>编辑</a>
-															<a class="btn btn-delete" href='{:url('delete',array('id'=>$tab_list.id))}' onclick="javascript:return confirm('确定要删除吗？');"><i class="icon ai-delete"></i>删除</a>
-														</td>
-													</tr>
+													{if condition="$tab_list.group eq $tabs_list.name"}
+														<tr>
+															<td class="check"><input class="Tab_check" type="checkbox" name="id[]" value="{$tab_list.id}"></td>
+															<td class="text-ctr">{$tab_list.id}</td>
+															<td class="text-ctr-05"><input class="sort" type="text" name="sort" value="{$tab_list.sort}"></td>
+															<td class="text-ltr">{$tab_list.title}</td>
+															<td class="text-ltr">{$tab_list.group}</td>
+															<td class="text-ltr">{$tab_list.value}</td>
+															<td class="text-ctr">
+																{if condition="$tab_list.status eq 0"}<span class="label red">禁用</span>
+																{elseif condition="$tab_list.status eq 1"}<span class="label green">启用</span>
+																{/if}
+															</td>
+															<td><a class="btn btn-redact" href='{:url('redact',array('id'=>$tab_list.id))}'><i class="icon ai-edit"></i>编辑</a>
+																<a class="btn btn-delete" href='{:url('delete',array('id'=>$tab_list.id))}' onclick="javascript:return confirm('确定要删除吗？');"><i class="icon ai-delete"></i>删除</a>
+															</td>
+														</tr>
+													{/if}
 												{/volist}
 											</tbody>
 										</table>
 									</div>
 								</form>
 							</div>
+						{/volist}
+
+						<!-- 标签管理 -->
+						<div class="tab-pane fade" id="tab">
+							<form class="Tab_form" name="form" method="post" action="">
+								<div class="box-btn">
+									<a class="btn btn-insert" href="{:url('insert')}"><i class="icon ai-edit"></i>添加标签</a>
+									<a class="btn btn-insert" href="{:url('insert')}"><i class="icon ai-edit"></i>更新排序</a>
+								</div>
+								<div class="table-con">
+									<table class="table">
+										<thead>
+											<tr>
+												<th class="check"><input type="checkbox" class="Tab_checkAll" id="idAll"></th>
+												<th class="text-ctr-05">序号</th>
+												<th class="text-ctr-05">排序</th>
+												<th class="text-ltr-20">标题</th>
+												<th class="text-ltr-20">分组</th>
+												<th class="text-ltr">枚举值</th>
+												<th class="text-ctr-08">状态</th>
+												<th class="text-ctr-15">操作</th>
+											</tr>
+										</thead>
+										<tbody id="id">
+											{volist name='tab_lists' id='tab_list'}
+												<tr>
+													<td class="check"><input class="Tab_check" type="checkbox" name="id[]" value="{$tab_list.id}"></td>
+													<td class="text-ctr">{$tab_list.id}</td>
+													<td class="text-ctr-05"><input class="sort" type="text" name="sort" value="{$tab_list.sort}"></td>
+													<td class="text-ltr">{$tab_list.title}</td>
+													<td class="text-ltr">{$tab_list.group}</td>
+													<td class="text-ltr">{$tab_list.value}</td>
+													<td class="text-ctr">
+														{if condition="$tab_list.status eq 0"}<span class="label red">禁用</span>
+														{elseif condition="$tab_list.status eq 1"}<span class="label green">启用</span>
+														{/if}
+													</td>
+													<td><a class="btn btn-redact" href='{:url('redact',array('id'=>$tab_list.id))}'><i class="icon ai-edit"></i>编辑</a>
+														<a class="btn btn-delete" href='{:url('delete',array('id'=>$tab_list.id))}' onclick="javascript:return confirm('确定要删除吗？');"><i class="icon ai-delete"></i>删除</a>
+													</td>
+												</tr>
+											{/volist}
+										</tbody>
+									</table>
+								</div>
+							</form>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-		<script type="text/javascript" src="__ADMIN__/style/jquery.min.js"></script>
-		<script type="text/javascript" src="__ADMIN__/style/major.js"></script>
-		<script type="text/javascript" src="__ADMIN__/style/bootstrap.js"></script>
-	</body>
+	</div>
+	<script type="text/javascript" src="__ADMIN__/style/jquery.min.js"></script>
+	<script type="text/javascript" src="__ADMIN__/style/major.js"></script>
+	<script type="text/javascript" src="__ADMIN__/style/bootstrap.js"></script>
+</body>
 </html>

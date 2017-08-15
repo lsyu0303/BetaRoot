@@ -1,61 +1,61 @@
 <!DOCTYPE HTML>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<meta name="renderer" content="webkit">
-		<meta http-equiv="Cache-Control" content="no-siteapp" />
-		<title>轻风之语〖开发中……〗</title>
-		<meta name="keywords" content="轻风之语〖开发中……〗"/>
-		<meta name="description" content="轻风之语〖开发中……〗"/>
-		<link rel="stylesheet" type="text/css" href="__ADMIN__/style/framework.css">
-		<link rel="stylesheet" type="text/css" href="__ADMIN__/style/font.min.css">
-	</head>
-	<body style="overflow:hidden">
-		<div class="main">
-			<div class="nav">
-				<!-- 引入导航页面 -->
-				{include file="Index/navlist" /}
-			</div>
-			<div class="con">
-				<div class="menu">
-					<div class="menu-con">
-						<li class="no"><a class="Tab_menu" href="javascript:;" data-id="1"><i class="icon ai-home"></i><span>首页</span></a></li>
-						<li><a class="Tab_menu" href="javascript:;" data-id="2"><i class="icon ai-shop"></i><span>商城管理</span></a></li>
-						<li><a class="Tab_menu" href="javascript:;" data-id="3"><i class="icon ai-article"></i><span>内容管理</span></a></li>
-						<li><a class="Tab_menu" href="javascript:;" data-id="4"><i class="icon ai-profit"></i><span>资金管理</span></a></li>
-						<li><a class="Tab_menu" href="javascript:;" data-id="5"><i class="icon ai-users"></i><span>会员管理</span></a></li>
-						<li><a class="Tab_menu" href="javascript:;" data-id="6"><i class="icon ai-set"></i><span>系统管理</span></a></li>
-					</div>
-				</div>
-				<div class="tab">
-					<button class="tab-btn Tab_Left"><i class="icon ai-rew-left"></i></button>
-					<button class="tab-btn Tab_New"><i class="icon ai-spin"></i></button>
-					<div class="Tab_Tabs" id="Tab_Tabs">
-						<div class="page-con">
-							<a class="no Tab_Tab" href="javascript:;" data-id="">首页</a>
-						</div>
-					</div>
-					<button class="tab-btn Tab_Right"><i class="icon ai-rew-right"></i></button>
-					<div class="btn-con">
-						<a class="name"><span>关闭操作</span><a>
-						<ul class="btn-menu">
-							<li class="Tab_Other"><a>关闭其他标签</a></li>
-							<li class="divider"></li>
-							<li class="Tab_All"><a>关闭全部标签</a></li>
-						</ul>
-					</div>
-					<a class="tab-btn Tab_Home" href="/" target="_blank"><i class="icon ai-home"></i></a>
-				</div>
-				<div class="Tab_main">
-					<iframe class="Tab_iframe" name="iframe0" id="iframe" width="100%" height="100%" src="{:url('home')}" data-id="" frameborder="0" ></iframe>
-				</div>
-				<div class="footer"><div class="copy">版权所有 &copy; <a href="/" target="_blank"> www.lsyu.net </a> 2010-2020 桂ICP备15000934号</div></div>
-			</div>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="Cache-Control" content="no-siteapp" />
+	<title>轻风之语〖开发中……〗</title>
+	<meta name="keywords" content="轻风之语〖开发中……〗"/>
+	<meta name="description" content="轻风之语〖开发中……〗"/>
+	<link rel="stylesheet" type="text/css" href="__ADMIN__/style/framework.css">
+	<link rel="stylesheet" type="text/css" href="__ADMIN__/style/font.min.css">
+</head>
+<body style="overflow:hidden">
+	<div class="main">
+		<div class="nav">
+			<!-- 引入导航页面 -->
+			{include file="Index/navlist" /}
 		</div>
+		<div class="con">
+			<div class="menu">
+				<div class="menu-con">
+					<li class="no"><a class="Tab_menu" href="javascript:;" data-id="1"><i class="icon ai-home"></i><span>首页</span></a></li>
+					<li><a class="Tab_menu" href="javascript:;" data-id="2"><i class="icon ai-shop"></i><span>商城管理</span></a></li>
+					<li><a class="Tab_menu" href="javascript:;" data-id="3"><i class="icon ai-article"></i><span>内容管理</span></a></li>
+					<li><a class="Tab_menu" href="javascript:;" data-id="4"><i class="icon ai-profit"></i><span>资金管理</span></a></li>
+					<li><a class="Tab_menu" href="javascript:;" data-id="5"><i class="icon ai-users"></i><span>会员管理</span></a></li>
+					<li><a class="Tab_menu" href="javascript:;" data-id="6"><i class="icon ai-set"></i><span>系统管理</span></a></li>
+				</div>
+			</div>
+			<div class="tab">
+				<button class="tab-btn Tab_Left"><i class="icon ai-rew-left"></i></button>
+				<button class="tab-btn Tab_New"><i class="icon ai-spin"></i></button>
+				<div class="Tab_Tabs" id="Tab_Tabs">
+					<div class="page-con">
+						<a class="no Tab_Tab" href="javascript:;" data-id="">首页</a>
+					</div>
+				</div>
+				<button class="tab-btn Tab_Right"><i class="icon ai-rew-right"></i></button>
+				<div class="btn-con">
+					<a class="name"><span>关闭操作</span><a>
+					<ul class="btn-menu">
+						<li class="Tab_Other"><a>关闭其他标签</a></li>
+						<li class="divider"></li>
+						<li class="Tab_All"><a>关闭全部标签</a></li>
+					</ul>
+				</div>
+				<a class="tab-btn Tab_Home" href="/" target="_blank"><i class="icon ai-home"></i></a>
+			</div>
+			<div class="Tab_main">
+				<iframe class="Tab_iframe" name="iframe0" id="iframe" width="100%" height="100%" src="{:url('home')}" data-id="" frameborder="0" ></iframe>
+			</div>
+			<div class="footer"><div class="copy">版权所有 &copy; <a href="/" target="_blank"> www.lsyu.net </a> 2010-2020 桂ICP备15000934号</div></div>
+		</div>
+	</div>
 
-		<script type="text/javascript" src="__ADMIN__/style/jquery.min.js"></script>
-		<script type="text/javascript" src="__ADMIN__/style/tabs.js"></script>
-		<script type="text/javascript" src="__ADMIN__/style/major.js"></script>
-	</body>
+	<script type="text/javascript" src="__ADMIN__/style/jquery.min.js"></script>
+	<script type="text/javascript" src="__ADMIN__/style/tabs.js"></script>
+	<script type="text/javascript" src="__ADMIN__/style/major.js"></script>
+</body>
 </html>

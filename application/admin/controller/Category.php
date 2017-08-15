@@ -127,15 +127,15 @@ class Category extends Controller
 	public function change()
 	{
 		if(request()->isAjax()){
-			$sid=input('sid');
-			$status=db('category')->field('status')->where('id',$sid)->find();
+			$id=input('id');
+			$status=db('category')->field('status')->where('id',$id)->find();
 			$status=$status['status'];
 			if($status==1){
-				db('category')->where('id',$sid)->update(['status'=>0]);
+				db('category')->where('id',$id)->update(['status'=>0]);
 				echo 0; //由显示转换为隐藏
 			}
 			else{
-				db('category')->where('id',$sid)->update(['status'=>1]);
+				db('category')->where('id',$id)->update(['status'=>1]);
 				echo 1; //由隐藏转换为显示
 			}
 		}
@@ -147,18 +147,36 @@ class Category extends Controller
 	// Ajax 异步删除文件
 	public function deletefile()
 	{
-		$id=input('id');
-		$source=input('source');
-		$source=UPLOADS.$source;
-		$results=@unlink($source);
-		if($id){
-			db('category')->where('id',$id)->setField('image','');
-		}
-		if($results){
-			echo 1; //删除文件成功
+		if(request()->isAjax()){
+			$id=input('id');
+			$source=input('source');
+			$source=UPLOADS.$source;
+			$results=@unlink($source);
+			if($id){
+				db('category')->where('id',$id)->setField('image','');
+			}
+			if($results){
+				echo 1; //删除文件成功
+			}
+			else{
+				echo 0; //删除文件失败
+			}
 		}
 		else{
-			echo 0; //删除文件失败
+			$this->error('非法操作！');
+		}
+	}
+
+	// Ajax 异步模块伸缩
+	public function flex()
+	{
+		if(request()->isAjax()){
+			$id=input('id');
+			$childrens=model('category')->childrens($id);
+			echo json_encode($childrens);
+		}
+		else{
+			$this->error('非法操作！');
 		}
 	}
 

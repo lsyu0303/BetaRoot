@@ -16,7 +16,7 @@
             var url=$("#url").val();
             var wait=$("#wait").val();
             layer.open({
-                offset: ['300px','600px'],
+                offset: ['200px','600px'],
                 content: msg,
                 yes: function(index, layero){
                 location.href = href;

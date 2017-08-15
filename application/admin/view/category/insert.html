@@ -1,249 +1,249 @@
 <!DOCTYPE HTML>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<meta name="renderer" content="webkit">
-		<meta http-equiv="Cache-Control" content="no-siteapp" />
-		<title>轻风之语〖开发中……〗</title>
-		<meta name="keywords" content="轻风之语〖开发中……〗"/>
-		<meta name="description" content="轻风之语〖开发中……〗"/>
-		<link rel="stylesheet" type="text/css" href="__ADMIN__/style/default.css">
-		<link rel="stylesheet" type="text/css" href="__ADMIN__/style/font.min.css">
-		<link rel="stylesheet" type="text/css" href="__ADMIN__/style/bootstrap.css">
-		<script type="text/javascript" src="__ADDONS__/ueditor/ueditor.config.js"></script>
-		<script type="text/javascript" src="__ADDONS__/ueditor/ueditor.all.min.js"></script>
-		<script type="text/javascript" src="__ADDONS__/ueditor/lang/zh-cn/zh-cn.js"></script>
-		<script type="text/javascript" src="__ADMIN__/style/jquery.min.js"></script>
-		<script type="text/javascript" src="__ADDONS__/uploadify/jquery.uploadifive.js"></script>
-		<script type="text/javascript" src="__ADDONS__/layer/layer.js"></script>
-		<script type="text/javascript">
-			$(function() {
-				$('#uploadify').uploadifive({
-					'auto'				: true,
-					'queueID'			: 'queue',
-					'uploadScript'		: '{:url('Category/uploadify')}',
-					'buttonText'		: '选择文件',
-					'buttonClass'		: 'btn btn-back',
-					'fileTypeDesc'		: 'Image Files',
-					'fileObjName'		: 'image',
-					'onUploadComplete'	: function(file,data){
-						$("input[name='image']").val(data);
-						var upload_src= "__UPLOADS__/"+data;
-						var upload_image="<img height='100px' src='"+upload_src+"'>";
-						$('#upload_show').show();
-						$('#upload_image').html(upload_image);
-					}
-				});
-				$("#uploadifive-uploadify").prepend("<i style='padding-right:5px;' class='icon ai-up-img'></i>");
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="Cache-Control" content="no-siteapp" />
+	<title>轻风之语〖开发中……〗</title>
+	<meta name="keywords" content="轻风之语〖开发中……〗"/>
+	<meta name="description" content="轻风之语〖开发中……〗"/>
+	<link rel="stylesheet" type="text/css" href="__ADMIN__/style/default.css">
+	<link rel="stylesheet" type="text/css" href="__ADMIN__/style/font.min.css">
+	<link rel="stylesheet" type="text/css" href="__ADMIN__/style/bootstrap.css">
+	<script type="text/javascript" src="__ADDONS__/ueditor/ueditor.config.js"></script>
+	<script type="text/javascript" src="__ADDONS__/ueditor/ueditor.all.min.js"></script>
+	<script type="text/javascript" src="__ADDONS__/ueditor/lang/zh-cn/zh-cn.js"></script>
+	<script type="text/javascript" src="__ADMIN__/style/jquery.min.js"></script>
+	<script type="text/javascript" src="__ADDONS__/uploadify/jquery.uploadifive.js"></script>
+	<script type="text/javascript" src="__ADDONS__/layer/layer.js"></script>
+	<script type="text/javascript">
+		$(function() {
+			$('#uploadify').uploadifive({
+				'auto'				: true,
+				'queueID'			: 'queue',
+				'uploadScript'		: '{:url('Category/uploadify')}',
+				'buttonText'		: '选择文件',
+				'buttonClass'		: 'btn btn-back',
+				'fileTypeDesc'		: 'Image Files',
+				'fileObjName'		: 'image',
+				'onUploadComplete'	: function(file,data){
+					$("input[name='image']").val(data);
+					var upload_src= "__UPLOADS__/"+data;
+					var upload_image="<img height='100px' src='"+upload_src+"'>";
+					$('#upload_show').show();
+					$('#upload_image').html(upload_image);
+				}
 			});
-		</script>
-	</head>
+			$("#uploadifive-uploadify").prepend("<i style='padding-right:5px;' class='icon ai-up-img'></i>");
+		});
+	</script>
+</head>
 
-	<body>
-		<div class="i-con">
-			<div class="box i-row">
-				<div class="i-col-12">
-					<ul class="nav nav-tabs" role="tablist">
-						<li class="active"><a role="tab" data-toggle="tab" href="#basic">基本选项</a></li>
-						<li><a role="tab" data-toggle="tab" href="#expert">高级设置</a></li>
-						<li><a role="tab" data-toggle="tab" href="#authd">权限设置</a></li>
-						<li><a role="tab" data-toggle="tab" href="#explain">内容描述</a></li>
-					</ul>
-					<div class="box-con">
-						<form class="Tab_form" name="form" method="post" action="">
-							<div class="tab-content tabs">
+<body>
+	<div class="i-con">
+		<div class="box i-row">
+			<div class="i-col-12">
+				<ul class="nav nav-tabs" role="tablist">
+					<li class="active"><a role="tab" data-toggle="tab" href="#basic">基本选项</a></li>
+					<li><a role="tab" data-toggle="tab" href="#expert">高级设置</a></li>
+					<li><a role="tab" data-toggle="tab" href="#authd">权限设置</a></li>
+					<li><a role="tab" data-toggle="tab" href="#explain">内容描述</a></li>
+				</ul>
+				<div class="box-con">
+					<form class="Tab_form" name="form" method="post" action="">
+						<div class="tab-content tabs">
 
-								<div class="tab-pane fade in active" id="basic">
-									<div class="form-node">
-										<div class="form-title">内容模型：</div>
-										<div class="form-con i-col-2">
-											<select name="modelid" style="width: 109%">
-												{volist name='model_lists' id='models'}
-													<option value="{$models.id}">{$models.title}</option>
-												{/volist}
-											</select>
-										</div>
-									</div>
-									<div class="form-node">
-										<div class="form-title">上级模块：</div>
-										<div class="form-con i-col-2">
-											<select name="parentid" style="width: 109%">
-												<option value="0">顶级模块</option>
-												{volist name='category_lists' id='categorys'}
-													<option {if condition="$categorys.id eq $pid"} selected="selected" {/if} value="{$categorys.id}">{if condition="$categorys.parentid neq 0"}{$categorys.delimiter}├─{/if}{$categorys.title}</option>
-												{/volist}
-											</select>
-										</div>
-									</div>
-									<div class="form-node">
-										<div class="form-title">模块标题：</div>
-										<div class="form-con i-col-2">
-											<input class="input-title" type="text" name="title" value="" placeholder="模块名称">
-										</div>
-									</div>
-									<div class="form-node">
-										<div class="form-title">模块标识：</div>
-										<div class="form-con i-col-2">
-											<input class="input-title" type="text" name="name" value="" placeholder="只能包含字母、数字、下划线">
-										</div>
-									</div>
-									<div class="form-node">
-										<div class="form-title">模块排序：</div>
-										<div class="form-con i-col-2">
-											<input class="input-title" type="text" name="sort" value="">
-										</div>
-									</div>
-									<div class="form-node">
-										<div class="form-title">模块类型：</div>
-										<div class="form-con i-col-2">
-											{volist name='category_types' id='types'}
-												<div class="Tab_radio">
-													{if condition="$types.value eq 1"}
-														<input type="radio" checked="checked" name="type" value="{$types.value}"><dl class="on"><i class="icon ai-radio-on"></i><span>{$types.title}</span></dl>
-													{else}
-														<input type="radio" name="type" value="{$types.value}"><dl><i class="icon ai-radio"></i><span>{$types.title}</span></dl>
-													{/if}
-												</div>
+							<div class="tab-pane fade in active" id="basic">
+								<div class="form-node">
+									<div class="form-title">内容模型：</div>
+									<div class="form-con i-col-2">
+										<select name="modelid" style="width: 109%">
+											{volist name='model_lists' id='models'}
+												<option value="{$models.id}">{$models.title}</option>
 											{/volist}
-										</div>
+										</select>
 									</div>
-									<div class="form-node">
-										<div class="form-title">模块图片：</div>
-										<div class="form-con i-col-8">
-											<div id="queue">
-												<input type="hidden" name="image" value="">
-												<span id="uploadify"></span>
+								</div>
+								<div class="form-node">
+									<div class="form-title">上级模块：</div>
+									<div class="form-con i-col-2">
+										<select name="parentid" style="width: 109%">
+											<option value="0">顶级模块</option>
+											{volist name='category_lists' id='categorys'}
+												<option {if condition="$categorys.id eq $pid"} selected="selected" {/if} value="{$categorys.id}">{if condition="$categorys.parentid neq 0"}{$categorys.delimiter}├─{/if}{$categorys.title}</option>
+											{/volist}
+										</select>
+									</div>
+								</div>
+								<div class="form-node">
+									<div class="form-title">模块标题：</div>
+									<div class="form-con i-col-2">
+										<input class="input-title" type="text" name="title" value="" placeholder="模块名称">
+									</div>
+								</div>
+								<div class="form-node">
+									<div class="form-title">模块标识：</div>
+									<div class="form-con i-col-2">
+										<input class="input-title" type="text" name="name" value="" placeholder="只能包含字母、数字、下划线">
+									</div>
+								</div>
+								<div class="form-node">
+									<div class="form-title">模块排序：</div>
+									<div class="form-con i-col-2">
+										<input class="input-title" type="text" name="sort" value="">
+									</div>
+								</div>
+								<div class="form-node">
+									<div class="form-title">模块类型：</div>
+									<div class="form-con i-col-2">
+										{volist name='category_types' id='types'}
+											<div class="Tab_radio">
+												{if condition="$types.value eq 1"}
+													<input type="radio" checked="checked" name="type" value="{$types.value}"><dl class="on"><i class="icon ai-radio-on"></i><span>{$types.title}</span></dl>
+												{else}
+													<input type="radio" name="type" value="{$types.value}"><dl><i class="icon ai-radio"></i><span>{$types.title}</span></dl>
+												{/if}
 											</div>
-										</div>
+										{/volist}
 									</div>
-									<div id="upload_show" class="form-node" style="display:none;">
-										<div class="form-title">&nbsp;</div>
-										<div class="form-con i-col-8">
-											<div id="upload_image" style="float:left;"></div>
-											<div id="cancel" style="float:left;"><span><a href="javascript:void(0);"><i style='padding:0 5px 0 10px;' class="icon ai-delete"></i>删除</a></span></div>
-										</div>
-									</div>
-									<div class="form-node">
-										<div class="form-title">配置状态：</div>
-										<div class="form-con i-col-2">
-											<div class="btn-on">
-												<label class="Tab_on btn on-on">显 示</label>
-												<input class="Tab_open" type="radio" name="status" value="1" checked>
-												<input class="Tab_shut" type="radio" name="status" value="0">
-												<label class="Tab_off btn off-off">隐 藏</label>
-											</div>
+								</div>
+								<div class="form-node">
+									<div class="form-title">模块图片：</div>
+									<div class="form-con i-col-8">
+										<div id="queue">
+											<input type="hidden" name="image" value="">
+											<span id="uploadify"></span>
 										</div>
 									</div>
 								</div>
-
-								<div class="tab-pane fade" id="expert">
-									<div class="form-node">
-										<div class="form-title">模块模板：</div>
-										<div class="form-con i-col-2">
-											<select name="template_index" style="width: 109%">
-												<option value="">111</option>
-											</select>
-										</div>
-									</div>
-									<div class="form-node">
-										<div class="form-title">列表模板：</div>
-										<div class="form-con i-col-2">
-											<select name="template_list" style="width: 109%">
-												<option value="">111</option>
-											</select>
-										</div>
-									</div>
-									<div class="form-node">
-										<div class="form-title">输出模板：</div>
-										<div class="form-con i-col-2">
-											<select name="template_show" style="width: 109%">
-												<option value="">111</option>
-											</select>
-										</div>
-									</div>
-									<div class="form-node">
-										<div class="form-title">SEO 标题：</div>
-										<div class="form-con i-col-2">
-											<input class="input-title" type="text" name="seotitle" value="" placeholder="搜索引擎优化">
-										</div>
-									</div>
-									<div class="form-node">
-										<div class="form-title">搜关键词：</div>
-										<div class="form-con i-col-2">
-											<input class="input-title" type="text" name="keywords" value="" placeholder="搜索引擎关键词">
-										</div>
-									</div>
-									<div class="form-node">
-										<div class="form-title">模块描述：</div>
-										<div class="form-con i-col-2">
-											<textarea class="input-title" name="description" rows="3" placeholder="搜索引擎描述"></textarea>
-										</div>
+								<div id="upload_show" class="form-node" style="display:none;">
+									<div class="form-title">&nbsp;</div>
+									<div class="form-con i-col-8">
+										<div id="upload_image" style="float:left;"></div>
+										<div id="cancel" style="float:left;"><span><a href="javascript:void(0);"><i style='padding:0 5px 0 10px;' class="icon ai-delete"></i>删除</a></span></div>
 									</div>
 								</div>
-
-								<div class="tab-pane fade" id="authd">
-									<div class="form-node">
-										<div class="form-title">权限设置：</div>
-										<div class="form-con i-col-2">
-											<input class="input-title" type="text" name="" value="" placeholder="等待完善……">
+								<div class="form-node">
+									<div class="form-title">配置状态：</div>
+									<div class="form-con i-col-2">
+										<div class="btn-on">
+											<label class="Tab_on btn on-on">显 示</label>
+											<input class="Tab_open" type="radio" name="status" value="1" checked>
+											<input class="Tab_shut" type="radio" name="status" value="0">
+											<label class="Tab_off btn off-off">隐 藏</label>
 										</div>
-									</div>
-								</div>
-
-								<div class="tab-pane fade" id="explain">
-									<div class="form-node">
-											<textarea class="input-title" id="content" name="content" rows="3" placeholder="搜索引擎描述"></textarea>
 									</div>
 								</div>
 							</div>
-							<div class="form-node">
-								<div class="form-title">&nbsp;</div>
-								<div class="form-con">&nbsp;</div>
-							</div>
-							<div class="form-node">
-								<div class="form-title">&nbsp;</div>
-								<div class="form-con">
-									<button class="btn btn-submit blue" type="submit">提 交</button>
-									<button class="btn btn-back" type="submit" onclick="history.go(-1)">返 回</button>
+
+							<div class="tab-pane fade" id="expert">
+								<div class="form-node">
+									<div class="form-title">模块模板：</div>
+									<div class="form-con i-col-2">
+										<select name="template_index" style="width: 109%">
+											<option value="">111</option>
+										</select>
+									</div>
+								</div>
+								<div class="form-node">
+									<div class="form-title">列表模板：</div>
+									<div class="form-con i-col-2">
+										<select name="template_list" style="width: 109%">
+											<option value="">111</option>
+										</select>
+									</div>
+								</div>
+								<div class="form-node">
+									<div class="form-title">输出模板：</div>
+									<div class="form-con i-col-2">
+										<select name="template_show" style="width: 109%">
+											<option value="">111</option>
+										</select>
+									</div>
+								</div>
+								<div class="form-node">
+									<div class="form-title">SEO 标题：</div>
+									<div class="form-con i-col-2">
+										<input class="input-title" type="text" name="seotitle" value="" placeholder="搜索引擎优化">
+									</div>
+								</div>
+								<div class="form-node">
+									<div class="form-title">搜关键词：</div>
+									<div class="form-con i-col-2">
+										<input class="input-title" type="text" name="keywords" value="" placeholder="搜索引擎关键词">
+									</div>
+								</div>
+								<div class="form-node">
+									<div class="form-title">模块描述：</div>
+									<div class="form-con i-col-2">
+										<textarea class="input-title" name="description" rows="3" placeholder="搜索引擎描述"></textarea>
+									</div>
 								</div>
 							</div>
-						</form>
-					</div>
+
+							<div class="tab-pane fade" id="authd">
+								<div class="form-node">
+									<div class="form-title">权限设置：</div>
+									<div class="form-con i-col-2">
+										<input class="input-title" type="text" name="" value="" placeholder="等待完善……">
+									</div>
+								</div>
+							</div>
+
+							<div class="tab-pane fade" id="explain">
+								<div class="form-node">
+										<textarea class="input-title" id="content" name="content" rows="3" placeholder="搜索引擎描述"></textarea>
+								</div>
+							</div>
+						</div>
+						<div class="form-node">
+							<div class="form-title">&nbsp;</div>
+							<div class="form-con">&nbsp;</div>
+						</div>
+						<div class="form-node">
+							<div class="form-title">&nbsp;</div>
+							<div class="form-con">
+								<button class="btn btn-submit blue" type="submit">提 交</button>
+								<button class="btn btn-back" type="submit" onclick="history.go(-1)">返 回</button>
+							</div>
+						</div>
+					</form>
 				</div>
 			</div>
 		</div>
-		<script type="text/javascript" src="__ADMIN__/style/major.js"></script>
-		<script type="text/javascript" src="__ADMIN__/style/bootstrap.js"></script>
-		<script type="text/javascript">
-			UE.getEditor('content',{initialFrameWidth:1000,initialFrameHeight:400,});
+	</div>
+	<script type="text/javascript" src="__ADMIN__/style/major.js"></script>
+	<script type="text/javascript" src="__ADMIN__/style/bootstrap.js"></script>
+	<script type="text/javascript">
+		UE.getEditor('content',{initialFrameWidth:1000,initialFrameHeight:400,});
 
-			$("#cancel").click(function(){
-				var source=$("input[name='image']").val();
-				if(!source){
-					layer.msg('请先上传文件！', {icon: 7});
-					return false;
-				}
-				layer.confirm('确定删除文件吗？', {icon: 3, title:'提示'}, function(index){
-					$("#upload_show").hide();
-					$("input[name='image']").val('');
-					$.ajax({
-						type	: 'post',
-						dataType: 'json',
-						url		: '{:url('deletefile')}',
-						data	: {source:source},
-						success:function(data){
-							if(data==1){
-								layer.msg('删除文件成功！', {icon: 1});
-							}
-							else{
-								layer.msg('删除文件失败！', {icon: 2});
-							}
+		$("#cancel").click(function(){
+			var source=$("input[name='image']").val();
+			if(!source){
+				layer.msg('请先上传文件！', {icon: 7});
+				return false;
+			}
+			layer.confirm('确定删除文件吗？', {icon: 3, title:'提示'}, function(index){
+				$("#upload_show").hide();
+				$("input[name='image']").val('');
+				$.ajax({
+					type	: 'post',
+					dataType: 'json',
+					url		: '{:url('deletefile')}',
+					data	: {source:source},
+					success:function(data){
+						if(data==1){
+							layer.msg('删除文件成功！', {icon: 1});
 						}
-					});
-					layer.close(index);
+						else{
+							layer.msg('删除文件失败！', {icon: 2});
+						}
+					}
 				});
+				layer.close(index);
 			});
-		</script>
-	</body>
+		});
+	</script>
+</body>
 </html>

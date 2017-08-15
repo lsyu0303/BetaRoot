@@ -117,15 +117,15 @@ class System extends Controller
 	// Ajax 异步转换状态
 	public function change(){
 		if(request()->isAjax()){
-			$sid=input('sid');
-			$status=db('system')->field('status')->where('id',$sid)->find();
+			$id=input('id');
+			$status=db('system')->field('status')->where('id',$id)->find();
 			$status=$status['status'];
 			if($status==1){
-				db('system')->where('id',$sid)->update(['status'=>0]);
+				db('system')->where('id',$id)->update(['status'=>0]);
 				echo 0; //由启用转换为禁用
 			}
 			else{
-				db('system')->where('id',$sid)->update(['status'=>1]);
+				db('system')->where('id',$id)->update(['status'=>1]);
 				echo 1; //由禁用转换为启用
 			}
 		}
