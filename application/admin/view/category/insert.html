@@ -11,12 +11,12 @@
 	<link rel="stylesheet" type="text/css" href="__ADMIN__/style/default.css">
 	<link rel="stylesheet" type="text/css" href="__ADMIN__/style/font.min.css">
 	<link rel="stylesheet" type="text/css" href="__ADMIN__/style/bootstrap.css">
-	<script type="text/javascript" src="__ADDONS__/ueditor/ueditor.config.js"></script>
-	<script type="text/javascript" src="__ADDONS__/ueditor/ueditor.all.min.js"></script>
-	<script type="text/javascript" src="__ADDONS__/ueditor/lang/zh-cn/zh-cn.js"></script>
 	<script type="text/javascript" src="__ADMIN__/style/jquery.min.js"></script>
 	<script type="text/javascript" src="__ADDONS__/uploadify/jquery.uploadifive.js"></script>
 	<script type="text/javascript" src="__ADDONS__/layer/layer.js"></script>
+	<script type="text/javascript" src="__ADDONS__/ueditor/ueditor.config.js"></script>
+	<script type="text/javascript" src="__ADDONS__/ueditor/ueditor.all.min.js"></script>
+	<script type="text/javascript" src="__ADDONS__/ueditor/lang/zh-cn/zh-cn.js"></script>
 	<script type="text/javascript">
 		$(function() {
 			$('#uploadify').uploadifive({
@@ -96,7 +96,7 @@
 								</div>
 								<div class="form-node">
 									<div class="form-title">模块类型：</div>
-									<div class="form-con i-col-2">
+									<div class="form-con i-col-3">
 										{volist name='category_types' id='types'}
 											<div class="Tab_radio">
 												{if condition="$types.value eq 1"}
@@ -125,7 +125,7 @@
 									</div>
 								</div>
 								<div class="form-node">
-									<div class="form-title">配置状态：</div>
+									<div class="form-title">模块状态：</div>
 									<div class="form-con i-col-2">
 										<div class="btn-on">
 											<label class="Tab_on btn on-on">显 示</label>
@@ -193,7 +193,7 @@
 
 							<div class="tab-pane fade" id="explain">
 								<div class="form-node">
-										<textarea class="input-title" id="content" name="content" rows="3" placeholder="搜索引擎描述"></textarea>
+										<textarea class="input-title" id="content" name="content" rows="3" placeholder="关于模块的描述……"></textarea>
 								</div>
 							</div>
 						</div>
@@ -218,6 +218,7 @@
 	<script type="text/javascript">
 		UE.getEditor('content',{initialFrameWidth:1000,initialFrameHeight:400,});
 
+		// Ajax 删除上传文件
 		$("#cancel").click(function(){
 			var source=$("input[name='image']").val();
 			if(!source){
