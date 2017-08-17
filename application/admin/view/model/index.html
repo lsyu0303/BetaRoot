@@ -44,29 +44,26 @@
 									</tr>
 								</thead>
 								<tbody id="id">
-									{volist name='model_lists' id='models'}
+									{volist name="models" id="model"}
 										<tr>
-											<td class="check"><input class="Tab_check" type="checkbox" name="id[]" value="{$models.id}"></td>
-											<td class="text-ctr-05"><input class="sort" type="text" name="sort[{$models.id}]" value="{$models.sort}"></td>
-											<td class="text-ctr">{$models.id}</td>
-											<td class="text-ltr">{$models.title}</td>
-											<td class="text-ltr">{$models.name}</td>
-											<td class="text-ltr">{$models.tablename}</td>
+											<td class="check"><input class="Tab_check" type="checkbox" name="id[]" value="{$model.id}"></td>
+											<td class="text-ctr-05"><input class="sort" type="text" name="sort[{$model.id}]" value="{$model.sort}"></td>
+											<td class="text-ctr">{$model.id}</td>
+											<td class="text-ltr">{$model.title}</td>
+											<td class="text-ltr">{$model.name}</td>
+											<td class="text-ltr">{$model.tablename}</td>
 											<td class="text-ctr">
-												<a id="{$models.id}" onclick="change(this);"{if condition="$models.status eq 0"} class="btn btn-info red"{else} class="btn btn-info green" {/if}>{if condition="$models.status eq 0"}禁用{else}启用{/if}</a>
+												<a id="{$model.id}" onclick="change(this);" {if condition="$model.status eq 0"} class="btn btn-info red"{else} class="btn btn-info green" {/if}>{if condition="$model.status eq 0"}禁用{else}启用{/if}</a>
 											</td>
 											<td class="text-ctr">
-												<a class="btn btn-info blue" href="{:url('insert',array('pid'=>$models.id))}"><i class="icon ai-edit"></i>添加</a>
-												<a class="btn btn-info orange" href="{:url('redact',array('id'=>$models.id))}"><i class="icon ai-edit"></i>编辑</a>
-												<a class="btn btn-info red" href="#" id="{$models.id}" tablename="{$models.tablename}" onclick="ajaxdel(this);"><i class="icon ai-delete"></i>删除</a>
+												<a class="btn btn-info blue" href="{:url('insert',array('pid'=>$model.id))}"><i class="icon ai-edit"></i>添加</a>
+												<a class="btn btn-info orange" href="{:url('redact',array('id'=>$model.id))}"><i class="icon ai-edit"></i>编辑</a>
+												<a class="btn btn-info red" href="javascript:void(0);" id="{$model.id}" tablename="{$model.tablename}" onclick="remove(this);"><i class="icon ai-delete"></i>删除</a>
 											</td>
 										</tr>
 									{/volist}
 								</tbody>
 							</table>
-						</div>
-						<div class="paging">
-							<div class="page">{$model_lists->render()}</div>
 						</div>
 					</form>
 				</div>
@@ -78,7 +75,7 @@
 	<script type="text/javascript">
 		// Ajax 异步转换状态
 		function change(object){
-			var id=$(object).attr("id");
+			var id=$(object).attr('id');
 			$.ajax({
 				type	: "post",
 				dataType: "json",
@@ -86,26 +83,26 @@
 				data	: {id:id},
 				success:function(data){
 					if(data==0){
-						$(object).attr("class","btn btn-info red");
-						$(object).text("禁用");
+						$(object).attr('class','btn btn-info red');
+						$(object).text('禁用');
 					}
 					else{
-						$(object).attr("class","btn btn-info green");
-						$(object).text("启用");
+						$(object).attr('class','btn btn-info green');
+						$(object).text('启用');
 					}
 				}
 			});
 		}
 
 		// Ajax 异步删除记录
-		function ajaxdel(object){
+		function remove(object){
 			layer.confirm('确定要删除该模型吗？', {icon: 3, title:'提示'}, function(index){
-				var id=$(object).attr("id");
-				var tablename=$(object).attr("tablename");
+				var id=$(object).attr('id');
+				var tablename=$(object).attr('tablename');
 				$.ajax({
 					type	: "post",
 					dataType: "json",
-					url		: "{:url('ajaxdel')}",
+					url		: "{:url('remove')}",
 					data	: {id:id,tablename:tablename},
 					success:function(data){
 						if(data==1){

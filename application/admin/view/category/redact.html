@@ -12,21 +12,21 @@
 	<link rel="stylesheet" type="text/css" href="__ADMIN__/style/font.min.css">
 	<link rel="stylesheet" type="text/css" href="__ADMIN__/style/bootstrap.css">
 	<script type="text/javascript" src="__ADMIN__/style/jquery.min.js"></script>
-	<script type="text/javascript" src="__ADDONS__/uploadify/jquery.uploadifive.js"></script>
 	<script type="text/javascript" src="__ADDONS__/layer/layer.js"></script>
+	<script type="text/javascript" src="__ADDONS__/uploadify/jquery.uploadifive.js"></script>
 	<script type="text/javascript" src="__ADDONS__/ueditor/ueditor.config.js"></script>
 	<script type="text/javascript" src="__ADDONS__/ueditor/ueditor.all.min.js"></script>
 	<script type="text/javascript" src="__ADDONS__/ueditor/lang/zh-cn/zh-cn.js"></script>
 	<script type="text/javascript">
 		$(function() {
 			$('#uploadify').uploadifive({
-				'auto'				: true,
-				'queueID'			: 'queue',
-				'uploadScript'		: '{:url('Category/uploadify')}',
-				'buttonText'		: '选择文件',
-				'buttonClass'		: 'btn btn-back',
-				'fileTypeDesc'		: 'Image Files',
-				'fileObjName'		: 'image',
+				'auto'				: "true",
+				'queueID'			: "queue",
+				'uploadScript'		: "{:url('Category/uploadify')}",
+				'buttonText'		: "选择文件",
+				'buttonClass'		: "btn btn-back",
+				'fileTypeDesc'		: "Image Files",
+				'fileObjName'		: "image",
 				'onUploadComplete'	: function(file,data){
 					$("input[name='image']").val(data);
 					var upload_src= "__UPLOADS__/"+data;
@@ -59,9 +59,9 @@
 								<div class="form-node">
 									<div class="form-title">内容模型：</div>
 									<div class="form-con i-col-2">
-										<select name="modelid" style="width: 109%">
-											{volist name='model_lists' id='models'}
-												<option {if condition="$models.id eq $category.modelid"} selected="selected" {/if} value="{$models.id}">{$models.title}</option>
+										<select name="modelid" style="width:109%">
+											{volist name="models" id="model"}
+												<option {if condition="$model.id eq $category.modelid"} selected="selected" {/if} value="{$model.id}">{$model.title}</option>
 											{/volist}
 										</select>
 									</div>
@@ -71,8 +71,8 @@
 									<div class="form-con i-col-2">
 										<select name="parentid" style="width: 109%">
 											<option value="">顶级模块</option>
-											{volist name='category_lists' id='categorys'}
-												<option {if condition="$categorys.id eq $category.parentid"} selected="selected" {/if} value="{$categorys.id}">{if condition="$categorys.parentid neq 0"}{$categorys.delimiter}├─{/if}{$categorys.title}</option>
+											{volist name='trees' id='tree'}
+												<option {if condition="$tree.id eq $category.parentid"} selected="selected" {/if} value="{$tree.id}">{if condition="$tree.parentid neq 0"}{$tree.delimiter}├─{/if}{$tree.title}</option>
 											{/volist}
 										</select>
 									</div>
@@ -98,12 +98,12 @@
 								<div class="form-node">
 									<div class="form-title">模块类型：</div>
 									<div class="form-con i-col-3">
-										{volist name='category_types' id='types'}
+										{volist name="types" id="type"}
 											<div class="Tab_radio">
-												{if condition="$types.value eq $category.type"}
-													<input type="radio" checked="checked" name="type" value="{$types.value}"><dl class="on"><i class="icon ai-radio-on"></i><span>{$types.title}</span></dl>
+												{if condition="$type.value eq $category.type"}
+													<input type="radio" checked="checked" name="type" value="{$type.value}"><dl class="on"><i class="icon ai-radio-on"></i><span>{$type.title}</span></dl>
 												{else}
-													<input type="radio" name="type" value="{$types.value}"><dl><i class="icon ai-radio"></i><span>{$types.title}</span></dl>
+													<input type="radio" name="type" value="{$type.value}"><dl><i class="icon ai-radio"></i><span>{$type.title}</span></dl>
 												{/if}
 											</div>
 										{/volist}
@@ -130,15 +130,15 @@
 									<div class="form-con i-col-2">
 										<div class="btn-on">
 											{if condition="$category.status eq 1"}
-												<label class="Tab_on btn on-on">开 启</label>
-												<input class="Tab_open" name="status" value="1" type="radio" checked>
-												<input class="Tab_shut" name="status" value="0" type="radio">
-												<label class="Tab_off btn off-off">关 闭</label>
+												<label class="Tab_on btn on-on">开启</label>
+												<input class="Tab_open" type="radio" name="status" value="1" checked>
+												<input class="Tab_shut" type="radio" name="status" value="0">
+												<label class="Tab_off btn off-off">关闭</label>
 											{elseif condition="$category.status eq 0"}
-												<label class="Tab_on btn on-off">开 启</label>
-												<input class="Tab_open" name="status" value="1" type="radio">
-												<input class="Tab_shut" name="status" value="0" type="radio" checked>
-												<label class="Tab_off btn off-on">关 闭</label>
+												<label class="Tab_on btn on-off">开启</label>
+												<input class="Tab_open" type="radio" name="status" value="1">
+												<input class="Tab_shut" type="radio" name="status" value="0" checked>
+												<label class="Tab_off btn off-on">关闭</label>
 											{/if}
 										</div>
 									</div>
@@ -149,7 +149,7 @@
 								<div class="form-node">
 									<div class="form-title">模块模板：</div>
 									<div class="form-con i-col-2">
-										<select name="template_index" style="width: 109%">
+										<select name="template_index" style="width:109%">
 											<option value="">111</option>
 										</select>
 									</div>
@@ -157,7 +157,7 @@
 								<div class="form-node">
 									<div class="form-title">列表模板：</div>
 									<div class="form-con i-col-2">
-										<select name="template_list" style="width: 109%">
+										<select name="template_list" style="width:109%">
 											<option value="">222</option>
 										</select>
 									</div>
@@ -165,7 +165,7 @@
 								<div class="form-node">
 									<div class="form-title">输出模板：</div>
 									<div class="form-con i-col-2">
-										<select name="template_show" style="width: 109%">
+										<select name="template_show" style="width:109%">
 											<option value="">333</option>
 										</select>
 									</div>
@@ -224,8 +224,10 @@
 	<script type="text/javascript" src="__ADMIN__/style/major.js"></script>
 	<script type="text/javascript" src="__ADMIN__/style/bootstrap.js"></script>
 	<script type="text/javascript">
+		// 百度编辑器 UEditor
 		UE.getEditor('content',{initialFrameWidth:1000,initialFrameHeight:400,});
 
+		// Ajax 删除上传文件
 		$("#cancel").click(function(){
 			var id={$category.id};
 			var source=$("input[name='image']").val();
@@ -237,10 +239,10 @@
 				$("#upload_show").hide();
 				$("input[name='image']").val('');
 				$.ajax({
-					type	: 'post',
-					dataType: 'json',
-					url		: '{:url('deletefile')}',
-					data	: {source:source,id:id},
+					type	: "post",
+					dataType: "json",
+					url		: "{:url('deletefile')}",
+					data	: {id:id,source:source},
 					success:function(data){
 						if(data==1){
 							layer.msg('删除文件成功！', {icon: 1});

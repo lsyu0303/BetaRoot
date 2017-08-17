@@ -11,6 +11,8 @@
 	<link rel="stylesheet" type="text/css" href="__ADMIN__/style/default.css">
 	<link rel="stylesheet" type="text/css" href="__ADMIN__/style/font.min.css">
 	<link rel="stylesheet" type="text/css" href="__ADMIN__/style/bootstrap.css">
+	<script type="text/javascript" src="__ADMIN__/style/jquery.min.js"></script>
+	<script type="text/javascript" src="__ADDONS__/layer/layer.js"></script>
 </head>
 
 <body>
@@ -42,28 +44,28 @@
 								</tr>
 							</thead>
 							<tbody id="id">
-								{volist name='config_lists' id='config_list'}
+								{volist name="configs" id="config"}
 								<tr>
-									<td class="check"><input class="Tab_check" type="checkbox" name="id[]" value="{$config_list.id}"></td>
-									<td class="text-ctr">{$config_list.id}</td>
-									<td class="text-ctr-05"><input class="sort" type="text" name="sort" value="{$config_list.sort}"></td>
-									<td class="text-ltr">{$config_list.name}</td>
-									<td class="text-ltr">{$config_list.title}</td>
+									<td class="check"><input class="Tab_check" type="checkbox" name="id[]" value="{$config.id}"></td>
+									<td class="text-ctr">{$config.id}</td>
+									<td class="text-ctr-05"><input class="sort" type="text" name="sort" value="{$config.sort}"></td>
+									<td class="text-ltr">{$config.name}</td>
+									<td class="text-ltr">{$config.title}</td>
 									<td class="text-ctr">
-										{volist name='config_groups' id='config_group'}
-											{if condition="$config_list.groupid eq $config_group.value"}{$config_group.title}{/if}
+										{volist name="groups" id="group"}
+											{if condition="$config.groupid eq $group.value"}{$group.title}{/if}
 										{/volist}
 									</td>
 									<td class="text-ctr">
-										{volist name='config_types' id='config_type'}
-											{if condition="$config_list.typeid eq $config_type.value"}{$config_type.title}{/if}
+										{volist name='types' id='type'}
+											{if condition="$config.typeid eq $type.value"}{$type.title}{/if}
 										{/volist}
 									</td>
 									<td class="text-ctr">
-										<a id="{$config_list.id}" onclick="change(this);"{if condition="$config_list.status eq 0"} class="btn btn-info red"{else} class="btn btn-info green" {/if}>{if condition="$config_list.status eq 0"}禁用{else}启用{/if}</a>
+										<a id="{$config.id}" onclick="change(this);" {if condition="$config.status eq 0"} class="btn btn-info red"{else} class="btn btn-info green" {/if}>{if condition="$config.status eq 0"}禁用{else}启用{/if}</a>
 									</td>
-									<td><a class="btn btn-info blue" href='{:url('redact',array('id'=>$config_list.id))}'><i class="icon ai-edit"></i>编辑</a>
-										<a class="btn btn-info red" href='{:url('delete',array('id'=>$config_list.id))}' onclick="javascript:return confirm('确定要删除吗？');"><i class="icon ai-delete"></i>删除</a>
+									<td><a class="btn btn-info blue" href='{:url('redact',array('id'=>$config.id))}'><i class="icon ai-edit"></i>编辑</a>
+										<a class="btn btn-info red" href="javascript:void(0);" id="{$config.id}" onclick="remove(this);"><i class="icon ai-delete"></i>删除</a>
 									</td>
 								</tr>
 								{/volist}
@@ -71,33 +73,56 @@
 						</table>
 					</div>
 					<div class="paging">
-						<div class="page">{$config_lists->render()}</div>
+						<div class="page">{$configs->render()}</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<script type="text/javascript" src="__ADMIN__/style/jquery.min.js"></script>
 	<script type="text/javascript" src="__ADMIN__/style/major.js"></script>
 	<script type="text/javascript" src="__ADMIN__/style/bootstrap.js"></script>
 	<script type="text/javascript">
+		// Ajax 异步状态转换
 		function change(object){
-			var id=$(object).attr("id");
+			var id=$(object).attr('id');
 			$.ajax({
-				type	: 'post',
-				dataType: 'json',
-				url		: '{:url('change')}',
+				type	: "post",
+				dataType: "json",
+				url		: "{:url('change')}",
 				data	: {id:id},
 				success:function(data){
 					if(data==0){
-						$(object).attr("class","btn btn-info red");
-						$(object).text("禁用");
+						$(object).attr('class','btn btn-info red');
+						$(object).text('禁用');
 					}
 					else{
-						$(object).attr("class","btn btn-info green");
-						$(object).text("启用");
+						$(object).attr('class','btn btn-info green');
+						$(object).text('启用');
 					}
 				}
+			});
+		}
+
+		// Ajax 异步删除单条记录及子记录
+		function remove(object){
+			layer.confirm('确定要删除该配置吗？', {icon: 3, title:'提示'}, function(index){
+				var id=$(object).attr('id');
+				$.ajax({
+					type	: "post",
+					dataType: "json",
+					url		: "{:url('remove')}",
+					data	: {id:id},
+					success:function(data){
+						if(data==1){
+							layer.msg('删除配置成功！', {icon: 1});
+							window.location.href="{:url('index')}";
+						}
+						else{
+							layer.msg('删除配置失败！', {icon: 2});
+						}
+					}
+				});
+				layer.close(index);
 			});
 		}
 	</script>

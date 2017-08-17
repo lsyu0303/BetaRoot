@@ -8,9 +8,11 @@ class Index
 		return view();
 	}
 
+
 	public function home()
 	{
 		return view();
 	}
+
 
 }

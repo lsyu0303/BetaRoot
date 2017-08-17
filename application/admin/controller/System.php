@@ -6,19 +6,20 @@ class System extends Controller
 {
 	public function index()
 	{
-		$config_lists=db('system')->field('id,name,title,typeid,groupid,status,sort')->paginate(10);
-		$config_types=db('tab')->field('value,title')->where('group','configtype')->select();
-		$config_groups=db('tab')->field('value,title')->where('group','configgroup')->select();
-		$this->assign('config_lists',$config_lists);
-		$this->assign('config_types',$config_types);
-		$this->assign('config_groups',$config_groups);
+		$configs=db('system')->field('id,name,title,typeid,groupid,status,sort')->paginate(10);
+		$types=db('tab')->field('value,title')->where('group','configtype')->select();
+		$groups=db('tab')->field('value,title')->where('group','configgroup')->select();
+		$this->assign([
+			'configs'	=> $configs,
+			'types'		=> $types,
+			'groups'	=> $groups,
+			]);
 		return view();
 	}
 
+
 	public function insert()
 	{
-		$config_types=db('tab')->field('value,title')->where('group','configtype')->select();
-		$this->assign('config_types',$config_types);
 		if(request()->isPost())
 		{
 			$data=input('post.');
@@ -26,60 +27,57 @@ class System extends Controller
 			if(!$validate->scene('insert')->check($data)){
 				$this->error($validate->getError());
 			}
-			$insert=db('system')->insert($data);
-			if($insert){
-				$this->success('添加配置成功！', url('index'));
-			}
 			else{
-				$this->error('添加配置失败！');
+				$insert=db('system')->insert($data);
+				if($insert){
+					$this->success('添加配置成功！', url('index'));
+				}
+				else{
+					$this->error('添加配置失败！');
+				}	
 			}
+			return;
 		}
+
+		$types=db('tab')->field('value,title')->where('group','configtype')->select();
+		$this->assign('types',$types);
 		return view();
 	}
 
+
 	public function redact()
 	{
-		$id=input('id');
-		$config_list=db('system')->find($id);
-		$config_types=db('tab')->field('value,title')->where('group','configtype')->select();
-		$this->assign('config_list',$config_list);
-		$this->assign('config_types',$config_types);
 		if(request()->isPost()){
 			$data=input('post.');
 			$validate=validate('system');
 			if(!$validate->scene('redact')->check($data)){
 				$this->error($validate->getError());
 			}
-			$redact=db('system')->update($data);
-			if($redact!==null){
-				$this->success('修改配置成功！', url('index'));
-			}
 			else{
-				$this->error('修改配置失败！');
+				$redact=db('system')->update($data);
+				if($redact!==null){
+					$this->success('修改配置成功！', url('index'));
+				}
+				else{
+					$this->error('修改配置失败！');
+				}
 			}
+			return;
 		}
+
+		$id=input('id');
+		$config=db('system')->find($id);
+		$types=db('tab')->field('value,title')->where('group','configtype')->select();
+		$this->assign([
+			'config'	=> $config,
+			'types'		=> $types,
+			]);
 		return view();
 	}
 
-	public function delete()
-	{
-		$id=input('id');
-		$data=db('system')->delete($id);
-		if($data){
-			$this->success('删除配置成功！', url('index'));
-		}
-		else{
-			$this->error('删除配置失败！');
-		}
-		return view();
-	}
 
 	public function system()
 	{
-		$config_groups=db('tab')->field('value,title')->where('group','configgroup')->select();
-		$config_lists=db('system')->select();
-		$this->assign('config_groups',$config_groups);
-		$this->assign('config_lists',$config_lists);
 		if(request()->isPost()){
 			$data=input('post.');
 			$name_Array=db('system')->column('name');
@@ -111,8 +109,35 @@ class System extends Controller
 			}
 			$this->success('修改配置成功！', url('system'));
 		}
+
+		$groups=db('tab')->field('value,title')->where('group','configgroup')->select();
+		$configs=db('system')->select();
+		$this->assign([
+			'groups'	=> $groups,
+			'configs'	=> $configs,
+			]);
 		return view();
 	}
+
+
+	// Ajax 异步删除单条记录及子记录
+	public function remove()
+	{
+		if(request()->isAjax()){
+			$id=input('id');
+			$data=db('system')->delete($id);
+			if($data){
+				echo 1;
+			}
+			else{
+				echo 0;
+			}
+		}
+		else{
+			$this->error('非法操作！');
+		}
+	}
+
 
 	// Ajax 异步转换状态
 	public function change(){

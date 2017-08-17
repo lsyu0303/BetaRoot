@@ -26,9 +26,9 @@
 						<div class="form-node">
 							<div class="form-title">配置类型：</div>
 							<div class="form-con i-col-2">
-								<select name="typeid" style="width: 109%">
-									{volist name='config_types' id='config_type'}
-									<option value="{$config_type.value}">{$config_type.title}</option>
+								<select name="typeid" style="width:109%">
+									{volist name="types" id="type"}
+									<option value="{$type.value}">{$type.title}</option>
 									{/volist}
 								</select>
 							</div>
@@ -36,53 +36,53 @@
 						<div class="form-node">
 							<div class="form-title">英文标识：</div>
 							<div class="form-con i-col-2">
-								<input class="input-title" id="name" name="name" type="text" value="">
+								<input class="input-title" type="text" name="name" value="">
 							</div>
 						</div>
 						<div class="form-node">
 							<div class="form-title">配置名称：</div>
 							<div class="form-con i-col-2">
-								<input class="input-title" id="title" name="title" type="text" value="">
+								<input class="input-title" type="text" name="title" value="">
 							</div>
 						</div>
 						<div class="form-node">
 							<div class="form-title">配置分组：</div>
 							<div class="form-con i-col-2">
-								<input class="input-title" id="groupid" name="groupid" type="text" value="">
+								<input class="input-title" type="text" name="groupid" value="">
 							</div>
 						</div>
 						<div class="form-node">
 							<div class="form-title">配置排序：</div>
 							<div class="form-con i-col-2">
-								<input class="input-title" id="sort" name="sort" type="text" value="">
+								<input class="input-title" type="text" name="sort" value="">
 							</div>
 						</div>
 						<div class="form-node">
 							<div class="form-title">默 认 值：</div>
 							<div class="form-con i-col-2">
-								<input class="input-title" id="value" name="value" type="text" value="">
+								<input class="input-title" type="text" name="value" value="">
 							</div>
 						</div>
 						<div class="form-node">
 							<div class="form-title">可 选 值：</div>
 							<div class="form-con i-col-2">
-								<textarea class="input-title" id="optional" name="optional" rows="3"></textarea>
+								<textarea class="input-title" name="optional" rows="3"></textarea>
 							</div>
 						</div>
 						<div class="form-node">
 							<div class="form-title">注释说明：</div>
 							<div class="form-con i-col-2">
-								<textarea class="input-title" id="description" name="description" rows="3"></textarea>
+								<textarea class="input-title" name="description" rows="3"></textarea>
 							</div>
 						</div>
 						<div class="form-node">
 							<div class="form-title">配置状态：</div>
 							<div class="form-con i-col-2">
 								<div class="btn-on">
-									<label class="Tab_on btn on-on">开 启</label>
-									<input class="Tab_open" name="status" value="1" type="radio" checked>
-									<input class="Tab_shut" name="status" value="0" type="radio">
-									<label class="Tab_off btn off-off">关 闭</label>
+									<label class="Tab_on btn on-on">开启</label>
+									<input class="Tab_open" type="radio" name="status" value="1" checked>
+									<input class="Tab_shut" type="radio" name="status" value="0">
+									<label class="Tab_off btn off-off">关闭</label>
 								</div>
 							</div>
 						</div>

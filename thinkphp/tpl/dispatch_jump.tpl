@@ -19,7 +19,7 @@
                 offset: ['200px','600px'],
                 content: msg,
                 yes: function(index, layero){
-                location.href = href;
+                location.href = url;
                 layer.close(index);
                 }
             });

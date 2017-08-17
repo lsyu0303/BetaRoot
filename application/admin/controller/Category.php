@@ -6,10 +6,11 @@ class Category extends Controller
 {
 	public function index()
 	{
-		$category_lists=model('category')->trees();
-		$this->assign('category_lists',$category_lists);
+		$categorys=model('category')->trees();
+		$this->assign('categorys',$categorys);
 		return view();
 	}
+
 
 	public function insert()
 	{
@@ -19,28 +20,31 @@ class Category extends Controller
 			if(!$validate->scene('insert')->check($data)){
 				$this->error($validate->getError());
 			}
-			$insert=db('category')->insert($data);
-			if($insert){
-				$this->success('添加模块成功！', url('index'));
-			}
 			else{
-				$this->error('添加模块失败！');
+				$insert=db('category')->insert($data);
+				if($insert){
+					$this->success('添加模块成功！', url('index'));
+				}
+				else{
+					$this->error('添加模块失败！');
+				}
 			}
 			return;
 		}
 
 		$pid=input('pid');
-		$category_lists=model('category')->tree();
-		$model_lists=db('model')->field('id,title')->select();
-		$category_types=db('tab')->where(['group'=>'categorytype','status'=>'1'])->field('title,value')->select();
+		$categorys=model('category')->tree();
+		$models=db('model')->field('id,title')->select();
+		$types=db('tab')->where(['group'=>'categorytype','status'=>'1'])->field('title,value')->select();
 		$this->assign([
-			'pid'=>$pid,
-			'category_lists'=>$category_lists,
-			'model_lists'=>$model_lists,
-			'category_types'=>$category_types,
+			'pid'		=> $pid,
+			'categorys'	=> $categorys,
+			'models'	=> $models,
+			'types'		=> $types,
 			]);
 		return view();
 	}
+
 
 	public function redact()
 	{
@@ -50,45 +54,51 @@ class Category extends Controller
 			if(!$validate->scene('redact')->check($data)){
 				$this->error($validate->getError());
 			}
-			$redact=db('category')->update($data);
-			if($redact!==null){
-				$this->success('修改模块成功！', url('index'));
-			}
 			else{
-				$this->error('修改模块失败！');
+				$redact=db('category')->update($data);
+				if($redact!==null){
+					$this->success('修改模块成功！', url('index'));
+				}
+				else{
+					$this->error('修改模块失败！');
+				}	
 			}
 			return;
 		}
 
 		$id=input('id');
-		$category_list=db('category')->where('id',$id)->find();
-		$category_lists=model('category')->tree();
-		$model_lists=db('model')->field('id,title')->select();
-		$category_types=db('tab')->where(['group'=>'categorytype','status'=>'1'])->field('title,value')->select();
+		$category=db('category')->where('id',$id)->find();
+		$trees=model('category')->tree();
+		$models=db('model')->field('id,title')->select();
+		$types=db('tab')->where(['group'=>'categorytype','status'=>'1'])->field('title,value')->select();
 		$this->assign([
-			'category'=>$category_list,
-			'category_lists'=>$category_lists,
-			'model_lists'=>$model_lists,
-			'category_types'=>$category_types,
+			'category'	=> $category,
+			'trees'		=> $trees,
+			'models'	=> $models,
+			'types'		=> $types,
 			]);
 		return view();
 	}
 
-	// 单条记录及子级记录并删除
-	public function delete()
+
+	// Ajax 异步删除单条记录及子记录
+	public function remove()
 	{
-		$id=input('id');
-		$childrens=model('category')->childrens($id);
-		$childrens[]=(int)$id;
-		$data=db('category')->delete($childrens);
-		if($data){
-			$this->success('删除模块成功！', url('index'));
+		if(request()->isAjax()){
+			$id=input('id');
+			$childrens=model('category')->childrens($id);
+			$childrens[]=(int)$id;
+			$data=db('category')->delete($childrens);
+			if($data){
+				echo 1;
+			}
+			else{
+				echo 0;
+			}
 		}
 		else{
-			$this->error('删除模块失败！');
+			$this->error('非法操作！');
 		}
-		return;
-
 	}
 
 	// 表单批量删除与排序
@@ -122,6 +132,7 @@ class Category extends Controller
 		return;
 	}
 
+
 	// Ajax 异步转换状态
 	public function change()
 	{
@@ -142,6 +153,7 @@ class Category extends Controller
 			$this->error('非法操作！');
 		}
 	}
+
 
 	// Ajax 异步删除文件
 	public function deletefile()
@@ -165,6 +177,7 @@ class Category extends Controller
 			$this->error('非法操作！');
 		}
 	}
+
 
 	// Ajax 异步模块伸缩
 	public function flex()

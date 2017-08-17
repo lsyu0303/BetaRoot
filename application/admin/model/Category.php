@@ -11,12 +11,14 @@ class Category extends Model
 		return $this->sort($data);
 	}
 
+
 	// 获取简洁的记录信息
 	public function tree()
 	{
 		$data=db('category')->field('id,parentid,title')->order('id asc')->select();
 		return $this->sort($data);
 	}
+
 
 	// 执行无限级排序循环
 	public function sort($data,$parentid=0,$level=0,$delimiter='&emsp;')
@@ -33,6 +35,7 @@ class Category extends Model
 		return $array;
 	}
 
+
 	// 获取子级记录信息
 	public function childrens($id)
 	{
@@ -40,6 +43,7 @@ class Category extends Model
 		return $this->_childrens($data,$id);
 
 	}
+
 
 	// 循环查找子级记录信息
 	private function _childrens($data,$id)
@@ -53,6 +57,7 @@ class Category extends Model
 		}
 		return $array;
 	}
+
 
 	// 批量删除记录及子记录
 	public function batch($ids)

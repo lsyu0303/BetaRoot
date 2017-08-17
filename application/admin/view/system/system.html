@@ -18,8 +18,8 @@
 			<div class="i-col-12">
 				<!-- 标签导航 -->
 				<ul class="nav nav-tabs" role="tablist">
-					{volist name='config_groups' id='config_group'}
-						<li {if condition="$config_group.value eq 1"} class="active" {/if}><a role="tab" data-toggle="tab" href="#{$config_group.value}">{$config_group.title}</a></li>
+					{volist name="groups" id="group"}
+						<li {if condition="$group.value eq 1"} class="active" {/if}><a role="tab" data-toggle="tab" href="#{$group.value}">{$group.title}</a></li>
 					{/volist}
 					<li><a href="{:url('index')}">配置管理</a></li>
 				</ul>
@@ -27,52 +27,52 @@
 					<form class="Tab_form" name="form" method="post" enctype="multipart/form-data" action="">
 						<div class="tab-content tabs">
 							<!-- 标签循环 -->
-							{volist name='config_groups' id='config_group'}
-								<div class="tab-pane fade {if condition="$config_group.value eq 1"} in active {/if}" id="{$config_group.value}">
-									{volist name='config_lists' id='config_list'}
-										{if condition="$config_list.groupid eq $config_group.value"}
+							{volist name="groups" id="group"}
+								<div class="tab-pane fade {if condition="$group.value eq 1"} in active {/if}" id="{$group.value}">
+									{volist name="configs" id="config"}
+										{if condition="$config.groupid eq $group.value"}
 											<div class="form-node">
-												<div class="form-title">{$config_list.title}：</div>
+												<div class="form-title">{$config.title}：</div>
 												<div class="form-con i-col-2">
 
 													<!-- 配置类型判断循环 -->
 													<!-- 字符值型 -->
-													{if $config_list.typeid==1}
-														<input class="input-title" type="text" name="{$config_list.name}" value="{$config_list.value}">
+													{if $config.typeid==1}
+														<input class="input-title" type="text" name="{$config.name}" value="{$config.value}">
 
 													<!-- 文本域型 -->
-													{elseif $config_list.typeid==2}
-														<textarea class="input-title" rows="3" name="{$config_list.name}">{$config_list.value}</textarea>
+													{elseif $config.typeid==2}
+														<textarea class="input-title" rows="3" name="{$config.name}">{$config.value}</textarea>
 
 													<!-- 下拉列表 -->
-													{elseif $config_list.typeid==3}
-														<select style="width: 109%" name="{$config_list.name}">
-															<?php $optional_Array=explode('|',$config_list['optional']);foreach($optional_Array as $key=>$value):?>
-																<option value="{$value}" {if condition="$value eq $config_list.value"} selected="selected"{/if}>{$value}</option>
+													{elseif $config.typeid==3}
+														<select style="width:109%" name="{$config.name}">
+															<?php $optional_Array=explode('|',$config['optional']);foreach($optional_Array as $key=>$value):?>
+																<option value="{$value}" {if condition="$value eq $config.value"} selected="selected"{/if}>{$value}</option>
 															<?php endforeach;?>
 														</select>
 
 													<!-- 单项选择 -->
-													{elseif $config_list.typeid==4}
-														<?php $optional_Array=explode('|',$config_list['optional']);foreach($optional_Array as $key=>$value):?>
+													{elseif $config.typeid==4}
+														<?php $optional_Array=explode('|',$config['optional']);foreach($optional_Array as $key=>$value):?>
 															<div class="Tab_radio">
-																{if condition="$value eq $config_list.value"}
-																	<input type="radio" checked="checked" name="{$config_list.name}" value="{$value}"><dl class="on"><i class="icon ai-radio-on"></i><span>{$value}</span></dl>
+																{if condition="$value eq $config.value"}
+																	<input type="radio" checked="checked" name="{$config.name}" value="{$value}"><dl class="on"><i class="icon ai-radio-on"></i><span>{$value}</span></dl>
 																{else}
-																	<input type="radio" name="{$config_list.name}" value="{$value}"><dl><i class="icon ai-radio"></i><span>{$value}</span></dl>
+																	<input type="radio" name="{$config.name}" value="{$value}"><dl><i class="icon ai-radio"></i><span>{$value}</span></dl>
 																{/if}
 															</div>
 														<?php endforeach;?>
 
 													<!-- 多项选择 -->
-													{elseif $config_list.typeid==5}
-														<?php $optional_Array=explode('|',$config_list['optional']);$value_Array=explode('|',$config_list['value']);foreach($optional_Array as $key=>$value):?>
-															<div class="Tab_checkbox2"><input type="checkbox" name="{$config_list.name}[]" value="{$value}" {if(in_array($value,$value_Array))} checked="checked" {/if}><span>{$value}</span></div>
+													{elseif $config.typeid==5}
+														<?php $optional_Array=explode('|',$config['optional']);$value_Array=explode('|',$config['value']);foreach($optional_Array as $key=>$value):?>
+															<div class="Tab_checkbox"><input type="checkbox" name="{$config.name}[]" value="{$value}" {if(in_array($value,$value_Array))} checked="checked" {/if}><span>{$value}</span></div>
 														<?php endforeach;?>
 
 													<!-- 文件附件 -->
-													{elseif $config_list.typeid==6}
-														<input class="input-upload" type="file" name="{$config_list.name}" value="">
+													{elseif $config.typeid==6}
+														<input class="input-upload" type="file" name="{$config.name}" value="">
 													{/if}
 												</div>
 											</div>

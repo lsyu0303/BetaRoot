@@ -11,6 +11,8 @@
 	<link rel="stylesheet" type="text/css" href="__ADMIN__/style/default.css">
 	<link rel="stylesheet" type="text/css" href="__ADMIN__/style/font.min.css">
 	<link rel="stylesheet" type="text/css" href="__ADMIN__/style/bootstrap.css">
+	<script type="text/javascript" src="__ADMIN__/style/jquery.min.js"></script>
+	<script type="text/javascript" src="__ADDONS__/layer/layer.js"></script>
 	<style type="text/css">
 		.flex{
 			border:1px solid #CCCCCC;
@@ -50,27 +52,27 @@
 									</tr>
 								</thead>
 								<tbody id="id">
-									{volist name='category_lists' id='categorys'}
-										<tr id="{$categorys.id}" pid="{$categorys.parentid}">
-											<td class="check"><input class="Tab_check" type="checkbox" name="id[]" value="{$categorys.id}"></td>
+									{volist name="categorys" id="category"}
+										<tr id="{$category.id}" pid="{$category.parentid}">
+											<td class="check"><input class="Tab_check" type="checkbox" name="id[]" value="{$category.id}"></td>
 											<td class="text-ctr-05">
-												<input class="sort" type="text" name="sort[{$categorys.id}]" value="{$categorys.sort}">
+												<input class="sort" type="text" name="sort[{$category.id}]" value="{$category.sort}">
 											</td>
-											<td class="text-ctr">{$categorys.id}</td>
+											<td class="text-ctr">{$category.id}</td>
 											<td class="text-ltr">
-												{if condition="$categorys.parentid neq 0"}{$categorys.delimiter}├─{/if}
-												{if condition="$categorys.parentid eq 0"}<span class="flex">-</span>{/if}{$categorys.title}
+												{if condition="$category.parentid neq 0"}{$category.delimiter}├─{/if}
+												{if condition="$category.parentid eq 0"}<span class="flex">-</span>{/if}{$category.title}
 											</td>
-											<td class="text-ltr">{$categorys.name}</td>
-											<td class="text-ctr">{$categorys.modeltitle}</td>
-											<td class="text-ctr">{$categorys.type}</td>
+											<td class="text-ltr">{$category.name}</td>
+											<td class="text-ctr">{$category.modeltitle}</td>
+											<td class="text-ctr">{$category.type}</td>
 											<td class="text-ctr">
-												<a id="{$categorys.id}" onclick="change(this);"{if condition="$categorys.status eq 0"} class="btn btn-info red"{else} class="btn btn-info green" {/if}>{if condition="$categorys.status eq 0"}隐藏{else}显示{/if}</a>
+												<a id="{$category.id}" onclick="change(this);" {if condition="$category.status eq 0"} class="btn btn-info red" {else} class="btn btn-info green" {/if}>{if condition="$category.status eq 0"}隐藏{else}显示{/if}</a>
 											</td>
 											<td class="text-ctr">
-												<a class="btn btn-info blue" href='{:url('insert',array('pid'=>$categorys.id))}'><i class="icon ai-edit"></i>添加</a>
-												<a class="btn btn-info orange" href='{:url('redact',array('id'=>$categorys.id))}'><i class="icon ai-edit"></i>编辑</a>
-												<a class="btn btn-info red" href='{:url('delete',array('id'=>$categorys.id))}' onclick="javascript:return confirm('确定要删除吗？');"><i class="icon ai-delete"></i>删除</a>
+												<a class="btn btn-info blue" href="{:url('insert',array('pid'=>$category.id))}"><i class="icon ai-edit"></i>添加</a>
+												<a class="btn btn-info orange" href="{:url('redact',array('id'=>$category.id))}"><i class="icon ai-edit"></i>编辑</a>
+												<a class="btn btn-info red" href="javascript:void(0);" id="{$category.id}" onclick="remove(this);"><i class="icon ai-delete"></i>删除</a>
 											</td>
 										</tr>
 									{/volist}
@@ -82,7 +84,6 @@
 			</div>
 		</div>
 	</div>
-	<script type="text/javascript" src="__ADMIN__/style/jquery.min.js"></script>
 	<script type="text/javascript" src="__ADMIN__/style/major.js"></script>
 	<script type="text/javascript" src="__ADMIN__/style/bootstrap.js"></script>
 	<script type="text/javascript">
@@ -96,9 +97,9 @@
 			else{
 				$(this).text('+');
 				$.ajax({
-					type	: 'post',
-					dataType: 'json',
-					url		: '{:url('flex')}',
+					type	: "post",
+					dataType: "json",
+					url		: "{:url('flex')}",
 					data	: {id:id},
 					success:function(data){
 						var ids=[];
@@ -119,22 +120,45 @@
 
 		// Ajax 异步转换状态
 		function change(object){
-			var id=$(object).attr("id");
+			var id=$(object).attr('id');
 			$.ajax({
-				type	: 'post',
-				dataType: 'json',
-				url		: '{:url('change')}',
+				type	: "post",
+				dataType: "json",
+				url		: "{:url('change')}",
 				data	: {id:id},
 				success:function(data){
 					if(data==0){
-						$(object).attr("class","btn btn-info red");
-						$(object).text("隐藏");
+						$(object).attr('class','btn btn-info red');
+						$(object).text('隐藏');
 					}
 					else{
-						$(object).attr("class","btn btn-info green");
-						$(object).text("显示");
+						$(object).attr('class','btn btn-info green');
+						$(object).text('显示');
 					}
 				}
+			});
+		}
+
+		// Ajax 异步删除单条记录及子记录
+		function remove(object){
+			layer.confirm('确定要删除该模块及子模块吗？', {icon: 3, title:'提示'}, function(index){
+				var id=$(object).attr('id');
+				$.ajax({
+					type	: "post",
+					dataType: "json",
+					url		: "{:url('remove')}",
+					data	: {id:id},
+					success:function(data){
+						if(data==1){
+							layer.msg('删除模块及子模块成功！', {icon: 1});
+							window.location.href="{:url('index')}";
+						}
+						else{
+							layer.msg('删除模块及子模块失败！', {icon: 2});
+						}
+					}
+				});
+				layer.close(index);
 			});
 		}
 	</script>

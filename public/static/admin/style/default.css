@@ -144,8 +144,7 @@ button.btn{height:36px;line-height:36px;}
 .Tab_select input[type=text]:focus{border:1px solid #00CCCC;}
 .Tab_form button.btn{height:34px;line-height:34px;margin:0 10px 0 0;}
 .Tab_select select,
-.Tab_radio input[type=radio],
-.Tab_checkbox input[type=checkbox]{display:none;}
+.Tab_radio input[type=radio]{display:none;}
 
 
 /***** 输入框 *****/
@@ -163,21 +162,21 @@ button.btn{height:36px;line-height:36px;}
 
 
 /***** 复选框 *****/
-.Tab_checkbox{float:left;margin:5px 0;-moz-user-select:none;-webkit-user-select:none;user-select:none;}
+
+.Tab_checkbox{float:left;padding-right:16px;margin:8px 0;-moz-user-select:none;-webkit-user-select:none;user-select:none;}
+.Tab_checkbox>input{width:14px;height:14px;z-index:10;}
+.Tab_checkbox>input::before {content:" ";display:inline-block;color:#000000;width:14px;height:14px;background:#FFFFFF;border:1px solid #000000;z-index:9;position:absolute;}
+.Tab_checkbox>input:checked::before {content:"√";color:#333333;font: normal normal normal 14px/1 FontAwesome;font-size:inherit;text-rendering:auto;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;} 
+.Tab_checkbox>span{margin-left:5px;}
 .Tab_checkbox>dl{position:relative;height:36px;line-height:34px;padding-right:30px;border:1px solid #D2D2D2;font-size:0;border-radius:4px;transition:.1s linear;box-sizing:border-box!important;}
 .Tab_checkbox>dl:hover{border:1px solid #C2C2C2;}
 .Tab_checkbox>dl span{padding:0 10px;font-size:14px;background-color:#D2D2D2;color:#FFFFFF;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;display:inline-block;vertical-align:middle;}
 .Tab_checkbox>dl:hover span{background-color:#C2C2C2;}
 .Tab_checkbox>dl i{position:absolute;right:0;top:50%;margin-top:-14px;width:28px;color:#FFFFFF;font-size:24px;}
-.Tab_checkbox>dl:hover i{color:#c2c2c2}
-.Tab_checkbox>dl.on{border:1px solid #00CCCC}
+.Tab_checkbox>dl:hover i{color:#C2C2C2;}
+.Tab_checkbox>dl.on{border:1px solid #00CCCC;}
 .Tab_checkbox>dl.on span{background-color:#00CCCC;}
 .Tab_checkbox>dl.on i{color:#00CCCC;}
-.Tab_checkbox2{float:left;padding-right:16px;margin:8px 0;-moz-user-select:none;-webkit-user-select:none;user-select:none;}
-.Tab_checkbox2>input{width:14px;height:14px;z-index:10;}
-.Tab_checkbox2>input::before {content:" ";display:inline-block;color:#000000;width:14px;height:14px;background:#FFFFFF;border:1px #000000 solid;z-index:9;position:absolute;}
-.Tab_checkbox2>input:checked::before {content:"√";color:#333333;font: normal normal normal 14px/1 FontAwesome;font-size:inherit;text-rendering:auto;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;} 
-.Tab_checkbox2>span{margin-left:5px;}
 
 
 /***** 单选框 *****/

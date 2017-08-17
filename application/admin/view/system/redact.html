@@ -1,37 +1,35 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <meta charset="utf-8">
+	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="renderer" content="webkit">
-    <meta http-equiv="Cache-Control" content="no-siteapp" />
-	
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="Cache-Control" content="no-siteapp" />
 	<title>轻风之语〖开发中……〗</title>
-    <meta name="keywords" content="轻风之语〖开发中……〗"/>
-    <meta name="description" content="轻风之语〖开发中……〗"/>
-	
+	<meta name="keywords" content="轻风之语〖开发中……〗"/>
+	<meta name="description" content="轻风之语〖开发中……〗"/>
 	<link rel="stylesheet" type="text/css" href="__ADMIN__/style/default.css">
 	<link rel="stylesheet" type="text/css" href="__ADMIN__/style/font.min.css">
 	<link rel="stylesheet" type="text/css" href="__ADMIN__/style/bootstrap.css">
 </head>
 
 <body>
-    <div class="i-con">
-        <div class="box i-row">
-		    <div class="i-col-12">
+	<div class="i-con">
+		<div class="box i-row">
+			<div class="i-col-12">
 				<ul class="nav nav-tabs" role="tablist">
 					<li class="active"><a href="javascript:void(0);">修改配置</a></li>
 					<li><a href="{:url('index')}">配置管理</a></li>
 				</ul>
 				<div class="box-con">
 					<form class="Tab_form" name="form" method="post" action="">
-						<input type="hidden" name="id" value="{$config_list.id}">
+						<input type="hidden" name="id" value="{$config.id}">
 						<div class="form-node">
 							<div class="form-title">配置类型：</div>
 							<div class="form-con i-col-2">
-								<select name="typeid" style="width: 109%">
-									{volist name='config_types' id='config_type'}
-									<option {if condition="$config_list.typeid eq $config_type.value"} selected="selected" {/if} value="{$config_type.value}">{$config_type.title}</option>
+								<select name="typeid" style="width:109%">
+									{volist name="types" id="type"}
+									<option {if condition="$config.typeid eq $type.value"} selected="selected" {/if} value="{$type.value}">{$type.title}</option>
 									{/volist}
 								</select>
 							</div>
@@ -39,58 +37,58 @@
 						<div class="form-node">
 							<div class="form-title">英文标识：</div>
 							<div class="form-con i-col-2">
-								<input class="input-title" id="name" name="name" type="text" value="{$config_list.name}">
+								<input class="input-title" type="text" name="name" value="{$config.name}">
 							</div>
 						</div>
 						<div class="form-node">
 							<div class="form-title">配置名称：</div>
 							<div class="form-con i-col-2">
-								<input class="input-title" id="title" name="title" type="text" value="{$config_list.title}">
+								<input class="input-title" type="text" name="title" value="{$config.title}">
 							</div>
 						</div>
 						<div class="form-node">
 							<div class="form-title">配置分组：</div>
 							<div class="form-con i-col-2">
-								<input class="input-title" id="groupid" name="groupid" type="text" value="{$config_list.groupid}">
+								<input class="input-title" type="text" name="groupid" value="{$config.groupid}">
 							</div>
 						</div>
 						<div class="form-node">
 							<div class="form-title">配置排序：</div>
 							<div class="form-con i-col-2">
-								<input class="input-title" id="sort" name="sort" type="text" value="{$config_list.sort}">
+								<input class="input-title" type="text" name="sort" value="{$config.sort}">
 							</div>
 						</div>
 						<div class="form-node">
 							<div class="form-title">默 认 值：</div>
 							<div class="form-con i-col-2">
-								<input class="input-title" id="value" name="value" type="text" value="{$config_list.value}">
+								<input class="input-title" type="text" name="value" value="{$config.value}">
 							</div>
 						</div>
 						<div class="form-node">
 							<div class="form-title">可 选 值：</div>
 							<div class="form-con i-col-2">
-								<textarea class="input-title" id="optional" name="optional" rows="3">{$config_list.optional}</textarea>
+								<textarea class="input-title" name="optional" rows="3">{$config.optional}</textarea>
 							</div>
 						</div>
 						<div class="form-node">
 							<div class="form-title">注释说明：</div>
 							<div class="form-con i-col-2">
-								<textarea class="input-title" id="description" name="description" rows="3">{$config_list.description}</textarea>
+								<textarea class="input-title" name="description" rows="3">{$config.description}</textarea>
 							</div>
 						</div>
 						<div class="form-node">
 							<div class="form-title">配置状态：</div>
 							<div class="form-con i-col-2">
 								<div class="btn-on">
-									{if condition="$config_list.status eq 1"}
+									{if condition="$config.status eq 1"}
 									<label class="Tab_on btn on-on">开 启</label>
-									<input class="Tab_open" name="status" value="1" type="radio" checked>
-									<input class="Tab_shut" name="status" value="0" type="radio">
+									<input class="Tab_open" type="radio" name="status" value="1" checked>
+									<input class="Tab_shut" type="radio" name="status" value="0">
 									<label class="Tab_off btn off-off">关 闭</label>
-									{elseif condition="$config_list.status eq 0"}
+									{elseif condition="$config.status eq 0"}
 									<label class="Tab_on btn on-off">开 启</label>
-									<input class="Tab_open" name="status" value="1" type="radio">
-									<input class="Tab_shut" name="status" value="0" type="radio" checked>
+									<input class="Tab_open" type="radio" name="status" value="1">
+									<input class="Tab_shut" type="radio" name="status" value="0" checked>
 									<label class="Tab_off btn off-on">关 闭</label>
 									{/if}
 								</div>

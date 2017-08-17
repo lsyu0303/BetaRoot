@@ -19,8 +19,8 @@
 			<div class="i-col-12">
 				<ul class="nav nav-tabs" role="tablist">
 					<li class="active"><a role="tab" data-toggle="tab" href="#tabs">联动分组</a></li>
-					{volist name='tabs_lists' id='tabs_list'}
-						<li><a role="tab" data-toggle="tab" href="#{$tabs_list.name}">{$tabs_list.title}</a></li>
+					{volist name="groups" id="group"}
+						<li><a role="tab" data-toggle="tab" href="#{$group.name}">{$group.title}</a></li>
 					{/volist}
 					<li><a role="tab" data-toggle="tab" href="#tab">标签管理</a></li>
 				</ul>
@@ -32,8 +32,8 @@
 						</div>
 
 						<!-- 标签循环 -->
-						{volist name='tabs_lists' id='tabs_list'}
-							<div role="tabpanel" class="tab-pane fade" id="{$tabs_list.name}">
+						{volist name="groups" id="group"}
+							<div role="tabpanel" class="tab-pane fade" id="{$group.name}">
 								<form class="Tab_form" name="form" method="post" action="">
 									<div class="box-btn">
 										<a class="btn btn-insert" href="{:url('insert')}"><i class="icon ai-edit"></i>添加标签</a>
@@ -54,22 +54,22 @@
 												</tr>
 											</thead>
 											<tbody id="id">
-												{volist name='tab_lists' id='tab_list'}
-													{if condition="$tab_list.group eq $tabs_list.name"}
+												{volist name='tabs' id='tab'}
+													{if condition="$tab.group eq $group.name"}
 														<tr>
-															<td class="check"><input class="Tab_check" type="checkbox" name="id[]" value="{$tab_list.id}"></td>
-															<td class="text-ctr">{$tab_list.id}</td>
-															<td class="text-ctr-05"><input class="sort" type="text" name="sort" value="{$tab_list.sort}"></td>
-															<td class="text-ltr">{$tab_list.title}</td>
-															<td class="text-ltr">{$tab_list.group}</td>
-															<td class="text-ltr">{$tab_list.value}</td>
+															<td class="check"><input class="Tab_check" type="checkbox" name="id[]" value="{$tab.id}"></td>
+															<td class="text-ctr">{$tab.id}</td>
+															<td class="text-ctr-05"><input class="sort" type="text" name="sort" value="{$tab.sort}"></td>
+															<td class="text-ltr">{$tab.title}</td>
+															<td class="text-ltr">{$tab.group}</td>
+															<td class="text-ltr">{$tab.value}</td>
 															<td class="text-ctr">
-																{if condition="$tab_list.status eq 0"}<span class="label red">禁用</span>
-																{elseif condition="$tab_list.status eq 1"}<span class="label green">启用</span>
+																{if condition="$tab.status eq 0"}<span class="label red">禁用</span>
+																{elseif condition="$tab.status eq 1"}<span class="label green">启用</span>
 																{/if}
 															</td>
-															<td><a class="btn btn-redact" href='{:url('redact',array('id'=>$tab_list.id))}'><i class="icon ai-edit"></i>编辑</a>
-																<a class="btn btn-delete" href='{:url('delete',array('id'=>$tab_list.id))}' onclick="javascript:return confirm('确定要删除吗？');"><i class="icon ai-delete"></i>删除</a>
+															<td><a class="btn btn-redact" href='{:url('redact',array('id'=>$tab.id))}'><i class="icon ai-edit"></i>编辑</a>
+																<a class="btn btn-delete" href='{:url('delete',array('id'=>$tab.id))}' onclick="javascript:return confirm('确定要删除吗？');"><i class="icon ai-delete"></i>删除</a>
 															</td>
 														</tr>
 													{/if}
@@ -103,21 +103,21 @@
 											</tr>
 										</thead>
 										<tbody id="id">
-											{volist name='tab_lists' id='tab_list'}
+											{volist name='tabs' id='tab'}
 												<tr>
-													<td class="check"><input class="Tab_check" type="checkbox" name="id[]" value="{$tab_list.id}"></td>
-													<td class="text-ctr">{$tab_list.id}</td>
-													<td class="text-ctr-05"><input class="sort" type="text" name="sort" value="{$tab_list.sort}"></td>
-													<td class="text-ltr">{$tab_list.title}</td>
-													<td class="text-ltr">{$tab_list.group}</td>
-													<td class="text-ltr">{$tab_list.value}</td>
+													<td class="check"><input class="Tab_check" type="checkbox" name="id[]" value="{$tab.id}"></td>
+													<td class="text-ctr">{$tab.id}</td>
+													<td class="text-ctr-05"><input class="sort" type="text" name="sort" value="{$tab.sort}"></td>
+													<td class="text-ltr">{$tab.title}</td>
+													<td class="text-ltr">{$tab.group}</td>
+													<td class="text-ltr">{$tab.value}</td>
 													<td class="text-ctr">
-														{if condition="$tab_list.status eq 0"}<span class="label red">禁用</span>
-														{elseif condition="$tab_list.status eq 1"}<span class="label green">启用</span>
+														{if condition="$tab.status eq 0"}<span class="label red">禁用</span>
+														{elseif condition="$tab.status eq 1"}<span class="label green">启用</span>
 														{/if}
 													</td>
-													<td><a class="btn btn-redact" href='{:url('redact',array('id'=>$tab_list.id))}'><i class="icon ai-edit"></i>编辑</a>
-														<a class="btn btn-delete" href='{:url('delete',array('id'=>$tab_list.id))}' onclick="javascript:return confirm('确定要删除吗？');"><i class="icon ai-delete"></i>删除</a>
+													<td><a class="btn btn-redact" href='{:url('redact',array('id'=>$tab.id))}'><i class="icon ai-edit"></i>编辑</a>
+														<a class="btn btn-delete" href='{:url('delete',array('id'=>$tab.id))}' onclick="javascript:return confirm('确定要删除吗？');"><i class="icon ai-delete"></i>删除</a>
 													</td>
 												</tr>
 											{/volist}
