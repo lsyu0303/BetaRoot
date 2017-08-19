@@ -30,22 +30,22 @@
 							{volist name="groups" id="group"}
 								<div class="tab-pane fade {if condition="$group.value eq 1"} in active {/if}" id="{$group.value}">
 									{volist name="configs" id="config"}
-										{if condition="$config.groupid eq $group.value"}
+										{if condition="$config.group eq $group.value"}
 											<div class="form-node">
 												<div class="form-title">{$config.title}：</div>
 												<div class="form-con i-col-2">
 
 													<!-- 配置类型判断循环 -->
 													<!-- 字符值型 -->
-													{if $config.typeid==1}
+													{if $config.type==1}
 														<input class="input-title" type="text" name="{$config.name}" value="{$config.value}">
 
 													<!-- 文本域型 -->
-													{elseif $config.typeid==2}
+													{elseif $config.type==2}
 														<textarea class="input-title" rows="3" name="{$config.name}">{$config.value}</textarea>
 
 													<!-- 下拉列表 -->
-													{elseif $config.typeid==3}
+													{elseif $config.type==3}
 														<select style="width:109%" name="{$config.name}">
 															<?php $optional_Array=explode('|',$config['optional']);foreach($optional_Array as $key=>$value):?>
 																<option value="{$value}" {if condition="$value eq $config.value"} selected="selected"{/if}>{$value}</option>
@@ -53,7 +53,7 @@
 														</select>
 
 													<!-- 单项选择 -->
-													{elseif $config.typeid==4}
+													{elseif $config.type==4}
 														<?php $optional_Array=explode('|',$config['optional']);foreach($optional_Array as $key=>$value):?>
 															<div class="Tab_radio">
 																{if condition="$value eq $config.value"}
@@ -65,13 +65,13 @@
 														<?php endforeach;?>
 
 													<!-- 多项选择 -->
-													{elseif $config.typeid==5}
+													{elseif $config.type==5}
 														<?php $optional_Array=explode('|',$config['optional']);$value_Array=explode('|',$config['value']);foreach($optional_Array as $key=>$value):?>
 															<div class="Tab_checkbox"><input type="checkbox" name="{$config.name}[]" value="{$value}" {if(in_array($value,$value_Array))} checked="checked" {/if}><span>{$value}</span></div>
 														<?php endforeach;?>
 
 													<!-- 文件附件 -->
-													{elseif $config.typeid==6}
+													{elseif $config.type==6}
 														<input class="input-upload" type="file" name="{$config.name}" value="">
 													{/if}
 												</div>

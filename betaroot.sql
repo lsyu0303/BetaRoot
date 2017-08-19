@@ -11,7 +11,7 @@
  Target Server Version : 50719
  File Encoding         : 65001
 
- Date: 19/08/2017 13:59:03
+ Date: 19/08/2017 23:03:44
 */
 
 SET NAMES utf8mb4;
@@ -28,9 +28,9 @@ CREATE TABLE `clover_category`  (
   `parentid` smallint(5) UNSIGNED NOT NULL DEFAULT 0 COMMENT '父级',
   `modelid` smallint(5) UNSIGNED NOT NULL DEFAULT 1 COMMENT '模型',
   `type` tinyint(2) UNSIGNED NOT NULL DEFAULT 1 COMMENT '类型',
-  `image` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '图片',
-  `seotitle` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '搜索',
-  `keywords` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '关键词',
+  `image` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '图片',
+  `seotitle` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '搜索',
+  `keywords` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '关键词',
   `description` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '描述',
   `content` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci COMMENT '内容',
   `template_index` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '模块模板',
@@ -44,7 +44,7 @@ CREATE TABLE `clover_category`  (
 -- ----------------------------
 -- Records of clover_category
 -- ----------------------------
-INSERT INTO `clover_category` VALUES (1, 'china', '中国中国', 0, 2, 1, '20170817\\c5e1993e0dd56bb9a6a20ee65bbfb255.png', '', '', '', '', 'image_index.html', 'image_list.html', 'image_show.html', 1, 1);
+INSERT INTO `clover_category` VALUES (1, 'china', '中国中国', 0, 2, 1, '20170817\\c5e1993e0dd56bb9a6a20ee65bbfb255.png', '', '', '', '', 'image_index.html', 'image_list.html', 'image_show.html', 1, 0);
 INSERT INTO `clover_category` VALUES (2, 'australia', '澳大利亚', 0, 3, 1, '20170817\\3a5e17c7766d7dc9043d726f0274b55d.png', '', '', '', '', 'image_index.html', 'image_list.html', 'image_show.htm', 1, 2);
 INSERT INTO `clover_category` VALUES (3, 'guangxi', '广西广西', 1, 3, 1, '', '', '', '', '', 'down_index.html', 'down_list.html', 'down_show.htm', 1, 1);
 INSERT INTO `clover_category` VALUES (4, 'zhejiang', '浙江浙江', 1, 1, 1, '', '', '', '', '', 'image_index.html', 'image_list.html', 'image_show.htm', 1, 2);
@@ -62,6 +62,33 @@ CREATE TABLE `clover_down`  (
   `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for clover_field
+-- ----------------------------
+DROP TABLE IF EXISTS `clover_field`;
+CREATE TABLE `clover_field`  (
+  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `name` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '标识',
+  `title` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '标题',
+  `type` smallint(5) UNSIGNED NOT NULL DEFAULT 0 COMMENT '类型',
+  `modelid` smallint(5) UNSIGNED NOT NULL COMMENT '模型',
+  `value` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '默认值',
+  `optional` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '可选值',
+  `status` tinyint(1) UNSIGNED NOT NULL COMMENT '状态',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of clover_field
+-- ----------------------------
+INSERT INTO `clover_field` VALUES (1, 'director', '导演', 1, 1, '', '', 1);
+INSERT INTO `clover_field` VALUES (2, 'actor', '演员', 1, 1, '', '', 1);
+INSERT INTO `clover_field` VALUES (3, 'price', '定价', 8, 1, '', '', 1);
+INSERT INTO `clover_field` VALUES (4, 'director2', '导演2', 1, 1, '', '', 1);
+INSERT INTO `clover_field` VALUES (5, 'director3', '导演3', 2, 1, '', '', 1);
+INSERT INTO `clover_field` VALUES (6, 'director4', '导演4', 7, 1, '', '', 1);
+INSERT INTO `clover_field` VALUES (7, 'director5', '导演5', 8, 1, '', '', 1);
 
 -- ----------------------------
 -- Table structure for clover_image
@@ -93,9 +120,9 @@ CREATE TABLE `clover_model`  (
 -- ----------------------------
 -- Records of clover_model
 -- ----------------------------
-INSERT INTO `clover_model` VALUES (1, 'video', '视频模型', 'video', '2', 'video_index.html', 'video_list.html', 'video_show.html', 1, 0);
-INSERT INTO `clover_model` VALUES (2, 'image', '图片模型', 'image', '', 'image_index.html', 'image_list.html', 'image_show.html', 1, 0);
-INSERT INTO `clover_model` VALUES (3, 'down', '下载模型', 'down', '', 'down_index.html', 'down_list.html', 'down_show.html', 1, 0);
+INSERT INTO `clover_model` VALUES (1, 'video', '视频模型', 'video', '2', 'video_index.html', 'video_list.html', 'video_show.html', 1, 1);
+INSERT INTO `clover_model` VALUES (2, 'image', '图片模型', 'image', '', 'image_index.html', 'image_list.html', 'image_show.html', 1, 2);
+INSERT INTO `clover_model` VALUES (3, 'down', '下载模型', 'down', '', 'down_index.html', 'down_list.html', 'down_show.html', 1, 3);
 
 -- ----------------------------
 -- Table structure for clover_system
@@ -106,10 +133,10 @@ CREATE TABLE `clover_system`  (
   `name` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '标识',
   `title` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '标题',
   `description` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '描述',
-  `typeid` smallint(5) UNSIGNED NOT NULL DEFAULT 0 COMMENT '类型',
-  `groupid` smallint(5) UNSIGNED NOT NULL DEFAULT 0 COMMENT '分组',
-  `value` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci COMMENT '默认值',
-  `optional` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '可选值',
+  `type` smallint(5) UNSIGNED NOT NULL DEFAULT 0 COMMENT '类型',
+  `group` smallint(5) UNSIGNED NOT NULL DEFAULT 0 COMMENT '分组',
+  `value` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '默认值',
+  `optional` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '可选值',
   `status` tinyint(1) UNSIGNED NOT NULL DEFAULT 1 COMMENT '状态',
   `sort` smallint(5) UNSIGNED NOT NULL DEFAULT 0 COMMENT '排序',
   PRIMARY KEY (`id`) USING BTREE
@@ -147,7 +174,7 @@ CREATE TABLE `clover_tab`  (
   `status` tinyint(1) UNSIGNED NOT NULL DEFAULT 1 COMMENT '状态',
   `sort` smallint(5) UNSIGNED NOT NULL DEFAULT 0 COMMENT '排序',
   PRIMARY KEY (`id`, `value`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 23 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 24 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of clover_tab
@@ -158,22 +185,23 @@ INSERT INTO `clover_tab` VALUES (3, '附件设置', 'configgroup', 3, 0, 1, 0);
 INSERT INTO `clover_tab` VALUES (4, '邮箱设置', 'configgroup', 4, 0, 1, 0);
 INSERT INTO `clover_tab` VALUES (5, '会员设置', 'configgroup', 5, 0, 1, 0);
 INSERT INTO `clover_tab` VALUES (6, '其他设置', 'configgroup', 6, 0, 1, 0);
-INSERT INTO `clover_tab` VALUES (7, '单行文本', 'configtype', 1, 0, 1, 0);
+INSERT INTO `clover_tab` VALUES (7, '文本框型', 'configtype', 1, 0, 1, 0);
 INSERT INTO `clover_tab` VALUES (8, '文本域型', 'configtype', 2, 0, 1, 0);
 INSERT INTO `clover_tab` VALUES (9, '下拉列表', 'configtype', 3, 0, 1, 0);
 INSERT INTO `clover_tab` VALUES (10, '单项选择', 'configtype', 4, 0, 1, 0);
 INSERT INTO `clover_tab` VALUES (11, '多项先择', 'configtype', 5, 0, 1, 0);
 INSERT INTO `clover_tab` VALUES (12, '文件附件', 'configtype', 6, 0, 1, 0);
-INSERT INTO `clover_tab` VALUES (13, '1', 'configtype', 7, 0, 1, 0);
-INSERT INTO `clover_tab` VALUES (14, '2', 'configtype', 8, 0, 1, 0);
-INSERT INTO `clover_tab` VALUES (15, '3', 'configtype', 9, 0, 1, 0);
-INSERT INTO `clover_tab` VALUES (16, '4', 'configtype', 10, 0, 1, 0);
-INSERT INTO `clover_tab` VALUES (17, '5', 'configtype', 11, 0, 1, 0);
-INSERT INTO `clover_tab` VALUES (18, '6', 'configtype', 12, 0, 1, 0);
-INSERT INTO `clover_tab` VALUES (19, '列表模块', 'categorytype', 1, 0, 1, 0);
-INSERT INTO `clover_tab` VALUES (20, '封面模块', 'categorytype', 2, 0, 1, 0);
-INSERT INTO `clover_tab` VALUES (21, '外部链接', 'categorytype', 0, 0, 1, 0);
-INSERT INTO `clover_tab` VALUES (22, '外部链良', 'categorytype', 4, 0, 1, 0);
+INSERT INTO `clover_tab` VALUES (13, '文本框型', 'fieldtype', 1, 0, 1, 0);
+INSERT INTO `clover_tab` VALUES (14, '文本域型', 'fieldtype', 2, 0, 1, 0);
+INSERT INTO `clover_tab` VALUES (15, '下拉列表', 'fieldtype', 3, 0, 1, 0);
+INSERT INTO `clover_tab` VALUES (16, '单项选择', 'fieldtype', 4, 0, 1, 0);
+INSERT INTO `clover_tab` VALUES (17, '多项先择', 'fieldtype', 5, 0, 1, 0);
+INSERT INTO `clover_tab` VALUES (18, '文件附件', 'fieldtype', 6, 0, 1, 0);
+INSERT INTO `clover_tab` VALUES (19, '浮点数值', 'fieldtype', 7, 0, 1, 0);
+INSERT INTO `clover_tab` VALUES (20, '整型数值', 'fieldtype', 8, 0, 1, 0);
+INSERT INTO `clover_tab` VALUES (21, '列表模块', 'categorytype', 1, 0, 1, 0);
+INSERT INTO `clover_tab` VALUES (22, '封面模块', 'categorytype', 2, 0, 1, 0);
+INSERT INTO `clover_tab` VALUES (23, '外部链接', 'categorytype', 0, 0, 1, 0);
 
 -- ----------------------------
 -- Table structure for clover_tabs
@@ -200,6 +228,10 @@ INSERT INTO `clover_tabs` VALUES (3, 'categorytype', '模块类型', 1);
 DROP TABLE IF EXISTS `clover_video`;
 CREATE TABLE `clover_video`  (
   `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `director2` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '',
+  `director3` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
+  `director4` float NOT NULL DEFAULT 0,
+  `director5` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 

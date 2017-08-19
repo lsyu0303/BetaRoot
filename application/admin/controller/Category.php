@@ -56,7 +56,7 @@ class Category extends Controller
 			}
 			else{
 				$redact=db('category')->update($data);
-				if($redact!==null){
+				if($redact!==false){
 					$this->success('修改模块成功！', url('index'));
 				}
 				else{
@@ -88,8 +88,8 @@ class Category extends Controller
 			$id=input('id');
 			$childrens=model('category')->childrens($id);
 			$childrens[]=(int)$id;
-			$data=db('category')->delete($childrens);
-			if($data){
+			$remove=db('category')->delete($childrens);
+			if($remove){
 				echo 1;
 			}
 			else{
@@ -121,8 +121,8 @@ class Category extends Controller
 	// Uploadify 插件文件上传
 	public function uploadify()
 	{
-		$file = request()->file('image');
-		$info = $file->move(ROOT_PATH . 'public' . DS . 'uploads');
+		$file=request()->file('image');
+		$info=$file->move(ROOT_PATH . 'public' . DS . 'uploads');
 		if($info){
 			echo $info->getSaveName();
 		}

@@ -57,7 +57,7 @@
 
 							<div class="tab-pane fade in active" id="basic">
 								<div class="form-node">
-									<div class="form-title">内容模型：</div>
+									<div class="form-title">所属模型：</div>
 									<div class="form-con i-col-2">
 										<select name="modelid" style="width:109%">
 											{volist name="models" id="model"}
@@ -253,7 +253,7 @@
 
 		function template(){
 			var pid=$("select[name=parentid]").find("option:selected").val();
-			if(pid != 0){
+			if(pid!=0){
 				$.ajax({
 					type	: "post",
 					dataType: "json",

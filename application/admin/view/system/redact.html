@@ -27,9 +27,9 @@
 						<div class="form-node">
 							<div class="form-title">配置类型：</div>
 							<div class="form-con i-col-2">
-								<select name="typeid" style="width:109%">
+								<select name="type" style="width:109%">
 									{volist name="types" id="type"}
-									<option {if condition="$config.typeid eq $type.value"} selected="selected" {/if} value="{$type.value}">{$type.title}</option>
+									<option {if condition="$config.type eq $type.value"} selected="selected" {/if} value="{$type.value}">{$type.title}</option>
 									{/volist}
 								</select>
 							</div>
@@ -49,7 +49,7 @@
 						<div class="form-node">
 							<div class="form-title">配置分组：</div>
 							<div class="form-con i-col-2">
-								<input class="input-title" type="text" name="groupid" value="{$config.groupid}">
+								<input class="input-title" type="text" name="group" value="{$config.group}">
 							</div>
 						</div>
 						<div class="form-node">

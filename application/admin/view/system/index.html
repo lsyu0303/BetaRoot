@@ -53,12 +53,12 @@
 									<td class="text-ltr">{$config.title}</td>
 									<td class="text-ctr">
 										{volist name="groups" id="group"}
-											{if condition="$config.groupid eq $group.value"}{$group.title}{/if}
+											{if condition="$config.group eq $group.value"}{$group.title}{/if}
 										{/volist}
 									</td>
 									<td class="text-ctr">
 										{volist name='types' id='type'}
-											{if condition="$config.typeid eq $type.value"}{$type.title}{/if}
+											{if condition="$config.type eq $type.value"}{$type.title}{/if}
 										{/volist}
 									</td>
 									<td class="text-ctr">

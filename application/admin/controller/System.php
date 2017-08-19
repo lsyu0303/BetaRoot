@@ -6,7 +6,7 @@ class System extends Controller
 {
 	public function index()
 	{
-		$configs=db('system')->field('id,name,title,typeid,groupid,status,sort')->paginate(10);
+		$configs=db('system')->field('id,name,title,type,group,status,sort')->paginate(10);
 		$types=db('tab')->field('value,title')->where('group','configtype')->select();
 		$groups=db('tab')->field('value,title')->where('group','configgroup')->select();
 		$this->assign([
@@ -55,7 +55,7 @@ class System extends Controller
 			}
 			else{
 				$redact=db('system')->update($data);
-				if($redact!==null){
+				if($redact!==false){
 					$this->success('修改配置成功！', url('index'));
 				}
 				else{
@@ -84,7 +84,7 @@ class System extends Controller
 			$config_Array=array();
 
 			// 附件类型数据处理
-			$file_column=db('system')->where('typeid',6)->column('name');
+			$file_column=db('system')->where('type',6)->column('name');
 			foreach ($file_column as $key => $value){
 				if($_FILES[$value]['tmp_name'] !=''){
 					$file=request()->file($value);
