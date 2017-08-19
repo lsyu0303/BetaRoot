@@ -130,15 +130,15 @@
 									<div class="form-con i-col-2">
 										<div class="btn-on">
 											{if condition="$category.status eq 1"}
-												<label class="Tab_on btn on-on">开启</label>
+												<label class="Tab_on btn on-on">显示</label>
 												<input class="Tab_open" type="radio" name="status" value="1" checked>
 												<input class="Tab_shut" type="radio" name="status" value="0">
-												<label class="Tab_off btn off-off">关闭</label>
+												<label class="Tab_off btn off-off">隐藏</label>
 											{elseif condition="$category.status eq 0"}
-												<label class="Tab_on btn on-off">开启</label>
+												<label class="Tab_on btn on-off">显示</label>
 												<input class="Tab_open" type="radio" name="status" value="1">
 												<input class="Tab_shut" type="radio" name="status" value="0" checked>
-												<label class="Tab_off btn off-on">关闭</label>
+												<label class="Tab_off btn off-on">隐藏</label>
 											{/if}
 										</div>
 									</div>
@@ -149,25 +149,20 @@
 								<div class="form-node">
 									<div class="form-title">模块模板：</div>
 									<div class="form-con i-col-2">
-										<select name="template_index" style="width:109%">
-											<option value="">111</option>
+										<input class="input-title" type="text" name="template_index" value="{$category.template_index}">
 										</select>
 									</div>
 								</div>
 								<div class="form-node">
 									<div class="form-title">列表模板：</div>
 									<div class="form-con i-col-2">
-										<select name="template_list" style="width:109%">
-											<option value="">222</option>
-										</select>
+										<input class="input-title" type="text" name="template_list" value="{$category.template_list}">
 									</div>
 								</div>
 								<div class="form-node">
 									<div class="form-title">输出模板：</div>
 									<div class="form-con i-col-2">
-										<select name="template_show" style="width:109%">
-											<option value="">333</option>
-										</select>
+										<input class="input-title" type="text" name="template_show" value="{$category.template_show}">
 									</div>
 								</div>
 								<div class="form-node">
@@ -254,6 +249,28 @@
 				});
 				layer.close(index);
 			});
+		});
+
+		function template(){
+			var pid=$("select[name=parentid]").find("option:selected").val();
+			if(pid != 0){
+				$.ajax({
+					type	: "post",
+					dataType: "json",
+					url		: "{:url('template')}",
+					data	: {id:pid},
+					success:function(data){
+						$("input[name=template_index]").val(data.template_index);
+						$("input[name=template_list]").val(data.template_list);
+						$("input[name=template_show]").val(data.template_show);
+						$("select[name=modelid]").val(data.modelid);
+					}
+				});
+			}
+		}
+
+		$("select[name=parentid]").change(function(){
+			template();
 		});
 	</script>
 </body>

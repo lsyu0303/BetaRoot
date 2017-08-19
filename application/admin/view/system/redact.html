@@ -81,15 +81,15 @@
 							<div class="form-con i-col-2">
 								<div class="btn-on">
 									{if condition="$config.status eq 1"}
-									<label class="Tab_on btn on-on">开 启</label>
+									<label class="Tab_on btn on-on">显示</label>
 									<input class="Tab_open" type="radio" name="status" value="1" checked>
 									<input class="Tab_shut" type="radio" name="status" value="0">
-									<label class="Tab_off btn off-off">关 闭</label>
+									<label class="Tab_off btn off-off">隐藏</label>
 									{elseif condition="$config.status eq 0"}
-									<label class="Tab_on btn on-off">开 启</label>
+									<label class="Tab_on btn on-off">显示</label>
 									<input class="Tab_open" type="radio" name="status" value="1">
 									<input class="Tab_shut" type="radio" name="status" value="0" checked>
-									<label class="Tab_off btn off-on">关 闭</label>
+									<label class="Tab_off btn off-on">隐藏</label>
 									{/if}
 								</div>
 							</div>

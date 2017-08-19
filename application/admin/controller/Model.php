@@ -41,6 +41,32 @@ class Model extends Controller
 
 	public function redact()
 	{
+		if(request()->isPost()){
+			$data=input('post.');
+			$old_tablename=db('model')->field('tablename')->find($data['id']);
+			$old_tablename=$old_tablename['tablename'];
+			$validate=validate('model');
+			if(!$validate->scene('redact')->check($data)){
+				$this->error($validate->getError());
+			}
+			elseif($old_tablename !== $data['tablename']){
+				$old_tablename=config('database.prefix').$old_tablename;
+				$tablename=config('database.prefix').$data['tablename'];
+				$sql="Alter table {$old_tablename} rename {$tablename}";
+				$redact=db('model')->update($data);
+				if($redact!==false){
+					Db::execute($sql);
+					$this->success('修改模型成功！', url('index'));
+				}
+				else{
+					$this->error('修改模型失败！');
+				}
+			}
+			return;
+		}
+		$id=input('id');
+		$model=db('model')->where('id',$id)->find();
+		$this->assign('model',$model);
 		return view();
 	}
 

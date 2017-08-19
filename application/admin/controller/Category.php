@@ -193,4 +193,13 @@ class Category extends Controller
 	}
 
 
+	// Ajax 异步模板切换
+	public function template()
+	{
+		$id=input('id');
+		$data=db('category')->find($id);
+		echo json_encode($data);
+	}
+
+
 }

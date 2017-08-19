@@ -62,7 +62,7 @@
 										{/volist}
 									</td>
 									<td class="text-ctr">
-										<a id="{$config.id}" onclick="change(this);" {if condition="$config.status eq 0"} class="btn btn-info red"{else} class="btn btn-info green" {/if}>{if condition="$config.status eq 0"}禁用{else}启用{/if}</a>
+										<a id="{$config.id}" onclick="change(this);" {if condition="$config.status eq 0"} class="btn btn-info red"{else} class="btn btn-info green" {/if}>{if condition="$config.status eq 0"}隐藏{else}显示{/if}</a>
 									</td>
 									<td><a class="btn btn-info blue" href='{:url('redact',array('id'=>$config.id))}'><i class="icon ai-edit"></i>编辑</a>
 										<a class="btn btn-info red" href="javascript:void(0);" id="{$config.id}" onclick="remove(this);"><i class="icon ai-delete"></i>删除</a>
@@ -93,11 +93,11 @@
 				success:function(data){
 					if(data==0){
 						$(object).attr('class','btn btn-info red');
-						$(object).text('禁用');
+						$(object).text('隐藏');
 					}
 					else{
 						$(object).attr('class','btn btn-info green');
-						$(object).text('启用');
+						$(object).text('显示');
 					}
 				}
 			});
