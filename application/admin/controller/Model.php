@@ -47,7 +47,7 @@ class Model extends Controller
 			$old_tablename=$old_tablename['tablename'];
 			$old_tablename=config('database.prefix').$old_tablename;
 			$tablename=config('database.prefix').$data['tablename'];
-			$sql="Alter table {$old_tablename} rename {$tablename}";
+			$sql="Alter Table {$old_tablename} Rename {$tablename}";
 			$validate=validate('model');
 			if(!$validate->scene('redact')->check($data)){
 				$this->error($validate->getError());
@@ -66,6 +66,7 @@ class Model extends Controller
 			}
 			return;
 		}
+
 		$id=input('id');
 		$model=db('model')->where('id',$id)->find();
 		$this->assign('model',$model);
@@ -79,7 +80,7 @@ class Model extends Controller
 		if(request()->isAjax()){
 			$id=input('id');
 			$tablename=config('database.prefix').input('tablename');
-			$sql="drop table {$tablename}";
+			$sql="Drop Table {$tablename}";
 			$remove=db('model')->delete($id);
 			if($remove){
 				Db::execute($sql);
@@ -98,8 +99,8 @@ class Model extends Controller
 	// 表单批量删除与排序
 	public function global()
 	{
-		$data=input('post.');
 		// 排序循环
+		$data=input('post.');
 		foreach ($data['sort'] as $key => $value) {
 			db('model')->where('id',$key)->update(['sort'=>$value]);
 		}
@@ -107,16 +108,16 @@ class Model extends Controller
 		$ids=input('post.id/a');
 		$remove=db('model')->where('id', 'in', $ids)->select();
 		static $tablename=array();
-		foreach ($remove as $k => $v) {
-			$tablename[]=config('database.prefix').$v['tablename'];
+		foreach ($remove as $key => $value) {
+			$tablename[]=config('database.prefix').$value['tablename'];
 		}
 		$tables=implode(',', $tablename);
-		$sql="drop table {$tables}";
+		$sql="Drop Table {$tables}";
 		if($ids){
 			Db::execute($sql);
 			db('model')->where('id', 'in', $ids)->delete();
 		}
-		$this->success('数据处理成功', url('index'));
+		$this->success('数据处理成功！', url('index'));
 	}
 
 

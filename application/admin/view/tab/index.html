@@ -20,14 +20,14 @@
 		<div class="box i-row">
 			<div class="i-col-12">
 				<ul class="nav nav-tabs" role="tablist">
-					<li class="active"><a href="javascript:void(0);">模型列表</a></li>
+					<li class="active"><a href="javascript:void(0);">标签列表</a></li>
 				</ul>
 				<div class="box-con">
 					<form class="Tab_form" name="form" method="post" action="{:url('global')}">
 						<div class="box-btn">
 				 			<button class="btn red" type="submit"><i class="icon ai-delete"></i>批量删除</button>
 				 			<button class="btn orange" type="submit"><i class="icon ai-spin"></i>更新排序</button>
-							<a class="btn blue" href="{:url('insert')}"><i class="icon ai-article"></i>添加模型</a>
+							<a class="btn blue" href="{:url('insert')}"><i class="icon ai-article"></i>添加标签</a>
 						</div>
 						<div class="table-con">
 							<table class="table">
@@ -37,27 +37,31 @@
 										<th class="text-ctr-05">排序</th>
 										<th class="text-ctr-05">序号</th>
 										<th class="text-ltr-20">标题</th>
-										<th class="text-ltr-20">标识</th>
-										<th class="text-ltr">附表</th>
+										<th class="text-ltr">分组</th>
+										<th class="text-ltr-20">枚举值</th>
 										<th class="text-ctr-08">状态</th>
 										<th class="text-ctr-15">操作</th>
 									</tr>
 								</thead>
 								<tbody id="id">
-									{volist name="models" id="model"}
+									{volist name="tabs" id="tab"}
 										<tr>
-											<td class="check"><input class="Tab_check" type="checkbox" name="id[]" value="{$model.id}"></td>
-											<td class="text-ctr-05"><input class="sort" type="text" name="sort[{$model.id}]" value="{$model.sort}"></td>
-											<td class="text-ctr">{$model.id}</td>
-											<td class="text-ltr">{$model.title}</td>
-											<td class="text-ltr">{$model.name}</td>
-											<td class="text-ltr">{$model.tablename}</td>
+											<td class="check"><input class="Tab_check" type="checkbox" name="id[]" value="{$tab.id}"></td>
+											<td class="text-ctr-05"><input class="sort" type="text" name="sort[{$tab.id}]" value="{$tab.sort}"></td>
+											<td class="text-ctr">{$tab.id}</td>
+											<td class="text-ltr">{$tab.title}</td>
+											<td class="text-ltr">
+												{volist name="groups" id="group"}
+													{if condition="$group.name eq $tab.group"}{$group.title} ({$group.name}){/if}
+												{/volist}
+											</td>
+											<td class="text-ltr">{$tab.value}</td>
 											<td class="text-ctr">
-												<a id="{$model.id}" onclick="change(this);" {if condition="$model.status eq 0"} class="btn btn-info red"{else} class="btn btn-info green" {/if}>{if condition="$model.status eq 0"}禁用{else}启用{/if}</a>
+												<a id="{$tab.id}" onclick="change(this);" {if condition="$tab.status eq 0"} class="btn btn-info red"{else} class="btn btn-info green" {/if}>{if condition="$tab.status eq 0"}禁用{else}启用{/if}</a>
 											</td>
 											<td class="text-ctr">
-												<a class="btn btn-info orange" href="{:url('redact',array('id'=>$model.id))}"><i class="icon ai-edit"></i>编辑</a>
-												<a class="btn btn-info red" href="javascript:void(0);" id="{$model.id}" tablename="{$model.tablename}" onclick="remove(this);"><i class="icon ai-delete"></i>删除</a>
+												<a class="btn btn-info orange" href="{:url('redact',array('id'=>$tab.id))}"><i class="icon ai-edit"></i>编辑</a>
+												<a class="btn btn-info red" href="javascript:void(0);" id="{$tab.id}" onclick="remove(this);"><i class="icon ai-delete"></i>删除</a>
 											</td>
 										</tr>
 									{/volist}
@@ -65,7 +69,7 @@
 							</table>
 						</div>
 						<div class="paging">
-							<div class="page">{$models->render()}</div>
+							<div class="page">{$tabs->render()}</div>
 						</div>
 					</form>
 				</div>
@@ -96,23 +100,22 @@
 			});
 		}
 
-		// Ajax 异步删除记录
+		// Ajax 异步删除单条记录
 		function remove(object){
-			layer.confirm('确定要删除该模型吗？', {icon: 3, title:'提示'}, function(index){
+			layer.confirm('确定要删除该标签吗？', {icon: 3, title:'提示'}, function(index){
 				var id=$(object).attr('id');
-				var tablename=$(object).attr('tablename');
 				$.ajax({
 					type	: "post",
 					dataType: "json",
 					url		: "{:url('remove')}",
-					data	: {id:id,tablename:tablename},
+					data	: {id:id},
 					success:function(data){
 						if(data==1){
-							layer.msg('删除模型成功！', {icon: 1});
+							layer.msg('删除标签成功！', {icon: 1});
 							window.location.href="{:url('index')}";
 						}
 						else{
-							layer.msg('删除模型失败！', {icon: 2});
+							layer.msg('删除标签失败！', {icon: 2});
 						}
 					}
 				});

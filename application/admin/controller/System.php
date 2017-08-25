@@ -7,7 +7,7 @@ class System extends Controller
 	public function index()
 	{
 		$configs=db('system')->field('id,name,title,type,group,status,sort')->paginate(10);
-		$types=db('tab')->field('value,title')->where('group','configtype')->select();
+		$types=db('tab')->field('value,title')->where('group',"configtype")->select();
 		$groups=db('tab')->field('value,title')->where('group','configgroup')->select();
 		$this->assign([
 			'configs'	=> $configs,

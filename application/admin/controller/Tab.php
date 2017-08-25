@@ -2,12 +2,16 @@
 namespace app\admin\controller;
 use think\Controller;
 
-class Tabs extends Controller
+class Tab extends Controller
 {
 	public function index()
 	{
-		$tabs=db('tabs')->order('sort asc')->paginate(10);
-		$this->assign('tabs',$tabs);
+		$tabs=db('tab')->order('sort asc')->paginate(10);
+		$groups=db('tabs')->field('name,title')->select();
+		$this->assign([
+			'tabs'		=> $tabs,
+			'groups'	=> $groups,
+			]);
 		return view();
 	}
 
@@ -16,21 +20,23 @@ class Tabs extends Controller
 	{
 		if(request()->isPost()){
 			$data=input('post.');
-			$validate=validate('tabs');
+			$validate=validate('tab');
 			if(!$validate->scene('insert')->check($data)){
 				$this->error($validate->getError());
 			}
 			else{
-				$insert=db('tabs')->insert($data);
+				$insert=db('tab')->insert($data);
 				if($insert){
-					$this->success('添加分组成功！', url('index'));
+					$this->success('添加标签成功！', url('index'));
 				}
 				else{
-					$this->error('添加分组失败！');
+					$this->error('添加标签失败！');
 				}
 			}
 			return;
 		}
+		$groups=db('tabs')->field('name,title')->select();
+		$this->assign('groups',$groups);
 		return view();
 	}
 
@@ -39,25 +45,29 @@ class Tabs extends Controller
 	{
 		if(request()->isPost()){
 			$data=input('post.');
-			$validate=validate('tabs');
+			$validate=validate('tab');
 			if(!$validate->scene('redact')->check($data)){
 				$this->error($validate->getError());
 			}
 			else{
-				$redact=db('tabs')->update($data);
+				$redact=db('tab')->update($data);
 				if($redact!==false){
-					$this->success('修改分组成功！', url('index'));
+					$this->success('修改标签成功！', url('index'));
 				}
 				else{
-					$this->error('修改分组失败！');
+					$this->error('修改标签失败！');
 				}	
 			}
 			return;
 		}
 
 		$id=input('id');
-		$tabs=db('tabs')->where('id',$id)->find();
-		$this->assign('tabs',$tabs);
+		$tab=db('tab')->where('id',$id)->find();
+		$groups=db('tabs')->field('name,title')->select();
+		$this->assign([
+			'tab'		=> $tab,
+			'groups'	=> $groups,
+			]);
 		return view();
 	}
 
@@ -67,7 +77,7 @@ class Tabs extends Controller
 	{
 		if(request()->isAjax()){
 			$id=input('id');
-			$remove=db('tabs')->delete($id);
+			$remove=db('tab')->delete($id);
 			if($remove){
 				echo 1;
 			}
@@ -87,12 +97,12 @@ class Tabs extends Controller
 		// 排序循环
 		$data=input('post.');
 		foreach ($data['sort'] as $key => $value) {
-			db('tabs')->where('id',$key)->update(['sort'=>$value]);
+			db('tab')->where('id',$key)->update(['sort'=>$value]);
 		}
 		// 批量删除
 		$ids=input('post.id/a');
 		if($ids){
-			db('tabs')->where('id', 'in', $ids)->delete();
+			db('tab')->where('id', 'in', $ids)->delete();
 		}
 		$this->success('数据处理成功！', url('index'));
 	}
@@ -103,14 +113,14 @@ class Tabs extends Controller
 	{
 		if(request()->isAjax()){
 			$id=input('id');
-			$status=db('tabs')->field('status')->where('id',$id)->find();
+			$status=db('tab')->field('status')->where('id',$id)->find();
 			$status=$status['status'];
 			if($status==1){
-				db('tabs')->where('id',$id)->update(['status'=>0]);
+				db('tab')->where('id',$id)->update(['status'=>0]);
 				echo 0; //由启用转换为禁用
 			}
 			else{
-				db('tabs')->where('id',$id)->update(['status'=>1]);
+				db('tab')->where('id',$id)->update(['status'=>1]);
 				echo 1; //由禁用转换为启用
 			}
 		}

@@ -7,7 +7,13 @@ class Category extends Controller
 	public function index()
 	{
 		$categorys=model('category')->trees();
-		$this->assign('categorys',$categorys);
+		$models=db('model')->field('id,title')->select();
+		$types=db('tab')->where(['group'=>'categorytype','status'=>'1'])->field('title,value')->select();
+		$this->assign([
+			'categorys'	=> $categorys,
+			'models'	=> $models,
+			'types'		=> $types,
+			]);
 		return view();
 	}
 
@@ -104,8 +110,8 @@ class Category extends Controller
 	// 表单批量删除与排序
 	public function global()
 	{
-		$data=input('post.');
 		// 排序循环
+		$data=input('post.');
 		foreach ($data['sort'] as $key => $value) {
 			db('category')->where('id',$key)->update(['sort'=>$value]);
 		}
@@ -114,7 +120,7 @@ class Category extends Controller
 		if($ids){
 			model('category')->batch($ids);
 		}
-		$this->success('数据处理成功', url('index'));
+		$this->success('数据处理成功！', url('index'));
 	}
 
 

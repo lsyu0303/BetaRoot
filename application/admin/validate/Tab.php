@@ -2,7 +2,7 @@
 namespace app\admin\validate;
 use think\Validate;
 
-class Tabs extends Validate
+class Tab extends Validate
 {
 	protected $rule = [
 		'title'		=>	'chsDash|require|unique:system|max:30',

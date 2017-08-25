@@ -11,6 +11,8 @@
 	<link rel="stylesheet" type="text/css" href="__ADMIN__/style/default.css">
 	<link rel="stylesheet" type="text/css" href="__ADMIN__/style/font.min.css">
 	<link rel="stylesheet" type="text/css" href="__ADMIN__/style/bootstrap.css">
+	<script type="text/javascript" src="__ADMIN__/style/jquery.min.js"></script>
+	<script type="text/javascript" src="__ADDONS__/layer/layer.js"></script>
 </head>
 
 <body>
@@ -18,121 +20,102 @@
 		<div class="box i-row">
 			<div class="i-col-12">
 				<ul class="nav nav-tabs" role="tablist">
-					<li class="active"><a role="tab" data-toggle="tab" href="#tabs">联动分组</a></li>
-					{volist name="groups" id="group"}
-						<li><a role="tab" data-toggle="tab" href="#{$group.name}">{$group.title}</a></li>
-					{/volist}
-					<li><a role="tab" data-toggle="tab" href="#tab">标签管理</a></li>
+					<li class="active"><a href="javascript:void(0);">标签分组</a></li>
 				</ul>
 				<div class="box-con">
-					<div class="tab-content tabs">
-						<!-- 联动分组 -->
-						<div class="tab-pane fade in active" id="tabs">
-							<h3>Section 1</h3>
+					<form class="Tab_form" name="form" method="post" action="{:url('global')}">
+						<div class="box-btn">
+				 			<button class="btn red" type="submit"><i class="icon ai-delete"></i>批量删除</button>
+				 			<button class="btn orange" type="submit"><i class="icon ai-spin"></i>更新排序</button>
+							<a class="btn blue" href="{:url('insert')}"><i class="icon ai-article"></i>添加分组</a>
 						</div>
-
-						<!-- 标签循环 -->
-						{volist name="groups" id="group"}
-							<div role="tabpanel" class="tab-pane fade" id="{$group.name}">
-								<form class="Tab_form" name="form" method="post" action="">
-									<div class="box-btn">
-										<a class="btn btn-insert" href="{:url('insert')}"><i class="icon ai-edit"></i>添加标签</a>
-										<a class="btn btn-insert" href="{:url('insert')}"><i class="icon ai-edit"></i>更新排序</a>
-									</div>
-									<div class="table-con">
-										<table class="table">
-											<thead>
-												<tr>
-													<th class="check"><input type="checkbox" class="Tab_checkAll" id="idAll"></th>
-													<th class="text-ctr-05">序号</th>
-													<th class="text-ctr-05">排序</th>
-													<th class="text-ltr-20">标题</th>
-													<th class="text-ltr-20">分组</th>
-													<th class="text-ltr">枚举值</th>
-													<th class="text-ctr-08">状态</th>
-													<th class="text-ctr-15">操作</th>
-												</tr>
-											</thead>
-											<tbody id="id">
-												{volist name='tabs' id='tab'}
-													{if condition="$tab.group eq $group.name"}
-														<tr>
-															<td class="check"><input class="Tab_check" type="checkbox" name="id[]" value="{$tab.id}"></td>
-															<td class="text-ctr">{$tab.id}</td>
-															<td class="text-ctr-05"><input class="sort" type="text" name="sort" value="{$tab.sort}"></td>
-															<td class="text-ltr">{$tab.title}</td>
-															<td class="text-ltr">{$tab.group}</td>
-															<td class="text-ltr">{$tab.value}</td>
-															<td class="text-ctr">
-																{if condition="$tab.status eq 0"}<span class="label red">禁用</span>
-																{elseif condition="$tab.status eq 1"}<span class="label green">启用</span>
-																{/if}
-															</td>
-															<td><a class="btn btn-redact" href='{:url('redact',array('id'=>$tab.id))}'><i class="icon ai-edit"></i>编辑</a>
-																<a class="btn btn-delete" href='{:url('delete',array('id'=>$tab.id))}' onclick="javascript:return confirm('确定要删除吗？');"><i class="icon ai-delete"></i>删除</a>
-															</td>
-														</tr>
-													{/if}
-												{/volist}
-											</tbody>
-										</table>
-									</div>
-								</form>
-							</div>
-						{/volist}
-
-						<!-- 标签管理 -->
-						<div class="tab-pane fade" id="tab">
-							<form class="Tab_form" name="form" method="post" action="">
-								<div class="box-btn">
-									<a class="btn btn-insert" href="{:url('insert')}"><i class="icon ai-edit"></i>添加标签</a>
-									<a class="btn btn-insert" href="{:url('insert')}"><i class="icon ai-edit"></i>更新排序</a>
-								</div>
-								<div class="table-con">
-									<table class="table">
-										<thead>
-											<tr>
-												<th class="check"><input type="checkbox" class="Tab_checkAll" id="idAll"></th>
-												<th class="text-ctr-05">序号</th>
-												<th class="text-ctr-05">排序</th>
-												<th class="text-ltr-20">标题</th>
-												<th class="text-ltr-20">分组</th>
-												<th class="text-ltr">枚举值</th>
-												<th class="text-ctr-08">状态</th>
-												<th class="text-ctr-15">操作</th>
-											</tr>
-										</thead>
-										<tbody id="id">
-											{volist name='tabs' id='tab'}
-												<tr>
-													<td class="check"><input class="Tab_check" type="checkbox" name="id[]" value="{$tab.id}"></td>
-													<td class="text-ctr">{$tab.id}</td>
-													<td class="text-ctr-05"><input class="sort" type="text" name="sort" value="{$tab.sort}"></td>
-													<td class="text-ltr">{$tab.title}</td>
-													<td class="text-ltr">{$tab.group}</td>
-													<td class="text-ltr">{$tab.value}</td>
-													<td class="text-ctr">
-														{if condition="$tab.status eq 0"}<span class="label red">禁用</span>
-														{elseif condition="$tab.status eq 1"}<span class="label green">启用</span>
-														{/if}
-													</td>
-													<td><a class="btn btn-redact" href='{:url('redact',array('id'=>$tab.id))}'><i class="icon ai-edit"></i>编辑</a>
-														<a class="btn btn-delete" href='{:url('delete',array('id'=>$tab.id))}' onclick="javascript:return confirm('确定要删除吗？');"><i class="icon ai-delete"></i>删除</a>
-													</td>
-												</tr>
-											{/volist}
-										</tbody>
-									</table>
-								</div>
-							</form>
+						<div class="table-con">
+							<table class="table">
+								<thead>
+									<tr>
+										<th class="check"><input type="checkbox" class="Tab_checkAll" id="idAll"></th>
+										<th class="text-ctr-05">排序</th>
+										<th class="text-ctr-05">序号</th>
+										<th class="text-ltr-20">标题</th>
+										<th class="text-ltr">标识</th>
+										<th class="text-ctr-08">状态</th>
+										<th class="text-ctr-15">操作</th>
+									</tr>
+								</thead>
+								<tbody id="id">
+									{volist name="tabs" id="tab"}
+										<tr>
+											<td class="check"><input class="Tab_check" type="checkbox" name="id[]" value="{$tab.id}"></td>
+											<td class="text-ctr-05"><input class="sort" type="text" name="sort[{$tab.id}]" value="{$tab.sort}"></td>
+											<td class="text-ctr">{$tab.id}</td>
+											<td class="text-ltr">{$tab.title}</td>
+											<td class="text-ltr">{$tab.name}</td>
+											<td class="text-ctr">
+												<a id="{$tab.id}" onclick="change(this);" {if condition="$tab.status eq 0"} class="btn btn-info red"{else} class="btn btn-info green" {/if}>{if condition="$tab.status eq 0"}禁用{else}启用{/if}</a>
+											</td>
+											<td class="text-ctr">
+												<a class="btn btn-info orange" href="{:url('redact',array('id'=>$tab.id))}"><i class="icon ai-edit"></i>编辑</a>
+												<a class="btn btn-info red" href="javascript:void(0);" id="{$tab.id}" onclick="remove(this);"><i class="icon ai-delete"></i>删除</a>
+											</td>
+										</tr>
+									{/volist}
+								</tbody>
+							</table>
 						</div>
-					</div>
+						<div class="paging">
+							<div class="page">{$tabs->render()}</div>
+						</div>
+					</form>
 				</div>
 			</div>
 		</div>
 	</div>
-	<script type="text/javascript" src="__ADMIN__/style/jquery.min.js"></script>
 	<script type="text/javascript" src="__ADMIN__/style/major.js"></script>
 	<script type="text/javascript" src="__ADMIN__/style/bootstrap.js"></script>
+	<script type="text/javascript">
+		// Ajax 异步转换状态
+		function change(object){
+			var id=$(object).attr('id');
+			$.ajax({
+				type	: "post",
+				dataType: "json",
+				url		: "{:url('change')}",
+				data	: {id:id},
+				success:function(data){
+					if(data==0){
+						$(object).attr('class','btn btn-info red');
+						$(object).text('禁用');
+					}
+					else{
+						$(object).attr('class','btn btn-info green');
+						$(object).text('启用');
+					}
+				}
+			});
+		}
+
+		// Ajax 异步删除单条记录
+		function remove(object){
+			layer.confirm('确定要删除该分组吗？', {icon: 3, title:'提示'}, function(index){
+				var id=$(object).attr('id');
+				$.ajax({
+					type	: "post",
+					dataType: "json",
+					url		: "{:url('remove')}",
+					data	: {id:id},
+					success:function(data){
+						if(data==1){
+							layer.msg('删除分组成功！', {icon: 1});
+							window.location.href="{:url('index')}";
+						}
+						else{
+							layer.msg('删除分组失败！', {icon: 2});
+						}
+					}
+				});
+				layer.close(index);
+			});
+		}
+	</script>
 </body>
 </html>

@@ -7,7 +7,7 @@ class Category extends Model
 	// 获取完整的记录信息
 	public function trees()
 	{
-		$data=db('category')->alias('c')->join('model m','c.modelid=m.id','LEFT')->field('c.id,c.name,c.title,c.parentid,c.modelid,c.type,c.status,c.sort,m.title as modeltitle')->order('sort asc')->select();
+		$data=db('category')->field('id,name,title,parentid,modelid,type,status,sort')->order('sort asc')->select();
 		return $this->sort($data);
 	}
 

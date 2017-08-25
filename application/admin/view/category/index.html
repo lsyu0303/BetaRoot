@@ -27,14 +27,14 @@
 		<div class="box i-row">
 			<div class="i-col-12">
 				<ul class="nav nav-tabs" role="tablist">
-					<li class="active"><a href="{:url('index')}">模块列表</a></li>
+					<li class="active"><a href="javascript:void(0);">模块列表</a></li>
 				</ul>
 				<div class="box-con">
 					<form class="Tab_form" name="form" method="post" action="{:url('global')}">
 						<div class="box-btn">
 				 			<button class="btn red" type="submit"><i class="icon ai-delete"></i>批量删除</button>
-				 			<button class="btn orange" type="submit"><i class="icon ai-delete"></i>更新排序</button>
-							<a class="btn blue" href="{:url('insert')}"><i class="icon ai-edit"></i>添加模块</a>
+				 			<button class="btn orange" type="submit"><i class="icon ai-spin"></i>更新排序</button>
+							<a class="btn blue" href="{:url('insert')}"><i class="icon ai-article"></i>添加模块</a>
 						</div>
 						<div class="table-con">
 							<table class="table">
@@ -64,13 +64,21 @@
 												{if condition="$category.parentid eq 0"}<span class="flex">-</span>{/if}{$category.title}
 											</td>
 											<td class="text-ltr">{$category.name}</td>
-											<td class="text-ctr">{$category.modeltitle}</td>
-											<td class="text-ctr">{$category.type}</td>
+											<td class="text-ctr">
+												{volist name="models" id="model"}
+													{if condition="$category.modelid eq $model.id"}{$model.title}{/if}
+												{/volist}
+											</td>
+											<td class="text-ctr">
+												{volist name="types" id="type"}
+													{if condition="$category.type eq $type.value"}{$type.title}{/if}
+												{/volist}
+											</td>
 											<td class="text-ctr">
 												<a id="{$category.id}" onclick="change(this);" {if condition="$category.status eq 0"} class="btn btn-info red" {else} class="btn btn-info green" {/if}>{if condition="$category.status eq 0"}隐藏{else}显示{/if}</a>
 											</td>
 											<td class="text-ctr">
-												<a class="btn btn-info blue" href="{:url('insert',array('pid'=>$category.id))}"><i class="icon ai-edit"></i>添加</a>
+												<a class="btn btn-info blue" href="{:url('insert',array('pid'=>$category.id))}"><i class="icon ai-article"></i>添加</a>
 												<a class="btn btn-info orange" href="{:url('redact',array('id'=>$category.id))}"><i class="icon ai-edit"></i>编辑</a>
 												<a class="btn btn-info red" href="javascript:void(0);" id="{$category.id}" onclick="remove(this);"><i class="icon ai-delete"></i>删除</a>
 											</td>
