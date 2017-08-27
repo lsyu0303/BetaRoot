@@ -12,6 +12,7 @@
 	<link rel="stylesheet" type="text/css" href="__ADMIN__/style/font.min.css">
 	<link rel="stylesheet" type="text/css" href="__ADMIN__/style/bootstrap.css">
 </head>
+
 <body>
 	<div class="i-con">
 		<div class="box i-row">
@@ -21,7 +22,6 @@
 					{volist name="groups" id="group"}
 						<li {if condition="$group.value eq 1"} class="active" {/if}><a role="tab" data-toggle="tab" href="#{$group.value}">{$group.title}</a></li>
 					{/volist}
-					<li><a href="{:url('index')}">配置管理</a></li>
 				</ul>
 				<div class="box-con">
 					<form class="Tab_form" name="form" method="post" enctype="multipart/form-data" action="">

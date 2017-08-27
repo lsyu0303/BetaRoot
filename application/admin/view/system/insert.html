@@ -18,71 +18,85 @@
 		<div class="box i-row">
 			<div class="i-col-12">
 				<ul class="nav nav-tabs" role="tablist">
-					<li class="active"><a href="javascript:void(0);">添加配置</a></li>
-					<li><a href="{:url('index')}">配置管理</a></li>
+					<li class="active"><a role="tab" data-toggle="tab" href="#basic">基本选项</a></li>
+					<li><a role="tab" data-toggle="tab" href="#authd">权限设置</a></li>
 				</ul>
 				<div class="box-con">
 					<form class="Tab_form" name="form" method="post" action="">
-						<div class="form-node">
-							<div class="form-title">配置类型：</div>
-							<div class="form-con i-col-2">
-								<select name="type" style="width:109%">
-									{volist name="types" id="type"}
-									<option value="{$type.value}">{$type.title}</option>
-									{/volist}
-								</select>
+						<div class="tab-content tabs">
+
+							<div class="tab-pane fade in active" id="basic">
+								<div class="form-node">
+									<div class="form-title">配置类型：</div>
+									<div class="form-con i-col-2">
+										<select name="type" style="width:109%">
+											{volist name="types" id="type"}
+											<option value="{$type.value}">{$type.title}</option>
+											{/volist}
+										</select>
+									</div>
+								</div>
+								<div class="form-node">
+									<div class="form-title">英文标识：</div>
+									<div class="form-con i-col-2">
+										<input class="input-title" type="text" name="name" value="">
+									</div>
+								</div>
+								<div class="form-node">
+									<div class="form-title">配置名称：</div>
+									<div class="form-con i-col-2">
+										<input class="input-title" type="text" name="title" value="">
+									</div>
+								</div>
+								<div class="form-node">
+									<div class="form-title">配置分组：</div>
+									<div class="form-con i-col-2">
+										<input class="input-title" type="text" name="group" value="">
+									</div>
+								</div>
+								<div class="form-node">
+									<div class="form-title">配置排序：</div>
+									<div class="form-con i-col-2">
+										<input class="input-title" type="text" name="sort" value="">
+									</div>
+								</div>
+								<div class="form-node">
+									<div class="form-title">默 认 值 ：</div>
+									<div class="form-con i-col-2">
+										<input class="input-title" type="text" name="value" value="">
+									</div>
+								</div>
+								<div class="form-node">
+									<div class="form-title">可 选 值 ：</div>
+									<div class="form-con i-col-2">
+										<textarea class="input-title" name="optional" rows="3"></textarea>
+									</div>
+								</div>
+								<div class="form-node">
+									<div class="form-title">注释说明：</div>
+									<div class="form-con i-col-2">
+										<textarea class="input-title" name="description" rows="3"></textarea>
+									</div>
+								</div>
+								<div class="form-node">
+									<div class="form-title">配置状态：</div>
+									<div class="form-con i-col-2">
+										<div class="btn-on">
+											<label class="Tab_on btn on-on">启用</label>
+											<input class="Tab_open" type="radio" name="status" value="1" checked>
+											<input class="Tab_shut" type="radio" name="status" value="0">
+											<label class="Tab_off btn off-off">禁用</label>
+										</div>
+									</div>
+								</div>
 							</div>
-						</div>
-						<div class="form-node">
-							<div class="form-title">英文标识：</div>
-							<div class="form-con i-col-2">
-								<input class="input-title" type="text" name="name" value="">
-							</div>
-						</div>
-						<div class="form-node">
-							<div class="form-title">配置名称：</div>
-							<div class="form-con i-col-2">
-								<input class="input-title" type="text" name="title" value="">
-							</div>
-						</div>
-						<div class="form-node">
-							<div class="form-title">配置分组：</div>
-							<div class="form-con i-col-2">
-								<input class="input-title" type="text" name="group" value="">
-							</div>
-						</div>
-						<div class="form-node">
-							<div class="form-title">配置排序：</div>
-							<div class="form-con i-col-2">
-								<input class="input-title" type="text" name="sort" value="">
-							</div>
-						</div>
-						<div class="form-node">
-							<div class="form-title">默 认 值：</div>
-							<div class="form-con i-col-2">
-								<input class="input-title" type="text" name="value" value="">
-							</div>
-						</div>
-						<div class="form-node">
-							<div class="form-title">可 选 值：</div>
-							<div class="form-con i-col-2">
-								<textarea class="input-title" name="optional" rows="3"></textarea>
-							</div>
-						</div>
-						<div class="form-node">
-							<div class="form-title">注释说明：</div>
-							<div class="form-con i-col-2">
-								<textarea class="input-title" name="description" rows="3"></textarea>
-							</div>
-						</div>
-						<div class="form-node">
-							<div class="form-title">配置状态：</div>
-							<div class="form-con i-col-2">
-								<div class="btn-on">
-									<label class="Tab_on btn on-on">显示</label>
-									<input class="Tab_open" type="radio" name="status" value="1" checked>
-									<input class="Tab_shut" type="radio" name="status" value="0">
-									<label class="Tab_off btn off-off">隐藏</label>
+
+							<div class="tab-pane fade" id="authd">
+								<div class="form-node">
+									<div class="form-title">权限设置：</div>
+									<div class="form-con i-col-2">
+										<input class="input-title" type="text" name="" value="" placeholder="等待完善……">
+									</div>
 								</div>
 							</div>
 						</div>
