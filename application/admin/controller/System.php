@@ -7,8 +7,8 @@ class System extends Controller
 	public function index()
 	{
 		$configs=db('system')->field('id,name,title,type,group,status,sort')->paginate(10);
-		$types=db('tab')->field('value,title')->where('group',"configtype")->select();
-		$groups=db('tab')->field('value,title')->where('group','configgroup')->select();
+		$types=db('tag')->field('value,title')->where('group',"configtype")->select();
+		$groups=db('tag')->field('value,title')->where('group','configgroup')->select();
 		$this->assign([
 			'configs'	=> $configs,
 			'types'		=> $types,
@@ -39,7 +39,7 @@ class System extends Controller
 			return;
 		}
 
-		$types=db('tab')->field('value,title')->where('group','configtype')->select();
+		$types=db('tag')->field('value,title')->where('group','configtype')->select();
 		$this->assign('types',$types);
 		return view();
 	}
@@ -67,7 +67,7 @@ class System extends Controller
 
 		$id=input('id');
 		$config=db('system')->find($id);
-		$types=db('tab')->field('value,title')->where('group','configtype')->select();
+		$types=db('tag')->field('value,title')->where('group','configtype')->select();
 		$this->assign([
 			'config'	=> $config,
 			'types'		=> $types,
@@ -110,7 +110,7 @@ class System extends Controller
 			$this->success('修改配置成功！', url('system'));
 		}
 
-		$groups=db('tab')->field('value,title')->where('group','configgroup')->select();
+		$groups=db('tag')->field('value,title')->where('group','configgroup')->select();
 		$configs=db('system')->select();
 		$this->assign([
 			'groups'	=> $groups,

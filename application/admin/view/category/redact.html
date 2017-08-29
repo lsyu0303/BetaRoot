@@ -8,31 +8,31 @@
 	<title>轻风之语〖开发中……〗</title>
 	<meta name="keywords" content="轻风之语〖开发中……〗"/>
 	<meta name="description" content="轻风之语〖开发中……〗"/>
-	<link rel="stylesheet" type="text/css" href="__ADMIN__/style/default.css">
-	<link rel="stylesheet" type="text/css" href="__ADMIN__/style/font.min.css">
-	<link rel="stylesheet" type="text/css" href="__ADMIN__/style/bootstrap.css">
-	<script type="text/javascript" src="__ADMIN__/style/jquery.min.js"></script>
-	<script type="text/javascript" src="__ADDONS__/layer/layer.js"></script>
-	<script type="text/javascript" src="__ADDONS__/uploadify/jquery.uploadifive.js"></script>
-	<script type="text/javascript" src="__ADDONS__/ueditor/ueditor.config.js"></script>
-	<script type="text/javascript" src="__ADDONS__/ueditor/ueditor.all.min.js"></script>
-	<script type="text/javascript" src="__ADDONS__/ueditor/lang/zh-cn/zh-cn.js"></script>
+	<link rel="stylesheet" type="text/css" href="__admin__/style/default.css">
+	<link rel="stylesheet" type="text/css" href="__admin__/style/font.min.css">
+	<link rel="stylesheet" type="text/css" href="__admin__/style/bootstrap.css">
+	<script type="text/javascript" src="__admin__/style/jquery.min.js"></script>
+	<script type="text/javascript" src="__addons__/layer/layer.js"></script>
+	<script type="text/javascript" src="__addons__/uploadify/jquery.uploadifive.js"></script>
+	<script type="text/javascript" src="__addons__/ueditor/ueditor.config.js"></script>
+	<script type="text/javascript" src="__addons__/ueditor/ueditor.all.min.js"></script>
+	<script type="text/javascript" src="__addons__/ueditor/lang/zh-cn/zh-cn.js"></script>
 	<script type="text/javascript">
 		$(function() {
 			$('#uploadify').uploadifive({
 				'auto'				: "true",
 				'queueID'			: "queue",
-				'uploadScript'		: "{:url('Category/uploadify')}",
+				'uploadScript'		: "{:url('uploadify')}",
 				'buttonText'		: "选择文件",
 				'buttonClass'		: "btn btn-back",
 				'fileTypeDesc'		: "Image Files",
 				'fileObjName'		: "image",
 				'onUploadComplete'	: function(file,data){
 					$("input[name='image']").val(data);
-					var upload_src= "__UPLOADS__/"+data;
-					var upload_image="<img height='100px' src='"+upload_src+"'>";
-					$('#upload_show').show();
-					$('#upload_image').html(upload_image);
+					var file_src= "__uploads__/image/"+data;
+					var file_show="<img height='100px' src='"+file_src+"'>";
+					$('#hide_show').show();
+					$('#file_show').html(file_show);
 				}
 			});
 			$("#uploadifive-uploadify").prepend("<i style='padding-right:5px;' class='icon ai-up-img'></i>");
@@ -118,10 +118,10 @@
 										</div>
 									</div>
 								</div>
-								<div class="form-node" id="upload_show" {if condition="$category.image eq ''"} style="display:none;" {/if}>
+								<div class="form-node" id="hide_show" {if condition="$category.image eq ''"} style="display:none;" {/if}>
 									<div class="form-title">&nbsp;</div>
 									<div class="form-con i-col-8">
-										<div id="upload_image" style="float:left;">{if condition="$category.image neq ''"}<img src="__UPLOADS__/{$category.image}" height="100px">{/if}</div>
+										<div id="file_show" style="float:left;">{if condition="$category.image neq ''"}<img src="__uploads__/image/{$category.image}" height="100px">{/if}</div>
 										<div id="cancel" style="float:left;"><span><a href="javascript:void(0);"><i style='padding:0 5px 0 10px;' class="icon ai-delete"></i>删除</a></span></div>
 									</div>
 								</div>
@@ -216,8 +216,8 @@
 			</div>
 		</div>
 	</div>
-	<script type="text/javascript" src="__ADMIN__/style/major.js"></script>
-	<script type="text/javascript" src="__ADMIN__/style/bootstrap.js"></script>
+	<script type="text/javascript" src="__admin__/style/major.js"></script>
+	<script type="text/javascript" src="__admin__/style/bootstrap.js"></script>
 	<script type="text/javascript">
 		// 百度编辑器 UEditor
 		UE.getEditor('content',{initialFrameWidth:1000,initialFrameHeight:400,});
@@ -231,7 +231,7 @@
 				return false;
 			}
 			layer.confirm('确定删除文件吗？', {icon: 3, title:'提示'}, function(index){
-				$("#upload_show").hide();
+				$("#hide_show").hide();
 				$("input[name='image']").val('');
 				$.ajax({
 					type	: "post",

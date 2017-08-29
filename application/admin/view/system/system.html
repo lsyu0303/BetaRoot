@@ -8,9 +8,9 @@
 	<title>轻风之语〖开发中……〗</title>
 	<meta name="keywords" content="轻风之语〖开发中……〗"/>
 	<meta name="description" content="轻风之语〖开发中……〗"/>
-	<link rel="stylesheet" type="text/css" href="__ADMIN__/style/default.css">
-	<link rel="stylesheet" type="text/css" href="__ADMIN__/style/font.min.css">
-	<link rel="stylesheet" type="text/css" href="__ADMIN__/style/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="__admin__/style/default.css">
+	<link rel="stylesheet" type="text/css" href="__admin__/style/font.min.css">
+	<link rel="stylesheet" type="text/css" href="__admin__/style/bootstrap.css">
 </head>
 
 <body>
@@ -36,7 +36,7 @@
 												<div class="form-con i-col-2">
 
 													<!-- 配置类型判断循环 -->
-													<!-- 字符值型 -->
+													<!-- 文本框型 -->
 													{if $config.type==1}
 														<input class="input-title" type="text" name="{$config.name}" value="{$config.value}">
 
@@ -47,14 +47,14 @@
 													<!-- 下拉列表 -->
 													{elseif $config.type==3}
 														<select style="width:109%" name="{$config.name}">
-															<?php $optional_Array=explode('|',$config['optional']);foreach($optional_Array as $key=>$value):?>
+															<?php $optional=explode('|',$config['optional']);foreach($optional as $key=>$value):?>
 																<option value="{$value}" {if condition="$value eq $config.value"} selected="selected"{/if}>{$value}</option>
 															<?php endforeach;?>
 														</select>
 
 													<!-- 单项选择 -->
 													{elseif $config.type==4}
-														<?php $optional_Array=explode('|',$config['optional']);foreach($optional_Array as $key=>$value):?>
+														<?php $optional=explode('|',$config['optional']);foreach($optional as $key=>$value):?>
 															<div class="Tab_radio">
 																{if condition="$value eq $config.value"}
 																	<input type="radio" checked="checked" name="{$config.name}" value="{$value}"><dl class="on"><i class="icon ai-radio-on"></i><span>{$value}</span></dl>
@@ -66,8 +66,8 @@
 
 													<!-- 多项选择 -->
 													{elseif $config.type==5}
-														<?php $optional_Array=explode('|',$config['optional']);$value_Array=explode('|',$config['value']);foreach($optional_Array as $key=>$value):?>
-															<div class="Tab_checkbox"><input type="checkbox" name="{$config.name}[]" value="{$value}" {if(in_array($value,$value_Array))} checked="checked" {/if}><span>{$value}</span></div>
+														<?php $optional=explode('|',$config['optional']);$values=explode('|',$config['value']);foreach($optional as $key=>$value):?>
+															<div class="Tab_checkbox"><input type="checkbox" name="{$config.name}[]" value="{$value}" {if(in_array($value,$values))} checked="checked" {/if}><span>{$value}</span></div>
 														<?php endforeach;?>
 
 													<!-- 文件附件 -->
@@ -98,8 +98,8 @@
 			</div>
 		</div>
 	</div>
-	<script type="text/javascript" src="__ADMIN__/style/jquery.min.js"></script>
-	<script type="text/javascript" src="__ADMIN__/style/major.js"></script>
-	<script type="text/javascript" src="__ADMIN__/style/bootstrap.js"></script>
+	<script type="text/javascript" src="__admin__/style/jquery.min.js"></script>
+	<script type="text/javascript" src="__admin__/style/major.js"></script>
+	<script type="text/javascript" src="__admin__/style/bootstrap.js"></script>
 </body>
 </html>

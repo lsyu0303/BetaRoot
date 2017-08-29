@@ -45,10 +45,10 @@
 		<div class="box i-row">
 			<div class="i-col-12">
 				<ul class="nav nav-tabs" role="tablist">
-					<li class="active"><a role="tab" data-toggle="tab" href="#basic">基本选项</a></li>
-					<li><a role="tab" data-toggle="tab" href="#expert">高级设置</a></li>
+					<li class="active"><a role="tab" data-toggle="tab" href="#basic">基本信息</a></li>
+					<li><a role="tab" data-toggle="tab" href="#expert">其他信息</a></li>
+					<li><a role="tab" data-toggle="tab" href="#custom">自 定 义</a></li>
 					<li><a role="tab" data-toggle="tab" href="#authd">权限设置</a></li>
-					<li><a role="tab" data-toggle="tab" href="#explain">内容描述</a></li>
 				</ul>
 				<div class="box-con">
 					<form class="Tab_form" name="form" method="post" action="">
@@ -56,60 +56,70 @@
 
 							<div class="tab-pane fade in active" id="basic">
 								<div class="form-node">
-									<div class="form-title">所属模型：</div>
-									<div class="form-con i-col-2">
-										<select name="modelid" style="width:109%">
-											{volist name="models" id="model"}
-												<option value="{$model.id}">{$model.title}</option>
-											{/volist}
-										</select>
-									</div>
-								</div>
-								<div class="form-node">
-									<div class="form-title">上级模块：</div>
-									<div class="form-con i-col-2">
-										<select name="parentid" style="width:109%">
-											<option value="0">顶级模块</option>
+									<div class="form-title">所属模块：</div>
+									<div class="form-con i-col-8">
+										<select name="categoryid" style="width:102%">
 											{volist name="categorys" id="category"}
-												<option {if condition="$category.id eq $parentid"} selected="selected" {/if} value="{$category.id}">{if condition="$category.parentid neq 0"}{$category.delimiter}├─{/if}{$category.title}</option>
+												<option {if condition="$category.id eq $categoryid"} selected="selected" {/if} value="{$category.id}">{if condition="$category.parentid neq 0"}{$category.delimiter}├─{/if}{$category.title}</option>
 											{/volist}
 										</select>
 									</div>
 								</div>
 								<div class="form-node">
-									<div class="form-title">模块标题：</div>
-									<div class="form-con i-col-2">
+									<div class="form-title">文章标题：</div>
+									<div class="form-con i-col-8">
 										<input class="input-title" type="text" name="title" value="" placeholder="模块名称">
 									</div>
 								</div>
 								<div class="form-node">
-									<div class="form-title">模块标识：</div>
-									<div class="form-con i-col-2">
-										<input class="input-title" type="text" name="name" value="" placeholder="只能包含字母、数字、下划线">
+									<div class="form-title">发布作者：</div>
+									<div class="form-con i-col-8">
+										<input class="input-title" type="text" name="author" value="">
 									</div>
 								</div>
 								<div class="form-node">
-									<div class="form-title">模块排序：</div>
-									<div class="form-con i-col-2">
-										<input class="input-title" type="text" name="sort" value="">
+									<div class="form-title">文章来源：</div>
+									<div class="form-con i-col-8">
+										<input class="input-title" type="text" name="source" value="">
 									</div>
 								</div>
 								<div class="form-node">
-									<div class="form-title">模块类型：</div>
-									<div class="form-con i-col-3">
+									<div class="form-title">属性标签：</div>
+									<div class="form-con i-col-8">
 										{volist name="types" id="type"}
-											<div class="Tab_radio">
-												{if condition="$type.value eq 1"}
-													<input type="radio" checked="checked" name="type" value="{$type.value}"><dl class="on"><i class="icon ai-radio-on"></i><span>{$type.title}</span></dl>
-												{else}
-													<input type="radio" name="type" value="{$type.value}"><dl><i class="icon ai-radio"></i><span>{$type.title}</span></dl>
-												{/if}
-											</div>
+											<div class="Tab_checkbox"><input type="checkbox" name="flag[]" value="{$type.value}"><span>{$type.title}</span></div>
 										{/volist}
 									</div>
 								</div>
 								<div class="form-node">
-									<div class="form-title">模块图片：</div>
+									<div class="form-title">发布内容：</div>
+									<div class="form-con i-col-8">
+										<textarea class="input-title" id="content" name="content" rows="3" placeholder="关于模块的描述……"></textarea>
+									</div>
+								</div>
+							</div>
+
+							<div class="tab-pane fade" id="expert">
+								<div class="form-node">
+									<div class="form-title">关 键 词 ：</div>
+									<div class="form-con i-col-8">
+										<input class="input-title" type="text" name="keywords" value="" placeholder="搜索引擎关键词">
+									</div>
+								</div>
+								<div class="form-node">
+									<div class="form-title">文章描述：</div>
+									<div class="form-con i-col-8">
+										<textarea class="input-title" name="description" rows="3" placeholder="搜索引擎描述"></textarea>
+									</div>
+								</div>
+								<div class="form-node">
+									<div class="form-title">点 击 量 ：</div>
+									<div class="form-con i-col-8">
+										<input class="input-title" type="text" name="click" value="">
+									</div>
+								</div>
+								<div class="form-node">
+									<div class="form-title">缩 略 图 ：</div>
 									<div class="form-con i-col-8">
 										<div id="queue">
 											<input type="hidden" name="image" value="">
@@ -126,7 +136,7 @@
 								</div>
 								<div class="form-node">
 									<div class="form-title">模块状态：</div>
-									<div class="form-con i-col-2">
+									<div class="form-con i-col-8">
 										<div class="btn-on">
 											<label class="Tab_on btn on-on">显示</label>
 											<input class="Tab_open" type="radio" name="status" value="1" checked>
@@ -137,63 +147,69 @@
 								</div>
 							</div>
 
-							<div class="tab-pane fade" id="expert">
-								<div class="form-node">
-									<div class="form-title">模块模板：</div>
-									<div class="form-con i-col-2">
-										<input class="input-title" type="text" name="template_index" value="article_index.html">
+							<div class="tab-pane fade" id="custom">
+								{volist name="fields" id="field"}
+									<div class="form-node">
+										<div class="form-title">{$field.title}：</div>
+										<div class="form-con i-col-8">
+											<?php switch ($field['type']) {
+												case 1:
+												case 7:
+												case 8:
+													echo "<input class='input-title' type='text' name='".$field['name']."' value=''>";
+													break;
+												case 2:
+													echo "<textarea class='input-title' name='".$field['name']."' rows='3'></textarea>";
+													break;
+												case 3:
+													echo "<select style='width:102%' name='".$field['name']."'>";
+														if($field['optional']){
+															$optional=explode('|',$field['optional']);
+															foreach ($optional as $key => $value) {
+																echo "<option value='$value'>$value</option>";
+															}
+														}
+													echo "</select>";
+													break;
+												case 4:
+													if($field['optional']){
+														$optional=explode('|',$field['optional']);
+														foreach ($optional as $key => $value) {
+															echo "<div class='Tab_radio'><input type='radio' name='".$field['name']."' value='$value'><dl><i class='icon ai-radio'></i><span>$value</span></dl></div>";
+														}
+													}
+													break;
+												case 5:
+													if($field['optional']){
+														$optional=explode('|',$field['optional']);
+														foreach ($optional as $key => $value) {
+															echo "<div class='Tab_checkbox'><input type='checkbox' name='".$field['name']."[]' value='$value'><span>$value</span></div>";
+														}
+													}
+													break;
+												case 6:
+													echo "<input class='input-upload' type='file' name='".$field['name']."' value=''>";
+													break;
+												case 9:
+													echo "<textarea class='input-title' id='".$field['name']."' name='".$field['name']."'></textarea>";
+													break;
+												default:
+													echo "<input class='input-title' type='text' name='".$field['name']."' value=''>";
+													break;
+											} ?>
+										</div>
 									</div>
-								</div>
-								<div class="form-node">
-									<div class="form-title">列表模板：</div>
-									<div class="form-con i-col-2">
-										<input class="input-title" type="text" name="template_list" value="article_list.html">
-									</div>
-								</div>
-								<div class="form-node">
-									<div class="form-title">输出模板：</div>
-									<div class="form-con i-col-2">
-										<input class="input-title" type="text" name="template_show" value="article_show.html">
-									</div>
-								</div>
-								<div class="form-node">
-									<div class="form-title">SEO 标题：</div>
-									<div class="form-con i-col-2">
-										<input class="input-title" type="text" name="seotitle" value="" placeholder="搜索引擎优化">
-									</div>
-								</div>
-								<div class="form-node">
-									<div class="form-title">搜关键词：</div>
-									<div class="form-con i-col-2">
-										<input class="input-title" type="text" name="keywords" value="" placeholder="搜索引擎关键词">
-									</div>
-								</div>
-								<div class="form-node">
-									<div class="form-title">模块描述：</div>
-									<div class="form-con i-col-2">
-										<textarea class="input-title" name="description" rows="3" placeholder="搜索引擎描述"></textarea>
-									</div>
-								</div>
+								{/volist}
 							</div>
 
 							<div class="tab-pane fade" id="authd">
 								<div class="form-node">
 									<div class="form-title">权限设置：</div>
-									<div class="form-con i-col-2">
+									<div class="form-con i-col-8">
 										<input class="input-title" type="text" name="" value="" placeholder="等待完善……">
 									</div>
 								</div>
 							</div>
-
-							<div class="tab-pane fade" id="explain">
-								<div class="form-node">
-										<textarea class="input-title" id="content" name="content" rows="3" placeholder="关于模块的描述……"></textarea>
-								</div>
-							</div>
-						</div>
-						<div class="form-node">
-							<div class="form-title">&nbsp;</div>
-							<div class="form-con">&nbsp;</div>
 						</div>
 						<div class="form-node">
 							<div class="form-title">&nbsp;</div>
@@ -210,8 +226,12 @@
 	<script type="text/javascript" src="__admin__/style/major.js"></script>
 	<script type="text/javascript" src="__admin__/style/bootstrap.js"></script>
 	<script type="text/javascript">
-		// 百度编辑器 UEditor
-		UE.getEditor('content',{initialFrameWidth:1000,initialFrameHeight:400,});
+		// 百度编辑器(UEditor)
+		UE.getEditor('content',{initialFrameWidth:'102%',initialFrameHeight:330,});
+		// 百度编辑器(自定义字段)
+		<?php foreach ($longtexts as $key => $value):?>
+			UE.getEditor('<?php echo $value['name'];?>',{initialFrameWidth:'102%',initialFrameHeight:330,});
+		<?php endforeach;?>
 
 		// Ajax 删除上传文件
 		$("#cancel").click(function(){
@@ -240,24 +260,6 @@
 				layer.close(index);
 			});
 		});
-
-		function template(){
-			var pid=$("select[name=parentid]").find("option:selected").val();
-			if(pid!=0){
-				$.ajax({
-					type	: "post",
-					dataType: "json",
-					url		: "{:url('template')}",
-					data	: {id:pid},
-					success:function(data){
-						$("input[name=template_index]").val(data.template_index);
-						$("input[name=template_list]").val(data.template_list);
-						$("input[name=template_show]").val(data.template_show);
-						$("select[name=modelid]").val(data.modelid);
-					}
-				});
-			}
-		}
 
 		var pid=$("select[name=parentid]").find("option:selected").val();
 		if(pid!=0){

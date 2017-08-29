@@ -8,16 +8,20 @@
 	<title>轻风之语〖开发中……〗</title>
 	<meta name="keywords" content="轻风之语〖开发中……〗"/>
 	<meta name="description" content="轻风之语〖开发中……〗"/>
-	<link rel="stylesheet" type="text/css" href="__ADMIN__/style/default.css">
-	<link rel="stylesheet" type="text/css" href="__ADMIN__/style/font.min.css">
-	<link rel="stylesheet" type="text/css" href="__ADMIN__/style/bootstrap.css">
-	<script type="text/javascript" src="__ADMIN__/style/jquery.min.js"></script>
-	<script type="text/javascript" src="__ADDONS__/layer/layer.js"></script>
+	<link rel="stylesheet" type="text/css" href="__admin__/style/default.css">
+	<link rel="stylesheet" type="text/css" href="__admin__/style/font.min.css">
+	<link rel="stylesheet" type="text/css" href="__admin__/style/bootstrap.css">
+	<script type="text/javascript" src="__admin__/style/jquery.min.js"></script>
+	<script type="text/javascript" src="__addons__/layer/layer.js"></script>
 	<style type="text/css">
 		.flex{
 			border:1px solid #CCCCCC;
 			padding:0 4px;
 			cursor:pointer;
+		}
+		#link:hover{
+			color:#00CCCC;
+			text-decoration:underline;
 		}
 	</style>
 </head>
@@ -61,7 +65,7 @@
 											<td class="text-ctr">{$category.id}</td>
 											<td class="text-ltr">
 												{if condition="$category.parentid neq 0"}{$category.delimiter}├─{/if}
-												{if condition="$category.parentid eq 0"}<span class="flex">-</span>{/if}{$category.title}
+												{if condition="$category.parentid eq 0"}<span class="flex">-</span>{/if}<a id="link" href="{:url('Article/index',array('cid'=>$category.id,'mid'=>$category.modelid))}">{$category.title}</a>
 											</td>
 											<td class="text-ltr">{$category.name}</td>
 											<td class="text-ctr">
@@ -92,8 +96,8 @@
 			</div>
 		</div>
 	</div>
-	<script type="text/javascript" src="__ADMIN__/style/major.js"></script>
-	<script type="text/javascript" src="__ADMIN__/style/bootstrap.js"></script>
+	<script type="text/javascript" src="__admin__/style/major.js"></script>
+	<script type="text/javascript" src="__admin__/style/bootstrap.js"></script>
 	<script type="text/javascript">
 		// Ajax 模块伸缩
 		$('.flex').click(function(){

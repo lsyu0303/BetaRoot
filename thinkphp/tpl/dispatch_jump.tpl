@@ -3,8 +3,8 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>跳转提示</title>
-    <script type="text/javascript" src="__ADMIN__/style/jquery.min.js"></script>
-    <script type="text/javascript" src="__ADDONS__/layer/layer.js"></script>
+    <script type="text/javascript" src="__admin__/style/jquery.min.js"></script>
+    <script type="text/javascript" src="__addons__/layer/layer.js"></script>
 </head>
 <body>
     <input type="hidden" id="msg" name="msg" value="<?php echo(strip_tags($msg));?>">

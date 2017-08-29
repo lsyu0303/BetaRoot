@@ -9,7 +9,7 @@ class Field extends Controller
 	{
 		$fields=db('field')->field('id,name,title,type,modelid,value,status,sort')->order('sort asc')->paginate(10);
 		$models=db('model')->where(['status'=>'1'])->field('id,title')->select();
-		$types=db('tab')->where(['group'=>'fieldtype','status'=>'1'])->field('title,value')->select();
+		$types=db('tag')->where(['group'=>'fieldtype','status'=>'1'])->field('title,value')->select();
 		$this->assign([
 			'fields'	=> $fields,
 			'models'	=> $models,
@@ -28,20 +28,21 @@ class Field extends Controller
 			// 判断字段类型及参数
 			switch ($data['type']) {
 				case 1:
+				case 2:
 				case 3:
 				case 4:
 				case 5:
 				case 6:
 					$fieldtype="varchar(255) not null default ''";
 					break;
-				case 2:
-					$fieldtype="text";
-					break;
 				case 7:
 					$fieldtype="float not null default '0.0'";
 					break;
 				case 8:
 					$fieldtype="int not null default '0'";
+					break;
+				case 9:
+					$fieldtype="text";
 					break;
 				default:
 					$fieldtype="varchar(255) not null default ''";
@@ -66,7 +67,7 @@ class Field extends Controller
 		}
 
 		$models=db('model')->field('id,title')->select();
-		$types=db('tab')->where(['group'=>'fieldtype','status'=>'1'])->field('title,value')->select();
+		$types=db('tag')->where(['group'=>'fieldtype','status'=>'1'])->field('title,value')->select();
 		$this->assign([
 			'models'	=> $models,
 			'types'		=> $types,
@@ -86,20 +87,21 @@ class Field extends Controller
 			// 判断字段类型及参数
 			switch ($data['type']) {
 				case 1:
+				case 2:
 				case 3:
 				case 4:
 				case 5:
 				case 6:
 					$fieldtype="varchar(255) not null default ''";
 					break;
-				case 2:
-					$fieldtype="text";
-					break;
 				case 7:
 					$fieldtype="float not null default '0.0'";
 					break;
 				case 8:
 					$fieldtype="int not null default '0'";
+					break;
+				case 9:
+					$fieldtype="text";
 					break;
 				default:
 					$fieldtype="varchar(255) not null default ''";
@@ -126,7 +128,7 @@ class Field extends Controller
 		$id=input('id');
 		$field=db('field')->where('id',$id)->find();
 		$models=db('model')->field('id,title')->select();
-		$types=db('tab')->where(['group'=>'fieldtype','status'=>'1'])->field('title,value')->select();
+		$types=db('tag')->where(['group'=>'fieldtype','status'=>'1'])->field('title,value')->select();
 		$this->assign([
 			'field'		=> $field,
 			'models'	=> $models,

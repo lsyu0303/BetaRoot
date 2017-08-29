@@ -16,9 +16,9 @@ return [
 
     // 视图输出字符串内容替换
     'view_replace_str'       => [
-        '__ADMIN__'    => '/public/static/admin',
-        '__ADDONS__'    => '/public/static/addons',
-        '__UPLOADS__'    => '/public/uploads',
+        '__admin__'		=> '/public/static/admin',
+        '__addons__'	=> '/public/static/addons',
+        '__uploads__'	=> '/public/uploads',
     ],
 
 ];

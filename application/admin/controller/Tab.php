@@ -7,11 +7,7 @@ class Tab extends Controller
 	public function index()
 	{
 		$tabs=db('tab')->order('sort asc')->paginate(10);
-		$groups=db('tabs')->field('name,title')->select();
-		$this->assign([
-			'tabs'		=> $tabs,
-			'groups'	=> $groups,
-			]);
+		$this->assign('tabs',$tabs);
 		return view();
 	}
 
@@ -27,16 +23,14 @@ class Tab extends Controller
 			else{
 				$insert=db('tab')->insert($data);
 				if($insert){
-					$this->success('添加标签成功！', url('index'));
+					$this->success('添加分组成功！', url('index'));
 				}
 				else{
-					$this->error('添加标签失败！');
+					$this->error('添加分组失败！');
 				}
 			}
 			return;
 		}
-		$groups=db('tabs')->field('name,title')->select();
-		$this->assign('groups',$groups);
 		return view();
 	}
 
@@ -52,10 +46,10 @@ class Tab extends Controller
 			else{
 				$redact=db('tab')->update($data);
 				if($redact!==false){
-					$this->success('修改标签成功！', url('index'));
+					$this->success('修改分组成功！', url('index'));
 				}
 				else{
-					$this->error('修改标签失败！');
+					$this->error('修改分组失败！');
 				}	
 			}
 			return;
@@ -63,11 +57,7 @@ class Tab extends Controller
 
 		$id=input('id');
 		$tab=db('tab')->where('id',$id)->find();
-		$groups=db('tabs')->field('name,title')->select();
-		$this->assign([
-			'tab'		=> $tab,
-			'groups'	=> $groups,
-			]);
+		$this->assign('tab',$tab);
 		return view();
 	}
 

@@ -20,42 +20,35 @@
 		<div class="box i-row">
 			<div class="i-col-12">
 				<ul class="nav nav-tabs" role="tablist">
-					<li class="active"><a href="javascript:void(0);">标签分组</a></li>
+					<li class="active"><a href="javascript:void(0);">文章列表</a></li>
 				</ul>
 				<div class="box-con">
 					<form class="Tab_form" name="form" method="post" action="{:url('global')}">
 						<div class="box-btn">
 				 			<button class="btn red" type="submit"><i class="icon ai-delete"></i>批量删除</button>
-				 			<button class="btn orange" type="submit"><i class="icon ai-spin"></i>更新排序</button>
-							<a class="btn blue" href="{:url('insert')}"><i class="icon ai-article"></i>添加分组</a>
+				 			{if condition="$modelid neq 0"}
+								<a class="btn blue" href="{:url('insert',array('cid'=>$categoryid,'mid'=>$modelid))}"><i class="icon ai-article"></i>添加文章</a>
+							{/if}
 						</div>
 						<div class="table-con">
 							<table class="table">
 								<thead>
 									<tr>
 										<th class="check"><input type="checkbox" class="Tab_checkAll" id="idAll"></th>
-										<th class="text-ctr-05">排序</th>
 										<th class="text-ctr-05">序号</th>
 										<th class="text-ltr-20">标题</th>
-										<th class="text-ltr">标识</th>
-										<th class="text-ctr-08">状态</th>
 										<th class="text-ctr-15">操作</th>
 									</tr>
 								</thead>
 								<tbody id="id">
-									{volist name="tabs" id="tab"}
+									{volist name="articles" id="article"}
 										<tr>
-											<td class="check"><input class="Tab_check" type="checkbox" name="id[]" value="{$tab.id}"></td>
-											<td class="text-ctr-05"><input class="sort" type="text" name="sort[{$tab.id}]" value="{$tab.sort}"></td>
-											<td class="text-ctr">{$tab.id}</td>
-											<td class="text-ltr">{$tab.title}</td>
-											<td class="text-ltr">{$tab.name}</td>
+											<td class="check"><input class="Tab_check" type="checkbox" name="id[]" value="{$article.id}"></td>
+											<td class="text-ctr">{$article.id}</td>
+											<td class="text-ltr">{$article.title}</td>
 											<td class="text-ctr">
-												<a id="{$tab.id}" onclick="change(this);" {if condition="$tab.status eq 0"} class="btn btn-info red"{else} class="btn btn-info green" {/if}>{if condition="$tab.status eq 0"}禁用{else}启用{/if}</a>
-											</td>
-											<td class="text-ctr">
-												<a class="btn btn-info orange" href="{:url('redact',array('id'=>$tab.id))}"><i class="icon ai-edit"></i>编辑</a>
-												<a class="btn btn-info red" href="javascript:void(0);" id="{$tab.id}" onclick="remove(this);"><i class="icon ai-delete"></i>删除</a>
+												<a class="btn btn-info orange" href="{:url('redact',array('id'=>$article.id))}"><i class="icon ai-edit"></i>编辑</a>
+												<a class="btn btn-info red" href="javascript:void(0);" id="{$article.id}" onclick="remove(this);"><i class="icon ai-delete"></i>删除</a>
 											</td>
 										</tr>
 									{/volist}
@@ -63,7 +56,7 @@
 							</table>
 						</div>
 						<div class="paging">
-							<div class="page">{$tabs->render()}</div>
+							<div class="page">{$articles->render()}</div>
 						</div>
 					</form>
 				</div>
@@ -96,7 +89,7 @@
 
 		// Ajax 异步删除单条记录
 		function remove(object){
-			layer.confirm('确定要删除该分组吗？', {icon: 3, title:'提示'}, function(index){
+			layer.confirm('确定要删除该标签吗？', {icon: 3, title:'提示'}, function(index){
 				var id=$(object).attr('id');
 				$.ajax({
 					type	: "post",
@@ -105,11 +98,11 @@
 					data	: {id:id},
 					success:function(data){
 						if(data==1){
-							layer.msg('删除分组成功！', {icon: 1});
+							layer.msg('删除标签成功！', {icon: 1});
 							window.location.href="{:url('index')}";
 						}
 						else{
-							layer.msg('删除分组失败！', {icon: 2});
+							layer.msg('删除标签失败！', {icon: 2});
 						}
 					}
 				});
