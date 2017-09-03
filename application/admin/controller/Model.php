@@ -1,9 +1,9 @@
 <?php
 namespace app\admin\controller;
-use think\Controller;
+use app\admin\controller\Common;
 use think\Db;
 
-class Model extends Controller
+class Model extends Common
 {
 	public function index()
 	{
@@ -18,7 +18,7 @@ class Model extends Controller
 		if(request()->isPost()){
 			$data=input('post.');
 			$tablename=config('database.prefix').$data['tablename'];
-			$sql="Create Table {$tablename} (id int(10) unsigned not null auto_increment primary key) Engine=InnoDB default Charset=utf8mb4";
+			$sql="Create Table {$tablename} (aid int(10) unsigned not null auto_increment primary key) Engine=InnoDB default Charset=utf8mb4";
 			$validate=validate('model');
 			if(!$validate->scene('insert')->check($data)){
 				$this->error($validate->getError());

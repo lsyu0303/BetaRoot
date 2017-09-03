@@ -5,7 +5,7 @@ use think\Validate;
 class Article extends Validate
 {
 	protected $rule = [
-		'title'		=>	'chsDash|require|unique:system|max:30',
+		'title'		=>	'chsDash|require|unique:article|max:30',
 		'group'		=>	'alphaDash|require',
 		'value'		=>	'number',
 		'parentid'	=>	'number',

@@ -28,8 +28,8 @@
 							<div class="tab-pane fade in active" id="basic">
 								<div class="form-node">
 									<div class="form-title">所属模型：</div>
-									<div class="form-con i-col-2">
-										<select name="modelid" style="width:109%">
+									<div class="form-con i-col-8">
+										<select name="modelid" style="width:102%">
 											{volist name="models" id="model"}
 												<option value="{$model.id}">{$model.title}</option>
 											{/volist}
@@ -38,8 +38,8 @@
 								</div>
 								<div class="form-node">
 									<div class="form-title">字段类型：</div>
-									<div class="form-con i-col-2">
-										<select name="type" style="width:109%">
+									<div class="form-con i-col-8">
+										<select name="type" style="width:102%">
 											{volist name="types" id="type"}
 												<option value="{$type.value}">{$type.title}</option>
 											{/volist}
@@ -48,34 +48,34 @@
 								</div>
 								<div class="form-node">
 									<div class="form-title">字段标题：</div>
-									<div class="form-con i-col-2">
+									<div class="form-con i-col-8">
 										<input class="input-title" type="text" name="title" value="" placeholder="字段名称">
 									</div>
 								</div>
 								<div class="form-node">
 									<div class="form-title">字段标识：</div>
-									<div class="form-con i-col-2">
+									<div class="form-con i-col-8">
 										<input class="input-title" type="text" name="name" value="" placeholder="只能包含字母、数字、下划线">
 									</div>
 								</div>
 								<div class="form-node">
 									<div class="form-title">默 认 值：</div>
-									<div class="form-con i-col-2">
+									<div class="form-con i-col-8">
 										<input class="input-title" type="text" name="value" value="">
 									</div>
 								</div>
 								<div class="form-node">
 									<div class="form-title">可 选 值：</div>
-									<div class="form-con i-col-2">
+									<div class="form-con i-col-8">
 										<textarea class="input-title" name="optional" rows="3"></textarea>
 									</div>
 								</div>
 								<div class="form-node">
 									<div class="form-title">模型状态：</div>
-									<div class="form-con i-col-2">
+									<div class="form-con i-col-8">
 										<div class="btn-on">
 											<label class="Tab_on btn on-on">启用</label>
-											<input class="Tab_open" type="radio" name="status" value="1" checked>
+											<input class="Tab_open" type="radio" name="status" value="1" checked="checked">
 											<input class="Tab_shut" type="radio" name="status" value="0">
 											<label class="Tab_off btn off-off">禁用</label>
 										</div>
@@ -86,7 +86,7 @@
 							<div class="tab-pane fade" id="authd">
 								<div class="form-node">
 									<div class="form-title">权限设置：</div>
-									<div class="form-con i-col-2">
+									<div class="form-con i-col-8">
 										<input class="input-title" type="text" name="" value="" placeholder="等待完善……">
 									</div>
 								</div>

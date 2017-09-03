@@ -28,8 +28,8 @@
 							<div class="tab-pane fade in active" id="basic">
 								<div class="form-node">
 									<div class="form-title">所属分组：</div>
-									<div class="form-con i-col-2">
-										<select name="group" style="width:109%">
+									<div class="form-con i-col-8">
+										<select name="group" style="width:102%">
 											{volist name="groups" id="group"}
 												<option value="{$group.name}">{$group.title}</option>
 											{/volist}
@@ -38,34 +38,34 @@
 								</div>
 								<div class="form-node">
 									<div class="form-title">标签标题：</div>
-									<div class="form-con i-col-2">
+									<div class="form-con i-col-8">
 										<input class="input-title" type="text" name="title" value="" placeholder="标签名称">
 									</div>
 								</div>
 								<div class="form-node">
 									<div class="form-title">默 认 值 ：</div>
-									<div class="form-con i-col-2">
+									<div class="form-con i-col-8">
 										<input class="input-title" type="text" name="value" value="">
 									</div>
 								</div>
 								<div class="form-node">
 									<div class="form-title">父级标签：</div>
-									<div class="form-con i-col-2">
+									<div class="form-con i-col-8">
 										<input class="input-title" type="text" name="parentid" value="">
 									</div>
 								</div>
 								<div class="form-node">
 									<div class="form-title">标签排序：</div>
-									<div class="form-con i-col-2">
+									<div class="form-con i-col-8">
 										<input class="input-title" type="text" name="sort" value="">
 									</div>
 								</div>
 								<div class="form-node">
 									<div class="form-title">标签状态：</div>
-									<div class="form-con i-col-2">
+									<div class="form-con i-col-8">
 										<div class="btn-on">
 											<label class="Tab_on btn on-on">启用</label>
-											<input class="Tab_open" type="radio" name="status" value="1" checked>
+											<input class="Tab_open" type="radio" name="status" value="1" checked="checked">
 											<input class="Tab_shut" type="radio" name="status" value="0">
 											<label class="Tab_off btn off-off">禁用</label>
 										</div>
@@ -76,7 +76,7 @@
 							<div class="tab-pane fade" id="authd">
 								<div class="form-node">
 									<div class="form-title">权限设置：</div>
-									<div class="form-con i-col-2">
+									<div class="form-con i-col-8">
 										<input class="input-title" type="text" name="" value="" placeholder="等待完善……">
 									</div>
 								</div>

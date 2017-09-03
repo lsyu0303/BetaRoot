@@ -144,7 +144,7 @@ button.btn{height:36px;line-height:36px;}
 .Tab_select input[type=text]:focus{border:1px solid #00CCCC;}
 .Tab_form button.btn{height:34px;line-height:34px;margin:0 10px 0 0;}
 .Tab_select select,
-.Tab_radio input[type=radio]{display:none;}
+/*.Tab_radio input[type=radio]{display:none;}*/
 
 
 /***** 输入框 *****/
@@ -179,14 +179,9 @@ button.btn{height:36px;line-height:36px;}
 
 
 /***** 单选框 *****/
-.Tab_radio{float:left;padding-right:10px;}
-.Tab_radio>dl{line-height:36px;margin-right:10px;cursor:pointer;}
-.Tab_radio>dl i{margin-right:3px;font-size:22px;color:#C2C2C2;display:inline-block;vertical-align:middle;-webkit-animation-duration:.3s;animation-duration:.3s;-webkit-animation-fill-mode:both;animation-fill-mode:both;}
-.Tab_radio>dl i:hover,
-.Tab_radio>dl.on i{color:#333333;}
-.Tab_radio>dl span{font-size:14px;display:inline-block;vertical-align:middle;}
-.Tab_radio>dl.no,
-.Tab_radio>dl.no:hover{color:#D2D2D2!important;cursor:not-allowed!important;}
+.Tab_radio{float:left;padding-right:20px;margin-top:8px;}
+.Tab_radio>input{width:18px;height:18px;vertical-align:middle;}
+.Tab_radio>span{font-size:14px;vertical-align:middle;}
 
 
 /***** 下拉框 *****/

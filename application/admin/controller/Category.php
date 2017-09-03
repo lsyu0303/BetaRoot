@@ -1,8 +1,8 @@
 <?php
 namespace app\admin\controller;
-use think\Controller;
+use app\admin\controller\Common;
 
-class Category extends Controller
+class Category extends Common
 {
 	public function index()
 	{

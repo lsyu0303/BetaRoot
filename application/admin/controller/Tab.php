@@ -1,8 +1,8 @@
 <?php
 namespace app\admin\controller;
-use think\Controller;
+use app\admin\controller\Common;
 
-class Tab extends Controller
+class Tab extends Common
 {
 	public function index()
 	{

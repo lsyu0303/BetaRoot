@@ -33,46 +33,45 @@
 										{if condition="$config.group eq $group.value"}
 											<div class="form-node">
 												<div class="form-title">{$config.title}：</div>
-												<div class="form-con i-col-2">
-
+												<div class="form-con i-col-8">
 													<!-- 配置类型判断循环 -->
-													<!-- 文本框型 -->
 													{if $config.type==1}
 														<input class="input-title" type="text" name="{$config.name}" value="{$config.value}">
-
-													<!-- 文本域型 -->
 													{elseif $config.type==2}
 														<textarea class="input-title" rows="3" name="{$config.name}">{$config.value}</textarea>
-
-													<!-- 下拉列表 -->
 													{elseif $config.type==3}
-														<select style="width:109%" name="{$config.name}">
+														<textarea class="input-title" rows="3" name="{$config.name}">{$config.value}</textarea>
+													{elseif $config.type==4}
+														<input class="input-title" type="text" name="{$config.name}" value="{$config.value}">
+													{elseif $config.type==5}
+														<input class="input-title" type="text" name="{$config.name}" value="{$config.value}">
+													{elseif $config.type==6}
+														<?php $optional=explode('|',$config['optional']);foreach($optional as $key=>$value):?>
+															<div class="Tab_radio">
+																<input type="radio" name="{$config.name}" value="{$value}" {if condition="$value eq $config.value"} checked="checked" {/if}>
+																<span>{$value}</span>
+															</div>
+														<?php endforeach;?>
+													{elseif $config.type==7}
+														<?php $optional=explode('|',$config['optional']);$values=explode('|',$config['value']);foreach($optional as $key=>$value):?>
+															<div class="Tab_checkbox">
+																<input type="checkbox" name="{$config.name}[]" value="{$value}" {if(in_array($value,$values))} checked="checked" {/if}>
+																<span>{$value}</span>
+															</div>
+														<?php endforeach;?>
+													{elseif $config.type==8}
+														<select style="width:102%" name="{$config.name}">
 															<?php $optional=explode('|',$config['optional']);foreach($optional as $key=>$value):?>
 																<option value="{$value}" {if condition="$value eq $config.value"} selected="selected"{/if}>{$value}</option>
 															<?php endforeach;?>
 														</select>
-
-													<!-- 单项选择 -->
-													{elseif $config.type==4}
-														<?php $optional=explode('|',$config['optional']);foreach($optional as $key=>$value):?>
-															<div class="Tab_radio">
-																{if condition="$value eq $config.value"}
-																	<input type="radio" checked="checked" name="{$config.name}" value="{$value}"><dl class="on"><i class="icon ai-radio-on"></i><span>{$value}</span></dl>
-																{else}
-																	<input type="radio" name="{$config.name}" value="{$value}"><dl><i class="icon ai-radio"></i><span>{$value}</span></dl>
-																{/if}
-															</div>
-														<?php endforeach;?>
-
-													<!-- 多项选择 -->
-													{elseif $config.type==5}
-														<?php $optional=explode('|',$config['optional']);$values=explode('|',$config['value']);foreach($optional as $key=>$value):?>
-															<div class="Tab_checkbox"><input type="checkbox" name="{$config.name}[]" value="{$value}" {if(in_array($value,$values))} checked="checked" {/if}><span>{$value}</span></div>
-														<?php endforeach;?>
-
-													<!-- 文件附件 -->
-													{elseif $config.type==6}
-														<input class="input-upload" type="file" name="{$config.name}" value="">
+													{elseif $config.type==9}
+														<div>
+															<input class="input-upload" type="file" name="{$config.name}" value="{$config.value}">
+															{if condition="$config.value neq ''"}
+																<img src="__uploads__/image/{$config.value}" height="100px">
+															{/if}
+														</div>
 													{/if}
 												</div>
 											</div>

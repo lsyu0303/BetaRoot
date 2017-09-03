@@ -5,8 +5,8 @@ use think\Validate;
 class Category extends Validate
 {
 	protected $rule = [
-		'name'		=>	'alphaDash|require|unique:system|max:30',
-		'title'		=>	'chsDash|require|unique:system|max:30',
+		'name'		=>	'alphaDash|require|unique:category|max:30',
+		'title'		=>	'chsDash|require|unique:category|max:30',
 		'parentid'	=>	'number',
 		'modelid'	=>	'number',
 		'type'	=>	'number',

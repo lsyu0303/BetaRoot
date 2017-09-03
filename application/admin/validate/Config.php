@@ -2,14 +2,14 @@
 namespace app\admin\validate;
 use think\Validate;
 
-class System extends Validate
+class Config extends Validate
 {
 	protected $rule = [
-		'name'		=>	'alphaDash|require|unique:system|max:30',
-		'title'		=>	'chsDash|require|unique:system|max:30',
+		'name'		=>	'alphaDash|require|unique:config|max:30',
+		'title'		=>	'chsDash|require|unique:config|max:30',
 		'groupid'	=>	'number',
 		'value'		=>	'chsDash',
-		'optional'	=>	'chsDash',
+		// 'optional'	=>	'chsDash',
 		'sort'		=>	'number',
 	];
 
@@ -23,8 +23,8 @@ class System extends Validate
 		'title.unique'		=>	'标题已经存在！',
 		'title.max'			=>	'标题不能超过 30 个字符！',
 		'groupid.number'	=>	'分组只能为数字！',
-		'value.chsDash'		=>	'默认值只能为 汉字、字母、数字、下划线_及破折号-！',
-		'optional.chsDash'	=>	'可选值只能为 汉字、字母、数字、下划线_及破折号-！',
+		'value.chsDash'		=>	'变量赋值只能为 汉字、字母、数字、下划线_及破折号-！',
+		// 'optional.chsDash'	=>	'可选赋值只能为 汉字、字母、数字、下划线_及破折号-！',
 		'sort.number'		=>	'排序只能为数字！',
 	];
 

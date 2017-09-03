@@ -5,8 +5,8 @@ use think\Validate;
 class Field extends Validate
 {
 	protected $rule = [
-		'name'		=>	'alphaDash|require|unique:system|max:30',
-		'title'		=>	'chsDash|require|unique:system|max:30',
+		'name'		=>	'alphaDash|require|unique:field|max:30',
+		'title'		=>	'chsDash|require|unique:field|max:30',
 		'groupid'	=>	'number',
 		'value'		=>	'chsDash',
 		'optional'	=>	'chsDash',

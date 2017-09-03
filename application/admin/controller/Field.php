@@ -1,9 +1,9 @@
 <?php
 namespace app\admin\controller;
-use think\Controller;
+use app\admin\controller\Common;
 use think\Db;
 
-class Field extends Controller
+class Field extends Common
 {
 	public function index()
 	{
@@ -29,20 +29,20 @@ class Field extends Controller
 			switch ($data['type']) {
 				case 1:
 				case 2:
-				case 3:
-				case 4:
-				case 5:
 				case 6:
+				case 7:
+				case 8:
+				case 9:
 					$fieldtype="varchar(255) not null default ''";
 					break;
-				case 7:
-					$fieldtype="float not null default '0.0'";
+				case 3:
+					$fieldtype="text";
 					break;
-				case 8:
+				case 4:
 					$fieldtype="int not null default '0'";
 					break;
-				case 9:
-					$fieldtype="text";
+				case 5:
+					$fieldtype="float not null default '0.0'";
 					break;
 				default:
 					$fieldtype="varchar(255) not null default ''";
@@ -88,20 +88,20 @@ class Field extends Controller
 			switch ($data['type']) {
 				case 1:
 				case 2:
-				case 3:
-				case 4:
-				case 5:
 				case 6:
+				case 7:
+				case 8:
+				case 9:
 					$fieldtype="varchar(255) not null default ''";
 					break;
-				case 7:
-					$fieldtype="float not null default '0.0'";
+				case 3:
+					$fieldtype="text";
 					break;
-				case 8:
+				case 4:
 					$fieldtype="int not null default '0'";
 					break;
-				case 9:
-					$fieldtype="text";
+				case 5:
+					$fieldtype="float not null default '0.0'";
 					break;
 				default:
 					$fieldtype="varchar(255) not null default ''";

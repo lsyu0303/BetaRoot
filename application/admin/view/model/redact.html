@@ -30,41 +30,41 @@
 							<div class="tab-pane fade in active" id="basic">
 								<div class="form-node">
 									<div class="form-title">模型标题：</div>
-									<div class="form-con i-col-2">
+									<div class="form-con i-col-8">
 										<input class="input-title" type="text" name="title" value="{$model.title}" placeholder="模型名称">
 									</div>
 								</div>
 								<div class="form-node">
 									<div class="form-title">模型标识：</div>
-									<div class="form-con i-col-2">
+									<div class="form-con i-col-8">
 										<input class="input-title" type="text" name="name" value="{$model.name}" placeholder="只能包含字母、数字、下划线">
 									</div>
 								</div>
 								<div class="form-node">
 									<div class="form-title">附加表名：</div>
-									<div class="form-con i-col-2">
+									<div class="form-con i-col-8">
 										<input class="input-title" type="text" name="tablename" value="{$model.tablename}" placeholder="请用小写且不带默认表前缀">
 									</div>
 								</div>
 								<div class="form-node">
 									<div class="form-title">模型排序：</div>
-									<div class="form-con i-col-2">
+									<div class="form-con i-col-8">
 										<input class="input-title" type="text" name="sort" value="{$model.sort}">
 									</div>
 								</div>
 								<div class="form-node">
 									<div class="form-title">模型状态：</div>
-									<div class="form-con i-col-2">
+									<div class="form-con i-col-8">
 										<div class="btn-on">
 											{if condition="$model.status eq 1"}
 												<label class="Tab_on btn on-on">启用</label>
-												<input class="Tab_open" type="radio" name="status" value="1" checked>
+												<input class="Tab_open" type="radio" name="status" value="1" checked="checked">
 												<input class="Tab_shut" type="radio" name="status" value="0">
 												<label class="Tab_off btn off-off">禁用</label>
 											{elseif condition="$model.status eq 0"}
 												<label class="Tab_on btn on-off">启用</label>
 												<input class="Tab_open" type="radio" name="status" value="1">
-												<input class="Tab_shut" type="radio" name="status" value="0" checked>
+												<input class="Tab_shut" type="radio" name="status" value="0" checked="checked">
 												<label class="Tab_off btn off-on">禁用</label>
 											{/if}
 										</div>
@@ -75,25 +75,25 @@
 							<div class="tab-pane fade" id="expert">
 								<div class="form-node">
 									<div class="form-title">模型模板：</div>
-									<div class="form-con i-col-2">
+									<div class="form-con i-col-8">
 										<input class="input-title" type="text" name="template_index" value="{$model.template_index}">
 									</div>
 								</div>
 								<div class="form-node">
 									<div class="form-title">模型模板：</div>
-									<div class="form-con i-col-2">
+									<div class="form-con i-col-8">
 										<input class="input-title" type="text" name="template_list" value="{$model.template_list}">
 									</div>
 								</div>
 								<div class="form-node">
 									<div class="form-title">模型模板：</div>
-									<div class="form-con i-col-2">
+									<div class="form-con i-col-8">
 										<input class="input-title" type="text" name="template_show" value="{$model.template_show}">
 									</div>
 								</div>
 								<div class="form-node">
 									<div class="form-title">模块描述：</div>
-									<div class="form-con i-col-2">
+									<div class="form-con i-col-8">
 										<textarea class="input-title" name="description" rows="3" placeholder="关于模型的描述……">{$model.description}</textarea>
 									</div>
 								</div>
@@ -102,7 +102,7 @@
 							<div class="tab-pane fade" id="authd">
 								<div class="form-node">
 									<div class="form-title">权限设置：</div>
-									<div class="form-con i-col-2">
+									<div class="form-con i-col-8">
 										<input class="input-title" type="text" name="" value="" placeholder="等待完善……">
 									</div>
 								</div>
